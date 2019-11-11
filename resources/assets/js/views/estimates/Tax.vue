@@ -159,7 +159,7 @@ export default {
     },
     openTaxModal () {
       this.openModal({
-        'title': this.$t('settings.tax_types.add_tax'),
+        'title': 'Add Tax',
         'componentName': 'TaxTypeModal'
       })
     }

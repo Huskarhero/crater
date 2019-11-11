@@ -49,8 +49,7 @@ export default {
     all: 'All',
     select_all: 'Select All',
     choose_file: 'Click here to choose a file',
-    choose_template: 'Choose a template',
-    choose: 'Choose',
+    choose_template: 'Choose',
     remove: 'Remove',
     powered_by: 'Powered by',
     bytefury: 'Bytefury',
@@ -600,7 +599,6 @@ export default {
     },
     tax_types: {
       title: 'Tax Types',
-      add_tax: 'Add Tax',
       description: 'You can add or Remove Taxes as you please. Crater supports Taxes on Individual Items as well as on the invoice.',
       add_new_tax: 'Add New Tax',
       tax_settings: 'Tax Settings',
@@ -680,6 +678,7 @@ export default {
     username: 'Username',
     next: 'Next',
     continue: 'Continue',
+    skip: 'Skip',
     database: {
       database: 'Site URL & Database',
       connection: 'Database Connection',
@@ -748,13 +747,13 @@ export default {
     price_greater_than_zero: 'Price must be greater than zero.',
     payment_greater_than_zero: 'Payment must be greater than zero.',
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
-    quantity_maxlength: 'Quantity should not be greater than 10 digits.',
-    price_maxlength: 'Price should not be greater than 10 digits.',
-    amount_maxlength: 'Amount should not be greater than 10 digits.',
+    quantity_maxlength: 'Quantity should not be greater than 10 characters.',
+    price_maxlength: 'Price should not be greater than 10 characters.',
+    amount_maxlength: 'Amount should not be greater than 10 characters.',
     description_maxlength: 'Description should not be greater than 255 characters.',
     maximum_options_error: 'Maximum  of {max} options selected. First remove a selected option to select another.',
     notes_maxlength: 'Notes should not be greater than 255 characters.',
     address_maxlength: 'Address should not be greater than 255 characters.',
-    ref_number_maxlength: 'Ref Number should not be greater than 10 digits'
+    ref_number_maxlength: 'Ref Number should not be greater than 10 characters'
   }
 }

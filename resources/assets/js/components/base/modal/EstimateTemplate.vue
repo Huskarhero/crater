@@ -31,7 +31,7 @@
         color="theme"
         @click="chooseTemplate()"
       >
-        {{ $t('general.choose') }}
+        {{ $t('general.choose_template') }}
       </base-button>
     </div>
   </div>
