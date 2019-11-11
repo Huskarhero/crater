@@ -582,7 +582,7 @@ export default {
     },
     openTemplateModal () {
       this.openModal({
-        'title': 'Choose a template',
+        'title': this.$t('general.choose_template'),
         'componentName': 'EstimateTemplate',
         'data': this.estimateTemplates
       })
@@ -688,7 +688,7 @@ export default {
           isValid = false
         }
       })
-      if (this.$v.newEstimate.$invalid === false && isValid === true) {
+      if (!this.$v.selectedCustomer.$invalid && this.$v.newEstimate.$invalid === false && isValid === true) {
         return true
       }
       return false
