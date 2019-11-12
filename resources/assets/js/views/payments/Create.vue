@@ -101,6 +101,7 @@
                 </div>
                 <div v-if="$v.formData.amount.$error">
                   <span v-if="!$v.formData.amount.required" class="text-danger">{{ $t('validation.required') }}</span>
+                  <span v-if="!$v.formData.amount.numeric" class="text-danger">{{ $t('validation.numbers_only') }}</span>
                   <span v-if="!$v.formData.amount.between && $v.formData.amount.numeric && amount <= 0" class="text-danger">{{ $t('validation.payment_greater_than_zero') }}</span>
                   <span v-if="!$v.formData.amount.between && amount > 0" class="text-danger">{{ $t('validation.payment_greater_than_due_amount') }}</span>
                 </div>
@@ -155,7 +156,7 @@ import { mapActions, mapGetters } from 'vuex'
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
 import moment from 'moment'
-const { required, between, maxLength } = require('vuelidate/lib/validators')
+const { required, numeric, between, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: { MultiSelect },
@@ -200,6 +201,7 @@ export default {
         },
         amount: {
           required,
+          numeric,
           between: between(1, this.maxPayableAmount + 1)
         },
         notes: {
