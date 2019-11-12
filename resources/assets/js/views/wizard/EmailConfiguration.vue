@@ -109,26 +109,15 @@
           </div>
         </div>
       </div>
-      <div class="row mt-5">
-        <base-button
-          :loading="loading"
-          class="pull-right"
-          icon="save"
-          color="theme"
-          type="submit"
-        >
-          {{ $t('wizard.save_cont') }}
-        </base-button>
-        <base-button
-          :loading="loading"
-          class="pull-right ml-4"
-          outline
-          color="theme"
-          @click="$emit('next')"
-        >
-          {{ $t('wizard.skip') }}
-        </base-button>
-      </div>
+      <base-button
+        :loading="loading"
+        class="pull-right mt-5"
+        icon="save"
+        color="theme"
+        type="submit"
+      >
+        {{ $t('wizard.save_cont') }}
+      </base-button>
     </form>
   </div>
 </template>
@@ -148,10 +137,10 @@ export default {
       mailConfigData: {
         mail_driver: 'smtp',
         mail_host: 'mailtrap.io',
-        mail_port: null,
-        mail_username: null,
-        mail_password: null,
-        mail_encryption: null
+        mail_port: 2525,
+        mail_username: 'cc3c64516febd4',
+        mail_password: 'e6a0176301f587',
+        mail_encryption: 'tls'
       },
       loading: false,
       mail_drivers: []
