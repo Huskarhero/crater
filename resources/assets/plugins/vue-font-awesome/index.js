@@ -50,8 +50,7 @@ import {
   faShare,
   faEllipsisH,
   faCopy,
-  faPaperPlane,
-  faEyeSlash
+  faPaperPlane
 } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -109,7 +108,6 @@ library.add(
   faFilePdf,
   faEnvelope,
   faEye,
-  faEyeSlash,
   faShare,
   faEllipsisH,
   faCopy,

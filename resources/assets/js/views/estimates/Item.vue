@@ -28,7 +28,6 @@
                   @select="onSelectItem"
                   @deselect="deselectItem"
                   @onDesriptionInput="$v.item.description.$touch()"
-                  @onSelectItem="isSelected = true"
                 />
               </div>
             </td>
@@ -194,16 +193,12 @@ export default {
         prefix: '$ ',
         precision: 2,
         masked: false
-      },
-      isSelected: false
+      }
     }
   },
   computed: {
     ...mapGetters('item', [
       'items'
-    ]),
-    ...mapGetters('modal', [
-      'modalActive'
     ]),
     ...mapGetters('currency', [
       'defaultCurrencyForInput'
@@ -289,11 +284,6 @@ export default {
       if (this.item.discount_type === 'percentage') {
         this.item.discount_val = (this.item.discount * newValue) / 100
       }
-    },
-    modalActive (val) {
-      if (!val) {
-        this.isSelected = false
-      }
     }
   },
   validations () {
@@ -323,11 +313,7 @@ export default {
   },
   created () {
     window.hub.$on('checkItems', this.validateItem)
-    window.hub.$on('newItem', (val) => {
-      if (!this.item.item_id && this.modalActive && this.isSelected) {
-        this.onSelectItem(val)
-      }
-    })
+    window.hub.$on('newItem', this.onSelectItem)
   },
   methods: {
     updateTax (data) {
