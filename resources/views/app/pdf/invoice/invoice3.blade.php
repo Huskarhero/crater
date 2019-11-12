@@ -80,7 +80,6 @@
         .wrapper {
            display: block;
            padding-top: 110px;
-           padding-bottom: 60px;
         }
 
         .address {
@@ -234,7 +233,7 @@
         .main-table-header {
             border-bottom: 1px solid red;
         }
-        tr.main-table-header th {
+        tr.main-table-header td {
             font-style: normal;
             font-weight: 600;
             font-size: 12px;
@@ -250,8 +249,6 @@
             margin-top: 188px;
             border-bottom: 1px solid #EAF1FB;
             padding: 0px 30px 0 30px;
-            page-break-before: avoid;
-            page-break-after: auto;
         }
 
         .table2 hr {
@@ -287,19 +284,15 @@
             padding-bottom: 8px;
         }
 
-        .padd2 {
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
-
         .table3 {
             border: 1px solid #EAF1FB;
             border-top: none;
+            padding-right: 30px;
             box-sizing: border-box;
-            width: 630px;
-            page-break-inside: avoid;
-            page-break-before: auto;
-            page-break-after: auto;
+            width: 230px;
+            height: 100px;
+            position: absolute;
+            right: -25;
         }
 
         .text-per-item-table3 {
@@ -377,32 +370,6 @@
             border-bottom:1px solid #E8E8E8;
             border-top:1px solid #E8E8E8;
         }
-
-        .notes {
-            font-family: 'Roboto', sans-serif;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 12px;
-            color: #595959;
-            margin-top: 15px;
-            margin-left: 30px;
-            width: 442px;
-            text-align: left;
-        }
-
-        .notes-label {
-            font-family: 'Roboto', sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 15px;
-            line-height: 22px;
-            letter-spacing: 0.05em;
-            color: #040405;
-            width: 108px;
-            height: 19.87px;
-            padding-bottom: 10px;
-        }
-
     </style>
 </head>
 <body>
@@ -460,7 +427,6 @@
             </div>
         </div>
         @include('app.pdf.invoice.partials.table')
-        @include('app.pdf.invoice.partials.notes')
     </div>
 </body>
 </html>

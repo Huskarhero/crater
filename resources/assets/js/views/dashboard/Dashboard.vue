@@ -96,7 +96,6 @@
               <line-chart
                 v-if="isLoaded"
                 :format-money="$utils.formatMoney"
-                :format-graph-money="$utils.formatGraphMoney"
                 :invoices="getChartInvoices"
                 :expenses="getChartExpenses"
                 :receipts="getReceiptTotals"

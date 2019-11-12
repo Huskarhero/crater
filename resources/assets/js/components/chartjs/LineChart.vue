@@ -9,7 +9,6 @@
 <script>
 import Chart from 'chart.js'
 import Utils from '../../helpers/utilities'
-import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -47,18 +46,7 @@ export default {
       type: Function,
       require: false,
       default: Function
-    },
-    FormatGraphMoney: {
-      type: Function,
-      require: false,
-      default: Function
     }
-  },
-
-  computed: {
-    ...mapGetters('currency', [
-      'defaultCurrency'
-    ])
   },
 
   watch: {
@@ -68,7 +56,6 @@ export default {
   },
 
   mounted () {
-    let self = this
     let context = this.$refs.graph.getContext('2d')
     let options = {
       responsive: true,
@@ -77,7 +64,7 @@ export default {
         enabled: true,
         callbacks: {
           label: function (tooltipItem, data) {
-            return self.FormatGraphMoney(tooltipItem.value, self.defaultCurrency)
+            return Utils.formatGraphMoney(tooltipItem.value)
           }
         }
       },
