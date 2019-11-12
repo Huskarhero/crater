@@ -49,7 +49,8 @@ export default {
     all: 'Todas',
     select_all: 'Seleccionar todo',
     choose_file: 'Haga clic aquí para elegir un archivo.',
-    choose_template: 'Escoger',
+    choose_template: 'Elige una plantilla',
+    choose: 'Escoger',
     remove: 'Eliminar',
     powered_by: 'Energizado por',
     bytefury: 'Bytefury',
@@ -186,6 +187,7 @@ export default {
     list_of_items: 'Esta sección contendrá la lista de artículos.',
     select_a_unit: 'seleccione unidad',
 
+    item_attached_message: 'No se puede eliminar un elemento que ya está en uso.',
     confirm_delete: 'No podrá recuperar este artículo | No podrás recuperar estos elementos',
     created_message: 'Artículo creado con éxito',
     updated_message: 'Artículo actualizado con éxito',
@@ -225,6 +227,7 @@ export default {
     estimate_template: 'Plantilla de estimación',
     convert_to_invoice: 'Convertir a factura',
     mark_as_sent: 'Marcar como enviado',
+    send_estimate: 'Enviar presupuesto',
     record_payment: 'Registro de pago',
     add_estimate: 'Agregar presupuesto',
     save_estimate: 'Guardar estimación',
@@ -331,6 +334,7 @@ export default {
       select_an_item: 'Escriba o haga clic para seleccionar un elemento',
       type_item_description: 'Tipo Elemento Descripción (opcional)'
     },
+    payment_attached_message: 'Una de las facturas seleccionadas ya tiene un pago adjunto. Asegúrese de eliminar primero los pagos adjuntos para continuar con la eliminación',
     confirm_delete: 'No podrá recuperar esta factura | No podrá recuperar estas facturas',
     created_message: 'Factura creada exitosamente',
     updated_message: 'Factura actualizada exitosamente',
@@ -544,7 +548,7 @@ export default {
       right: 'Derecho',
       left: 'Izquierda',
       action: 'Acción',
-      add_currency: 'Agregar moneda',
+      add_currency: 'Agregar moneda'
     },
     pdf: {
       title: 'Configuración de PDF',
@@ -591,12 +595,11 @@ export default {
       estimate_viewed_desc: 'Cuando su cliente ve la estimación enviada a través del panel de control del cráter.',
       save: 'Salvar',
       email_save_message: 'Correo electrónico guardado con éxito',
-      invoice_viewed_message: 'Factura vista',
-      estimate_viewed_message: 'Estimación vista',
       please_enter_email: 'Por favor, introduzca su correo electrónico'
     },
     tax_types: {
       title: 'Tipos de impuestos',
+      add_tax: 'Agregar impuesto',
       description: 'Puede agregar o eliminar impuestos a su gusto. Crater admite impuestos sobre artículos individuales, así como sobre la factura.',
       add_new_tax: 'Agregar nuevo impuesto',
       tax_settings: 'Configuraciones de impuestos',
@@ -636,7 +639,6 @@ export default {
       preference: 'Preferencia | Preferencias',
       general_settings: 'Preferencias predeterminadas para el sistema.',
       updated_message: 'Preferencias actualizadas exitosamente',
-      set_discount_per_item_message: 'Descuento establecido por artículo',
       select_language: 'seleccione el idioma',
       select_time_zone: 'selecciona la zona horaria',
       select_date_formate: 'seleccione formato de fecha',
@@ -662,7 +664,7 @@ export default {
     state: 'Estado',
     city: 'Ciudad',
     address: 'Habla a',
-    street: 'Calle1 '| 'Calle # 2',
+    street: 'Calle1 ' | 'Calle # 2',
     phone: 'Teléfono',
     zip_code: 'Código postal',
     go_back: 'Regresa',
@@ -670,7 +672,52 @@ export default {
     language: 'Idioma',
     time_zone: 'Zona horaria',
     fiscal_year: 'Año financiero',
-    date_format: 'Formato de fecha'
+    date_format: 'Formato de fecha',
+    from_address: 'De la Dirección',
+    username: 'Nombre de usuario',
+    next: 'Próximo',
+    continue: 'Hacer continuación',
+    database: {
+      database: 'URL del sitio y base de datose',
+      connection: 'Conexión de base de datos',
+      host: 'Database Host',
+      port: 'Host de base de datos',
+      password: 'Contraseña de base de datos',
+      app_url: 'URL de la aplicación',
+      username: 'Nombre de usuario de la base de datos',
+      db_name: 'Nombre de la base de datos',
+      desc: 'Cree una base de datos en su servidor y establezca las credenciales utilizando el siguiente formulario.'
+    },
+    permissions: {
+      permissions: 'Permisos',
+      permission_desc: 'A continuación se muestra la lista de permisos de carpeta necesarios para que la aplicación funcione. Si la verificación de permisos falla, asegúrese de actualizar los permisos de su carpeta.'
+    },
+    mail: {
+      host: 'Host de correo',
+      port: 'Puerto de correo',
+      driver: 'Conductor de correo',
+      password: 'Contraseña de correo',
+      username: 'Nombre de usuario de correo',
+      mail_config: 'Configuración de correo',
+      encryption: 'Cifrado de correo',
+      mail_config_desc: 'Los detalles a continuación se utilizarán para actualizar el entorno de correo. También puede cambiar los detalles en cualquier momento después de iniciar sesión.'
+    },
+    req: {
+      system_req: 'Requisitos del sistema',
+      php_req_version: 'Php (versión {version} necesario)',
+      check_req: 'Consultar requisitos',
+      system_req_desc: 'Crater tiene algunos requisitos de servidor. Asegúrese de que su servidor tenga la versión de php requerida y todas las extensiones mencionadas a continuación.'
+    },
+    errors: {
+      migrate_failed: 'La migración falló',
+      database_variables_save_error: 'No se puede conectar a la base de datos con los valores proporcionados.',
+      mail_variables_save_error: 'La configuración del correo electrónico ha fallado.',
+      connection_failed: 'Conexión de base de datos fallida'
+    },
+    success: {
+      mail_variables_save_successfully: 'Correo electrónico configurado correctamente',
+      database_variables_save_successfully: 'Base de datos configurada con éxito.'
+    }
   },
   layout_login: {
     copyright_crater: 'Copyright @ Crater - 2019',
@@ -699,13 +746,15 @@ export default {
     price_greater_than_zero: 'El precio debe ser mayor que cero.',
     payment_greater_than_zero: 'El pago debe ser mayor que cero.',
     payment_greater_than_due_amount: 'El pago ingresado es mayor al monto adeudado de esta factura.',
-    quantity_maxlength: 'La cantidad no debe ser mayor de 10 caracteres.',
-    price_maxlength: 'El precio no debe tener más de 10 caracteres.',
-    amount_maxlength: 'La cantidad no debe ser mayor de 10 caracteres.',
+    quantity_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
+    price_maxlength: 'El precio no debe ser mayor de 10 dígitos.',
+    price_minvalue: 'El precio debe ser mayor que 0 dígitos',
+    amount_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
+    amount_minvalue: 'La cantidad debe ser mayor que 0 dígitos',
     description_maxlength: 'La descripción no debe tener más de 255 caracteres.',
     maximum_options_error: 'Máximo de {max} opciones seleccionadas. Primero elimine una opción seleccionada para seleccionar otra.',
     notes_maxlength: 'Las notas no deben tener más de 255 caracteres.',
     address_maxlength: 'La dirección no debe tener más de 255 caracteres.',
-    ref_number_maxlength: 'El número de referencia no debe tener más de 10 caracteres.'
+    ref_number_maxlength: 'El número de referencia no debe tener más de 10 dígitos.'
   }
 }

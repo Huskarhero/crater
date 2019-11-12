@@ -49,7 +49,8 @@ export default {
     all: 'Tout',
     select_all: 'Tout sélectionner',
     choose_file: 'Cliquez ici pour choisir un fichier',
-    choose_template: 'Choisir',
+    choose_template: 'Choisissez un modèle',
+    choose: 'Choisir',
     remove: 'Retirer',
     powered_by: 'Alimenté par',
     bytefury: 'Bytefury',
@@ -186,6 +187,7 @@ export default {
     list_of_items: 'Cette section contiendra la liste des éléments.',
     select_a_unit: 'sélectionner lunité',
 
+    item_attached_message: 'Impossible de supprimer un élément déjà utilisé',
     confirm_delete: 'Vous ne pourrez pas récupérer cet article | Vous ne pourrez pas récupérer ces objets',
     created_message: 'Article créé avec succès',
     updated_message: 'Élément mis à jour avec succès',
@@ -225,6 +227,7 @@ export default {
     estimate_template: 'Modèle destimation',
     convert_to_invoice: 'Convertir en facture',
     mark_as_sent: 'Marquer comme envoyé',
+    send_estimate: 'Envoyer une estimation',
     record_payment: 'Record de paiement',
     add_estimate: 'Ajouter une estimation',
     save_estimate: 'Sauvegarder lestimation',
@@ -331,6 +334,7 @@ export default {
       select_an_item: 'Tapez ou cliquez pour sélectionner un élément',
       type_item_description: 'Type Item Description (optionnel)'
     },
+    payment_attached_message: "Un paiement est déjà associé à l'une des factures sélectionnées. Assurez-vous d’effacer d’abord les paiements en pièce jointe afin de procéder à la suppression.",
     confirm_delete: 'Vous ne pourrez pas récupérer cette facture | Vous ne pourrez pas récupérer ces factures',
     created_message: 'Facture créée avec succès',
     updated_message: 'Facture mise à jour avec succès',
@@ -597,6 +601,7 @@ export default {
     },
     tax_types: {
       title: 'Types de taxe',
+      add_tax: 'Ajouter une taxe',
       description: 'Vous pouvez ajouter ou supprimer des taxes à votre guise. Crater prend en charge les taxes sur les articles individuels ainsi que sur la facture.',
       add_new_tax: 'Ajouter une nouvelle taxe',
       tax_settings: 'Paramètres de taxe',
@@ -662,7 +667,7 @@ export default {
     state: 'Etat',
     city: 'Ville',
     address: 'Adresse',
-    street: 'Street1 '| 'Rue # 2',
+    street: 'Street1 ' | 'Rue # 2',
     phone: 'Téléphone',
     zip_code: 'Code postal',
     go_back: 'Retourner',
@@ -670,7 +675,52 @@ export default {
     language: 'La langue',
     time_zone: 'Fuseau horaire',
     fiscal_year: 'Année financière',
-    date_format: 'Format de date'
+    date_format: 'Format de date',
+    from_address: "De l'adresse",
+    username: "Nom d'utilisateur",
+    next: 'Suivant',
+    continue: 'Continuer',
+    database: {
+      database: 'URL du site et base de données',
+      connection: 'Connexion à la base de données',
+      host: 'Hôte de base de données',
+      port: 'Port de base de données',
+      password: 'Mot de passe de base de données',
+      app_url: 'Application URL',
+      username: "Nom d'utilisateur de la base de données",
+      db_name: 'Nom de la base de données',
+      desc: "Créez une base de données sur votre serveur et définissez les informations d'identification à l'aide du formulaire ci-dessous."
+    },
+    permissions: {
+      permissions: 'Les permissions',
+      permission_desc: "Vous trouverez ci-dessous la liste des autorisations de dossier requises pour le fonctionnement de l'application. Si la vérification des autorisations échoue, veillez à mettre à jour vos autorisations de dossier."
+    },
+    mail: {
+      host: 'Mail Host',
+      port: 'Port mail',
+      driver: 'Pilote de courrier',
+      password: 'Mot de passe mail',
+      username: "Mail Nom d'utilisateur",
+      mail_config: 'Configuration du courrier',
+      encryption: 'Chiffrement du courrier',
+      mail_config_desc: "Les détails ci-dessous seront utilisés pour mettre à jour l'environnement de messagerie. Aussi, vous pouvez modifier les détails à tout moment après la connexion."
+    },
+    req: {
+      system_req: 'Configuration requise',
+      php_req_version: 'Php (version {version} nécessaire)',
+      check_req: 'Vérifier les exigences',
+      system_req_desc: 'Crater a quelques exigences de serveur. Assurez-vous que votre serveur dispose de la version PHP requise et de toutes les extensions mentionnées ci-dessous.'
+    },
+    errors: {
+      migrate_failed: 'Migration impossible',
+      database_variables_save_error: 'Impossible de se connecter à la base de données avec les valeurs fournies.',
+      mail_variables_save_error: 'La configuration du courrier électronique a échoué.',
+      connection_failed: 'La connexion à la base de données a échoué'
+    },
+    success: {
+      mail_variables_save_successfully: 'Email configuré avec succès',
+      database_variables_save_successfully: 'Base de données configurée avec succès.'
+    }
   },
   layout_login: {
     copyright_crater: 'Copyright @ Crater - 2019',
@@ -690,7 +740,7 @@ export default {
     not_yet: 'Pas encore? Envoyer à nouveau',
     password_min_length: 'Le mot de passe doit contenir {nombre} caractères',
     name_min_length: 'Le nom doit avoir au moins {count} lettres.',
-    enter_valid_tax_rate: 'Enter valid tax rate',
+    enter_valid_tax_rate: 'Entrez un taux de taxe valide',
     numbers_only: 'Chiffres uniquement.',
     characters_only: 'Caractères seulement.',
     password_incorrect: 'Les mots de passe doivent être identiques',
@@ -699,13 +749,15 @@ export default {
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',
     payment_greater_than_due_amount: 'Le paiement entré est plus que le montant dû de cette facture.',
-    quantity_maxlength: 'La quantité ne doit pas dépasser 10 caractères.',
-    price_maxlength: 'Le prix ne doit pas dépasser 10 caractères.',
-    amount_maxlength: 'Le montant ne doit pas dépasser 10 caractères.',
+    quantity_maxlength: 'La quantité ne doit pas dépasser 10 chiffres.',
+    price_maxlength: 'Le prix ne doit pas dépasser 10 chiffres.',
+    price_minvalue: 'Le prix doit être supérieur à 0 chiffre',
+    amount_maxlength: 'Le montant ne doit pas dépasser 10 chiffres.',
+    amount_minvalue: 'Le montant doit être supérieur à 0 chiffre',
     description_maxlength: 'La description ne doit pas dépasser 255 caractères.',
     maximum_options_error: 'Maximum de {max} options sélectionnées. Commencez par supprimer une option sélectionnée pour en sélectionner une autre.',
     notes_maxlength: 'Les notes ne doivent pas dépasser 255 caractères.',
     address_maxlength: "L'adresse ne doit pas dépasser 255 caractères.",
-    ref_number_maxlength: 'Le numéro de référence ne doit pas dépasser 10 caractères'
+    ref_number_maxlength: 'Le numéro de référence ne doit pas dépasser 10 chiffres.'
   }
 }
