@@ -624,20 +624,17 @@ export default {
           this.isLoading = true
           this.formData.currency_id = this.currency.id
         }
-        try {
-          let response = await this.addCustomer(this.formData)
-          if (response.data.success) {
-            window.toastr['success'](this.$t('customers.created_message'))
-            this.$router.push('/admin/customers')
-            this.isLoading = false
-            return true
-          }
-        } catch (err) {
-          if (err.response.data.errors.email) {
-            this.isLoading = false
-            window.toastr['error'](this.$t('validation.email_already_taken'))
-          }
+
+        let response = await this.addCustomer(this.formData)
+
+        if (response.data.success) {
+          window.toastr['success'](this.$t('customers.created_message'))
+          this.$router.push('/admin/customers')
+          this.isLoading = false
+          return true
         }
+
+        window.toastr['error'](response.data.error)
       }
     },
     async fetchBillingState () {
