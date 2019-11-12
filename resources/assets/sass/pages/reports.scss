@@ -21,7 +21,6 @@
 
     .report-view-button {
         display: none;
-        color: $btn-secondary-color;
     }
 
     .report-fields-container {
@@ -62,13 +61,8 @@
             display: none;
         }
 
-        .report-submit-button-container {
-            display: none;
-        }
-
         .report-view-button {
             display: flex;
-            color: $btn-secondary-color !important;
             justify-content: center
         }
 

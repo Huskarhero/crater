@@ -549,16 +549,6 @@ export default {
       action: 'Action',
       add_currency: 'Add Currency'
     },
-    mail: {
-      host: 'Mail Host',
-      port: 'Mail Port',
-      driver: 'Mail Driver',
-      password: 'Mail Password',
-      username: 'Mail Username',
-      mail_config: 'Mail Configuration',
-      encryption: 'Mail Encryption',
-      mail_config_desc: 'Below details will be used to update the mail environment. Also you can change the details anytime after logging in.'
-    },
     pdf: {
       title: 'PDF Setting',
       footer_text: 'Footer Text',
@@ -690,6 +680,7 @@ export default {
     username: 'Username',
     next: 'Next',
     continue: 'Continue',
+    skip: 'Skip',
     database: {
       database: 'Site URL & Database',
       connection: 'Database Connection',
