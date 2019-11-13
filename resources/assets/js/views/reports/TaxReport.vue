@@ -189,21 +189,14 @@ export default {
       this.$v.formData.$touch()
 
       if (this.$v.$invalid) {
-        return false
+        return true
       }
 
       this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
       return true
     },
     downloadReport () {
-      if (!this.getReports()) {
-        return false
-      }
-      if (navigator.appVersion.indexOf('Mac') !== -1) {
-        this.url += '&download=true'
-      } else {
-        window.open(this.url + '&download=true')
-      }
+      this.url += '&download=true'
       setTimeout(() => {
         this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
       }, 200)
