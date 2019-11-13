@@ -15,10 +15,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'email' => 'admin@craterapp.com',
+            'email' => 'admin@crater.in',
             'name' => 'Jane Doe',
             'role' => 'admin',
-            'password' => Hash::make('crater@123')
+            'password' => Hash::make('admin@123')
         ]);
 
         Setting::setSetting('profile_complete', 0);

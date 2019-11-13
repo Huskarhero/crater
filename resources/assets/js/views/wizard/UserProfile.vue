@@ -45,7 +45,6 @@
           />
           <div v-if="$v.profileData.password.$error">
             <span v-if="!$v.profileData.password.required" class="text-danger">{{ $tc('validation.required') }}</span>
-            <span v-if="!$v.profileData.password.minLength" class="text-danger"> {{ $tc('validation.password_min_length', $v.profileData.password.$params.minLength.min, {count: $v.profileData.password.$params.minLength.min}) }} </span>
           </div>
         </div>
         <div class="col-md-6">
@@ -107,8 +106,7 @@ export default {
         required
       },
       password: {
-        required,
-        minLength: minLength(5)
+        required
       },
       confirm_password: {
         required: requiredIf('isRequired'),

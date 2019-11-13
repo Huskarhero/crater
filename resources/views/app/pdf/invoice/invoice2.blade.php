@@ -142,7 +142,6 @@
             color: #595959;
             padding: 0px;
             margin: 0px;
-            width: 170px;
         }
         .bill-user-phone {
             font-style: normal;
@@ -191,7 +190,6 @@
             color: #595959;
             padding: 0px;
             margin: 0px;
-            width: 170px;
         }
 
         .ship-user-phone {
@@ -437,7 +435,7 @@
                 @include('app.pdf.invoice.partials.billing-address')
             </div>
         </div>
-            @include('app.pdf.invoice.partials.table')
+        @include('app.pdf.invoice.partials.table')
         @include('app.pdf.invoice.partials.notes')
     </div>
 </body>
