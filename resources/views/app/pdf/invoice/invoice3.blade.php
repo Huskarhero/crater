@@ -89,7 +89,7 @@
         }
 
         .bill-add {
-            display: block;
+            display: inline;
             float:left;
             width:40%;
             padding: 0 0 0 30px;
@@ -146,7 +146,6 @@
             line-height: 15px;
             color: #595959;
             margin: 0px;
-            width: 160px;
         }
 
         .ship-user-phone {
@@ -185,7 +184,6 @@
             line-height: 15px;
             color: #595959;
             margin:0px;
-            width: 160px;
         }
 
         .bill-user-phone {
