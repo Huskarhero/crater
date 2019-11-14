@@ -611,6 +611,8 @@ export default {
       estimate_viewed_desc: 'When your customer views the estimate sent via crater dashboard.',
       save: 'Save',
       email_save_message: 'Email saved successfully',
+      // invoice_viewed_message: 'Invoice viewed updated successfully',
+      // estimate_viewed_message: 'Estimate viewed updated successfully',
       please_enter_email: 'Please Enter Email'
     },
     tax_types: {
@@ -620,6 +622,7 @@ export default {
       add_new_tax: 'Add New Tax',
       tax_settings: 'Tax Settings',
       tax_per_item: 'Tax Per Item',
+      // tax_per_item_switch: 'Tax Per Item updated successfully',
       tax_name: 'Tax Name',
       compound_tax: 'Compound Tax',
       percent: 'Percent',
@@ -657,6 +660,7 @@ export default {
       preference: 'Preference | Preferences',
       general_settings: 'Default preferences for the system.',
       updated_message: 'Preferences updated successfully',
+      // set_discount_per_item_message: 'Discount set per item updated successfully',
       select_language: 'select language',
       select_time_zone: 'select Time Zone',
       select_date_formate: 'select Date Formate',
@@ -736,7 +740,8 @@ export default {
       migrate_failed: 'Migrate Failed',
       database_variables_save_error: 'Unable to connect to the DB with Provided Values.',
       mail_variables_save_error: 'Email configuration failed.',
-      connection_failed: 'Database Connection Failed'
+      connection_failed: 'Database connection failed',
+      database_should_be_empty: 'Database should be empty'
     },
     success: {
       mail_variables_save_successfully: 'Email configured successfully',
