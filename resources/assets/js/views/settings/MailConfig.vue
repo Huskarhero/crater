@@ -8,7 +8,7 @@
         </p>
       </div>
       <form action="" @submit.prevent="saveEmailConfig()">
-        <div class="row">
+        <div class="row my-2 mt-5">
           <div class="col-md-6 my-2">
             <label class="form-label">{{ $t('settings.mail.driver') }}</label>
             <span class="text-danger"> *</span>
@@ -116,12 +116,12 @@
         </div>
         <base-button
           :loading="loading"
-          class="pull-right mt-4"
+          class="pull-right mt-5"
           icon="save"
           color="theme"
           type="submit"
         >
-          {{ $t('general.save') }}
+          {{ $t('wizard.save_cont') }}
         </base-button>
       </form>
     </div>

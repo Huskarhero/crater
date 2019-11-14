@@ -233,10 +233,6 @@ export default {
     save_estimate: 'Sauvegarder lestimation',
     confirm_conversion: 'Vous souhaitez convertir cette estimation en facture?',
     conversion_message: 'Conversion réussie',
-    confirm_send_estimate: 'Cette estimation sera envoyée par courrier électronique au client.',
-    confirm_mark_as_sent: 'Cette estimation sera marquée comme envoyé',
-    confirm_mark_as_accepted: 'Cette estimation sera marquée comme acceptée',
-    confirm_mark_as_rejected: 'Cette estimation sera marquée comme Rejetée',
     errors: {
       required: 'Champ requis'
     },
@@ -312,8 +308,6 @@ export default {
     invoice_template: 'Modèle de facture',
     template: 'Modèle',
     mark_as_sent: 'Marquer comme envoyé',
-    invoice_mark_as_sent: 'Cette facture sera marquée comme envoyé',
-    confirm_send: 'Cette facture sera envoyée par courrier électronique au client.',
     invoice_date: 'Date de facturation',
     record_payment: 'Record de paiement',
     add_new_invoice: 'Ajouter une nouvelle facture',
@@ -620,7 +614,6 @@ export default {
       created_message: 'La taxe de vente créée avec succès',
       updated_message: 'La taxe de vente a été mise à jour avec succès',
       deleted_message: 'La taxe de vente a été supprimée avec succès',
-      confirm_delete: 'Vous ne pourrez pas récupérer ce type de taxe',
       already_in_use: 'La taxe est déjà utilisée'
     },
     expense_category: {
@@ -633,7 +626,6 @@ export default {
       created_message: 'Catégorie créée avec succès',
       deleted_message: 'La catégorie de dépenses a été supprimée avec succès',
       updated_message: 'Catégorie de dépenses mise à jour avec succès',
-      confirm_delete: 'Vous ne pourrez pas récupérer cette catégorie de dépenses',
       already_in_use: 'La catégorie est déjà utilisée'
     },
     preferences: {
