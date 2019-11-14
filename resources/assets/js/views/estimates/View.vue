@@ -222,22 +222,12 @@ export default {
       return true
     },
     async onMarkAsSent () {
-      swal({
-        title: this.$t('general.are_you_sure'),
-        text: this.$t('estimates.confirm_mark_as_sent'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (willMarkAsSent) => {
-        if (willMarkAsSent) {
-          this.isRequestOnGoing = true
-          let response = await this.markAsSent({id: this.estimate.id})
-          this.isRequestOnGoing = false
-          if (response.data) {
-            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
-          }
-        }
-      })
+      this.isRequestOnGoing = true
+      let response = await this.markAsSent({id: this.estimate.id})
+      this.isRequestOnGoing = false
+      if (response.data) {
+        window.toastr['success'](this.$tc('estimates.mark_as_sent'))
+      }
     },
     async removeEstimate (id) {
       this.selectEstimate([parseInt(id)])
@@ -245,7 +235,7 @@ export default {
       swal({
         title: 'Deleted',
         text: 'you will not be able to recover this estimate!',
-        icon: '/assets/icon/trash-solid.svg',
+        icon: 'error',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
