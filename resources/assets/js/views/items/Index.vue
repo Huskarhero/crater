@@ -245,8 +245,7 @@ export default {
         { name: 'kg', value: 'kg' },
         { name: 'km', value: 'km' },
         { name: 'lb', value: 'lb' },
-        { name: 'mg', value: 'mg' },
-        { name: 'pc', value: 'pc' }
+        { name: 'mg', value: 'mg' }
       ],
       isRequestOngoing: true,
       filtersApplied: false,
@@ -363,7 +362,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('items.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
+        icon: 'error',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -389,7 +388,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('items.confirm_delete', 2),
-        icon: '/assets/icon/trash-solid.svg',
+        icon: 'error',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {

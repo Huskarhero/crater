@@ -12,15 +12,10 @@
         focus
         type="email"
         name="email"
-        @input="$v.loginData.email.$touch()"
       />
       <div v-if="$v.loginData.email.$error">
-        <span v-if="!$v.loginData.email.required" class="text-danger">
-          {{ $tc('validation.required') }}
-        </span>
-        <span v-if="!$v.loginData.email.email" class="text-danger">
-          {{ $tc('validation.email_incorrect') }}
-        </span>
+        <span v-if="!$v.loginData.email.required" class="text-danger">{{ $tc('validation.required') }}</span>
+        <span v-if="!$v.loginData.email.email" class="text-danger"> {{ $tc('validation.email_incorrect') }} </span>
       </div>
     </div>
     <div class="form-group">
@@ -30,10 +25,8 @@
         :invalid="$v.loginData.password.$error"
         type="password"
         name="password"
-        show-password
-        @input="$v.loginData.password.$touch()"
       />
-      <div v-if="$v.loginData.password.$error">
+      <div v-if="$v.loginData.email.$error">
         <span v-if="!$v.loginData.password.required" class="text-danger">{{ $tc('validation.required') }}</span>
         <span v-if="!$v.loginData.password.minLength" class="text-danger"> {{ $tc('validation.password_min_length', $v.loginData.password.$params.minLength.min, {count: $v.loginData.password.$params.minLength.min}) }} </span>
       </div>
@@ -98,7 +91,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(5)
+        minLength: minLength(8)
       }
     }
   },

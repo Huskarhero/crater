@@ -1,23 +1,6 @@
 // Dashboard
 // -------------------------
 
-.dashboard {
-
-    .dashboard-table
-    .table-component {
-
-        .dashboard-recent-invoice-options {
-
-            .dropdown-container {
-                margin: 10px 5px 0 -75px;
-            }
-
-        }
-
-    }
-
-}
-
 .dashbox {
     background-color: $white;
     box-shadow: $shadow;
@@ -381,7 +364,5 @@
                 justify-content: center;
             }
         }
-
     }
-
 }
