@@ -308,6 +308,7 @@ export default {
     invoice_template: 'Invoice Template',
     template: 'Template',
     mark_as_sent: 'Mark as sent',
+    confirm_send_invoice: 'This invoice will be sent via email to the customer',
     invoice_mark_as_sent: 'This invoice will be marked as sent',
     confirm_send: 'This invoice will be sent via email to the customer',
     invoice_date: 'Invoice Date',
@@ -528,8 +529,7 @@ export default {
       preferences: 'Preferences',
       notifications: 'Notifications',
       tax_types: 'Tax Types',
-      expense_category: 'Expense Categories',
-      update_app: 'Update App'
+      expense_category: 'Expense Categories'
     },
     title: 'Settings',
     setting: 'Settings | Settings',
@@ -665,11 +665,6 @@ export default {
       select_time_zone: 'select Time Zone',
       select_date_formate: 'select Date Formate',
       select_financial_year: 'select financial year'
-    },
-    update_app: {
-      title: 'Update App',
-      description: 'update app description',
-      update: 'Update'
     }
   },
   wizard: {

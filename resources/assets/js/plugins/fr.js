@@ -554,17 +554,7 @@ export default {
       right: 'Droite',
       left: 'La gauche',
       action: 'action',
-      add_currency: 'Ajouter une devise'
-    },
-    mail: {
-      host: 'Mail Host',
-      port: 'Port mail',
-      driver: 'Pilote de courrier',
-      password: 'Mot de passe mail',
-      username: "Mail Nom d'utilisateur",
-      mail_config: 'Configuration du courrier',
-      encryption: 'Chiffrement du courrier',
-      mail_config_desc: "Les détails ci-dessous seront utilisés pour mettre à jour l'environnement de messagerie. Aussi, vous pouvez modifier les détails à tout moment après la connexion."
+      add_currency: 'Ajouter une devise',
     },
     pdf: {
       title: 'Paramètre PDF',
@@ -762,7 +752,7 @@ export default {
     numbers_only: 'Chiffres uniquement.',
     characters_only: 'Caractères seulement.',
     password_incorrect: 'Les mots de passe doivent être identiques',
-    password_length: 'Le mot de passe doit comporter 5 caractères.',
+    password_length: 'Le mot de passe doit comporter 6 caractères.',
     qty_must_greater_than_zero: 'La quantité doit être supérieure à zéro.',
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',

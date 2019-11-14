@@ -106,7 +106,7 @@ export default {
         email
       },
       password: {
-        minLength: minLength(5)
+        minLength: minLength(8)
       },
       confirm_password: {
         required: requiredIf('isRequired'),
