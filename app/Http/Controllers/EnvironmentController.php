@@ -35,7 +35,9 @@ class EnvironmentController extends Controller
     {
         $results = $this->EnvironmentManager->saveDatabaseVariables($request);
 
+
         if(array_key_exists("success", $results)) {
+
             Artisan::call('config:clear');
             Artisan::call('migrate --seed');
             Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations']);

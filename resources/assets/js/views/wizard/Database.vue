@@ -97,6 +97,7 @@
         </div>
         <div class="col-md-6">
           <label class="form-label">{{ $t('wizard.database.password') }}</label>
+          <span class="text-danger"> *</span>
           <base-input
             v-model.trim="databaseData.database_password"
             type="password"
@@ -153,7 +154,7 @@ export default {
         database_name: null,
         database_username: null,
         database_password: null,
-        app_url: window.location.origin
+        app_url: null
       },
       loading: false,
       connections: [
@@ -206,8 +207,8 @@ export default {
         }
         this.loading = false
       } catch (e) {
-        console.log(e.response)
-        window.toastr['error'](e.response.data.message)
+        console.log(e)
+        window.toastr['error']('Something went wrong')
       }
     }
   }
