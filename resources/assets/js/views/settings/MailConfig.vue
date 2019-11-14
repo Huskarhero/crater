@@ -66,9 +66,8 @@
             <base-input
               :invalid="$v.mailConfigData.mail_password.$error"
               v-model.trim="mailConfigData.mail_password"
-              type="password"
+              type="mail_password"
               name="name"
-              show-password
               @input="$v.mailConfigData.mail_password.$touch()"
             />
             <div v-if="$v.mailConfigData.mail_password.$error">
@@ -142,12 +141,12 @@ export default {
   data () {
     return {
       mailConfigData: {
-        mail_driver: '',
-        mail_host: '',
-        mail_port: null,
-        mail_username: '',
-        mail_password: '',
-        mail_encryption: ''
+        mail_driver: 'smtp',
+        mail_host: 'mailtrap.io',
+        mail_port: 2525,
+        mail_username: 'cc3c64516febd4',
+        mail_password: 'e6a0176301f587',
+        mail_encryption: 'tls'
       },
       loading: false,
       mail_drivers: []
@@ -177,22 +176,18 @@ export default {
     }
   },
   mounted () {
-    this.loadData()
+    // this.getMailDrivers()
   },
   methods: {
-    async loadData () {
+    async getMailDrivers () {
       this.loading = true
 
-      let mailDrivers = await window.axios.get('/api/settings/environment/mail')
-      let mailData = await window.axios.get('/api/settings/environment/mail-env')
+      let response = await window.axios.get('/api/admin/onboarding/environment/mail')
 
-      if (mailDrivers.data) {
-        this.mail_drivers = mailDrivers.data
+      if (response.data) {
+        this.mail_drivers = response.data
+        this.loading = false
       }
-      if (mailData.data) {
-        this.mailConfigData = mailData.data
-      }
-      this.loading = false
     },
     async saveEmailConfig () {
       this.$v.mailConfigData.$touch()
@@ -201,7 +196,7 @@ export default {
       }
       this.loading = true
       try {
-        let response = await window.axios.post('/api/settings/environment/mail', this.mailConfigData)
+        let response = await window.axios.post('/api/admin/onboarding/environment/mail', this.mailConfigData)
         if (response.data.success) {
           window.toastr['success'](this.$t('wizard.success.' + response.data.success))
         } else {

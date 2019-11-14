@@ -51,7 +51,6 @@ import {
   faEllipsisH,
   faCopy,
   faPaperPlane,
-  faEyeSlash,
   faSyncAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -110,7 +109,6 @@ library.add(
   faFilePdf,
   faEnvelope,
   faEye,
-  faEyeSlash,
   faShare,
   faEllipsisH,
   faCopy,
