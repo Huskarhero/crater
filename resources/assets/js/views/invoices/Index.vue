@@ -390,15 +390,15 @@ export default {
         icon: '/assets/icon/paper-plane-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willSendInvoice) => {
-        if (willSendInvoice) {
+      }).then(async (Send_Invoice) => {
+        if (Send_Invoice) {
           const data = {
             id: id
           }
           let response = await this.sendEmail(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
+            window.toastr['success'](this.$tc('invoices.send_invoice'))
           }
         }
       })
@@ -410,15 +410,15 @@ export default {
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willMarkAsSend) => {
-        if (willMarkAsSend) {
+      }).then(async (MarkAsSend_Invoice) => {
+        if (MarkAsSend_Invoice) {
           const data = {
             id: id
           }
           let response = await this.markAsSent(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('invoices.mark_as_sent_successfully'))
+            window.toastr['success'](this.$tc('invoices.mark_as_sent'))
           }
         }
       })

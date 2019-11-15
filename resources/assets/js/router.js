@@ -72,7 +72,6 @@ import UserProfile from './views/settings/UserProfile.vue'
 import TaxTypes from './views/settings/TaxTypes.vue'
 import ExpenseCategory from './views/settings/ExpenseCategory.vue'
 import MailConfig from './views/settings/MailConfig.vue'
-import UpdateApp from './views/settings/UpdateApp.vue'
 
 import Wizard from './views/wizard/Index.vue'
 
@@ -338,11 +337,6 @@ const routes = [
             path: 'notifications',
             name: 'notifications',
             component: Notifications
-          },
-          {
-            path: 'update-app',
-            name: 'updateapp',
-            component: UpdateApp
           }
         ]
       }

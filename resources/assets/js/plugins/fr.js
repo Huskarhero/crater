@@ -237,8 +237,6 @@ export default {
     confirm_mark_as_sent: 'Cette estimation sera marquée comme envoyé',
     confirm_mark_as_accepted: 'Cette estimation sera marquée comme acceptée',
     confirm_mark_as_rejected: 'Cette estimation sera marquée comme Rejetée',
-    mark_as_sent_successfully: 'Estimation marquée comme envoyée avec succès',
-    send_estimate_successfully: 'Estimation envoyée avec succès',
     errors: {
       required: 'Champ requis'
     },
@@ -328,8 +326,6 @@ export default {
     no_invoices: 'Aucune facture pour le moment!',
     list_of_invoices: 'Cette section contiendra la liste des factures.',
     select_invoice: 'Sélectionnez facture',
-    mark_as_sent_successfully: 'Facture marquée comme envoyée avec succès',
-    send_invoice_successfully: 'Facture envoyée avec succès',
     item: {
       title: 'Titre de larticle',
       description: 'La description',
@@ -533,8 +529,7 @@ export default {
       preferences: 'Préférences',
       notifications: 'Les notifications',
       tax_types: 'Types de taxe',
-      expense_category: 'Catégories de dépenses',
-      update_app: "Mise à jour de l'application"
+      expense_category: 'Catégories de dépenses'
     },
     title: 'Paramètres',
     setting: 'Paramètres | Paramètres',
@@ -559,17 +554,7 @@ export default {
       right: 'Droite',
       left: 'La gauche',
       action: 'action',
-      add_currency: 'Ajouter une devise'
-    },
-    mail: {
-      host: 'Mail Host',
-      port: 'Port mail',
-      driver: 'Pilote de courrier',
-      password: 'Mot de passe mail',
-      username: "Mail Nom d'utilisateur",
-      mail_config: 'Configuration du courrier',
-      encryption: 'Chiffrement du courrier',
-      mail_config_desc: "Les détails ci-dessous seront utilisés pour mettre à jour l'environnement de messagerie. Aussi, vous pouvez modifier les détails à tout moment après la connexion."
+      add_currency: 'Ajouter une devise',
     },
     pdf: {
       title: 'Paramètre PDF',
@@ -669,11 +654,6 @@ export default {
       select_time_zone: 'sélectionnez le fuseau horaire',
       select_date_formate: 'sélectionnez Date Formate',
       select_financial_year: 'sélectionner lexercice'
-    },
-    update_app: {
-      title: "Mise à jour de l'application",
-      description: "mettre à jour la description de l'application",
-      update: 'Mise à jour'
     }
   },
   wizard: {
@@ -772,7 +752,7 @@ export default {
     numbers_only: 'Chiffres uniquement.',
     characters_only: 'Caractères seulement.',
     password_incorrect: 'Les mots de passe doivent être identiques',
-    password_length: 'Le mot de passe doit comporter 5 caractères.',
+    password_length: 'Le mot de passe doit comporter 6 caractères.',
     qty_must_greater_than_zero: 'La quantité doit être supérieure à zéro.',
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',

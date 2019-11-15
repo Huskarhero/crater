@@ -203,7 +203,7 @@ class OnboardingController extends Controller
             );
         }
 
-        Setting::setSetting('version', config('crater.version'));
+        Setting::setSetting('version','1.0.0');
 
         Artisan::call('passport:install --force');
 

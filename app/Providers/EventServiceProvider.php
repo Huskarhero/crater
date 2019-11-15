@@ -4,8 +4,6 @@ namespace Laraspace\Providers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Laraspace\Events\UpdateFinished;
-use Laraspace\Listeners\Updates\V10\Version101;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -15,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        UpdateFinished::class=> [
-            Version101::class,
+        'Laraspace\Events\SomeEvent' => [
+            'Laraspace\Listeners\EventListener',
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

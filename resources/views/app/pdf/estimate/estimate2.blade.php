@@ -264,7 +264,7 @@
         }
 
         tr.main-table-header th {
-            border-bottom: 0.620315px solid #E8E8E8;
+            border-bottom: 1px solid #EAF1FB;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;

@@ -1,6 +1,6 @@
 // Invoice statuses
 
-.inv-status-overdue {
+.inv-status-due {
     background: #FED7D7;
     font-size: 13px;
     color: #9B2C2C;
@@ -15,9 +15,9 @@
 }
 
 .inv-status-unpaid {
-    background: #F8EDCB;
+    background: rgba(246, 208, 154, 0.4);
     font-size: 13px;
-    color: #6C432E;
+    color: #A96E1A;
     padding: 5px 10px;
 }
 
@@ -50,9 +50,9 @@
 }
 
 .inv-status-partially_paid {
-    background: #C9E3EC;
+    background: #E1E0EA;
     font-size: 13px;
-    color: #1E576C;
+    color: #312F57;
     padding: 5px 10px;
 }
 

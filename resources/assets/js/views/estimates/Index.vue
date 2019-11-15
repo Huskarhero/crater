@@ -261,13 +261,13 @@
                   {{ $t('estimates.send_estimate') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status !== 'ACCEPTED'">
+              <v-dropdown-item v-if="row.status === 'DRAFT' || row.status === 'REJECTED'">
                 <a class="dropdown-item" href="#" @click.self="onMarkAsAccepted(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_accepted') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status !== 'REJECTED'">
+              <v-dropdown-item v-if="row.status === 'ACCEPTED' || row.status === 'DRAFT'">
                 <a class="dropdown-item" href="#" @click.self="onMarkAsRejected(row.id)">
                   <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_rejected') }}
@@ -425,7 +425,7 @@ export default {
           if (response.data) {
             this.filters.status = 'ACCEPTED'
             this.$refs.table.refresh()
-            window.toastr['success'](this.$tc('estimates.confirm_mark_as_accepted'))
+            window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
           }
         }
       })
@@ -514,8 +514,8 @@ export default {
         icon: '/assets/icon/envelope-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willConvertInToinvoice) => {
-        if (willConvertInToinvoice) {
+      }).then(async (willDelete) => {
+        if (willDelete) {
           let res = await this.convertToInvoice(id)
           if (res.data) {
             window.toastr['success'](this.$t('estimates.conversion_message'))
@@ -562,15 +562,15 @@ export default {
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willMarkAsSent) => {
-        if (willMarkAsSent) {
+      }).then(async (willDelete) => {
+        if (willDelete) {
           const data = {
             id: id
           }
           let response = await this.markAsSent(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
+            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
           }
         }
       })
@@ -582,15 +582,15 @@ export default {
         icon: '/assets/icon/paper-plane-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willSendEstimate) => {
-        if (willSendEstimate) {
+      }).then(async (sendEstimate) => {
+        if (sendEstimate) {
           const data = {
             id: id
           }
           let response = await this.sendEmail(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('estimates.send_estimate_successfully'))
+            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
           }
         }
       })
