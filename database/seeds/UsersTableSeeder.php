@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Crater\User;
-use Crater\Setting;
+use Laraspace\User;
+use Laraspace\Setting;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder

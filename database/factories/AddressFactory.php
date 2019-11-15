@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Crater\Address;
+use Laraspace\Address;
 use Faker\Generator as Faker;
 
 $factory->define(Address::class, function (Faker $faker) {

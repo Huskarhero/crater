@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Crater\Company;
-use Crater\User;
-use Crater\Address;
-use Crater\CompanySetting;
+use Laraspace\Company;
+use Laraspace\User;
+use Laraspace\Address;
+use Laraspace\CompanySetting;
 
 class SettingsSeeder extends Seeder
 {

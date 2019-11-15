@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Crater\Space\Updater;
-use Crater\Space\SiteApi;
+use Laraspace\Space\Updater;
+use Laraspace\Space\SiteApi;
 
 class UpdateController extends Controller
 {
@@ -12,7 +12,7 @@ class UpdateController extends Controller
     {
         set_time_limit(600); // 10 minutes
 
-        $json = Updater::update($request->installed, $request->version, $request->isMinor);
+        $json = Updater::update($request->installed, $request->version);
 
         return response()->json($json);
     }

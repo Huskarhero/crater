@@ -35,7 +35,7 @@
             width: 100%;
             height: 90px;
             left: 0px;
-            top: -50px;
+            top: 0px;
         }
 
         .header-logo {
@@ -69,15 +69,10 @@
             color: rgba(0, 0, 0, 0.5);
         }
 
-        @page {
-            margin-top: 60px !important;
-        }
-
         .wrapper {
            display: block;
-           margin-top: 0px;
-           padding-top: 16px;
-           padding-bottom: 20px;
+           padding-top: 60px;
+           padding-bottom: 60px;
         }
 
         .address {
@@ -348,7 +343,6 @@
             margin-left: 30px;
             width: 442px;
             text-align: left;
-            page-break-inside: avoid;
         }
 
         .notes-label {
@@ -381,8 +375,8 @@
                 </td>
             </tr>
         </table>
-        <hr class="header-line" style="border: 0.620315px solid #E8E8E8;" />
     </div>
+    <hr class="header-line" />
     <div class="wrapper">
         <div class="address">
             <div class="company">
@@ -419,9 +413,7 @@
             </div>
             <div style="clear: both;"></div>
         </div>
-        <div style="position:relative">
-            @include('app.pdf.estimate.partials.table')
-        </div>
+        @include('app.pdf.estimate.partials.table')
         @include('app.pdf.estimate.partials.notes')
     </div>
 </body>

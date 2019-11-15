@@ -1,8 +1,8 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\Invoice;
+use Laraspace\Invoice;
 
 class InvoiceTemplate extends Model
 {

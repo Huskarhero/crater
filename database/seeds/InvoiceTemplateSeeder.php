@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Crater\InvoiceTemplate;
+use Laraspace\InvoiceTemplate;
 
 class InvoiceTemplateSeeder extends Seeder
 {

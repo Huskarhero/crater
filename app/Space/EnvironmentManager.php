@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Space;
+namespace Laraspace\Space;
 
 use Exception;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\DatabaseEnvironmentRequest;
-use Crater\Http\Requests\MailEnvironmentRequest;
+use Laraspace\Http\Requests\DatabaseEnvironmentRequest;
+use Laraspace\Http\Requests\MailEnvironmentRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 

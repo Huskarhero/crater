@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Events;
+namespace Laraspace\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

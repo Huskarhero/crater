@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Crater\Estimate;
-use Crater\User;
-use Crater\Tax;
+use Laraspace\Estimate;
+use Laraspace\User;
+use Laraspace\Tax;
 use Faker\Generator as Faker;
-use Crater\EstimateItem;
-use Crater\EstimateTemplate;
+use Laraspace\EstimateItem;
+use Laraspace\EstimateTemplate;
 
 $factory->define(Estimate::class, function (Faker $faker) {
     return [

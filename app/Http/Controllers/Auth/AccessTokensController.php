@@ -1,16 +1,16 @@
 <?php
-namespace Crater\Http\Controllers\Auth;
+namespace Laraspace\Http\Controllers\Auth;
 
-use Crater\Proxy\HttpKernelProxy;
+use Laraspace\Proxy\HttpKernelProxy;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Validator;
 use Hash;
-use Crater\User;
+use Laraspace\User;
 use Auth;
-use Crater\Http\Controllers\Controller;
+use Laraspace\Http\Controllers\Controller;
 
 class AccessTokensController extends Controller
 {
