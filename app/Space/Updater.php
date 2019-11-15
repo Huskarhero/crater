@@ -13,12 +13,12 @@ class Updater
 {
     use SiteApi;
 
-    public static function update($installed, $version, $isMinor)
+    public static function update($installed, $version)
     {
         $data = null;
         $path = null;
 
-        $url = '/download/'.$version.'?type=update';
+        $url = '/download/'.$version;
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -40,8 +40,8 @@ class Updater
         // Create temp directory
         $path = 'temp-' . md5(mt_rand());
         $path2 = 'temp2-' . md5(mt_rand());
-        $temp_path = storage_path('app') . '/' . $path;
-        $temp_path2 = storage_path('app') . '/' . $path2;
+        $temp_path = storage_path('app/temp') . '/' . $path;
+        $temp_path2 = storage_path('app/temp') . '/' . $path2;
 
         if (!File::isDirectory($temp_path)) {
             File::makeDirectory($temp_path);
@@ -78,9 +78,7 @@ class Updater
         File::deleteDirectory($temp_path2);
 
         try {
-            if (!$isMinor) {
-                event(new UpdateFinished($installed, $version));
-            }
+            event(new UpdateFinished($installed, $version));
 
             return [
                 'success' => true,

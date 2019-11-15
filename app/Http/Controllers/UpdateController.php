@@ -12,7 +12,7 @@ class UpdateController extends Controller
     {
         set_time_limit(600); // 10 minutes
 
-        $json = Updater::update($request->installed, $request->version, $request->isMinor);
+        $json = Updater::update($request->installed, $request->version);
 
         return response()->json($json);
     }
