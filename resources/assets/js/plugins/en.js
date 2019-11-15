@@ -310,6 +310,7 @@ export default {
     invoice_template: 'Invoice Template',
     template: 'Template',
     mark_as_sent: 'Mark as sent',
+    confirm_send_invoice: 'This invoice will be sent via email to the customer',
     invoice_mark_as_sent: 'This invoice will be marked as sent',
     confirm_send: 'This invoice will be sent via email to the customer',
     invoice_date: 'Invoice Date',
@@ -668,8 +669,13 @@ export default {
     },
     update_app: {
       title: 'Update App',
-      description: 'update app description',
-      update: 'Update'
+      description: 'You can easily update Crater by checking for a new update by clicking the button below',
+      check_update: 'Check for updates',
+      avail_update: 'New Update available',
+      next_version: 'Next version',
+      update: 'Update',
+      update_progress: 'Update in progress...',
+      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes'
     }
   },
   wizard: {
