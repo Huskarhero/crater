@@ -23,16 +23,15 @@
             display:inline-block;
             width:30%;
         }
-        @page {
-            margin-top: 60px !important;
-        }
         .header-table {
             background: #817AE3;
             position: absolute;
             width: 100%;
             height: 141px;
             left: 0px;
-            top: -60px;
+            top: 0px;
+
+
         }
         .header-logo {
             position: absolute;
@@ -74,8 +73,8 @@
 
         .wrapper {
            display: block;
-           margin-top: 60px;
-           padding-bottom: 20px;
+           padding-top: 110px;
+           padding-bottom: 60px;
         }
 
         .address {
@@ -382,7 +381,6 @@
             margin-left: 30px;
             width: 442px;
             text-align: left;
-            page-break-inside: avoid;
         }
 
         .notes-label {

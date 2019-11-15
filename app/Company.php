@@ -1,9 +1,9 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\User;
-use Crater\CompanySetting;
+use Laraspace\User;
+use Laraspace\CompanySetting;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 

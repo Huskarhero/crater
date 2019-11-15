@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Space;
+namespace Laraspace\Space;
 
 class RequirementsChecker
 {

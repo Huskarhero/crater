@@ -1,15 +1,15 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Crater\CompanySetting;
-use Crater\Currency;
-use Crater\Invoice;
-use Crater\Payment;
+use Laraspace\CompanySetting;
+use Laraspace\Currency;
+use Laraspace\Invoice;
+use Laraspace\Payment;
 use Carbon\Carbon;
 use function MongoDB\BSON\toJSON;
-use Crater\User;
-use Crater\Http\Requests\PaymentRequest;
+use Laraspace\User;
+use Laraspace\Http\Requests\PaymentRequest;
 
 class PaymentController extends Controller
 {

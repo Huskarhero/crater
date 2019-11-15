@@ -1,9 +1,9 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\InvoiceTemplate;
-use Crater\Payment;
+use Laraspace\InvoiceTemplate;
+use Laraspace\Payment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -90,7 +90,7 @@ class Invoice extends Model
 
     public function items()
     {
-        return $this->hasMany('Crater\InvoiceItem');
+        return $this->hasMany('Laraspace\InvoiceItem');
     }
 
     public function taxes()
@@ -105,7 +105,7 @@ class Invoice extends Model
 
     public function user()
     {
-        return $this->belongsTo('Crater\User');
+        return $this->belongsTo('Laraspace\User');
     }
 
     public function invoiceTemplate()

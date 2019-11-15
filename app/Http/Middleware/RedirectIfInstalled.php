@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Middleware;
+namespace Laraspace\Http\Middleware;
 
 use Closure;
-use Crater\Setting;
+use Laraspace\Setting;
 
 class RedirectIfInstalled
 {

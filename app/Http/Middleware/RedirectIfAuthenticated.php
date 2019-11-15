@@ -1,5 +1,5 @@
 <?php
-namespace Crater\Http\Middleware;
+namespace Laraspace\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

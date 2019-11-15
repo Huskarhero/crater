@@ -1,5 +1,5 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Listeners\Updates;
+namespace Laraspace\Listeners\Updates;
 
 class Listener
 {
@@ -15,9 +15,9 @@ class Listener
     protected function check($event)
     {
         // Do not apply to the same or newer versions
-        if (version_compare($event->old, static::VERSION, '>=')) {
-            return false;
-        }
+        // if (version_compare($event->old, static::VERSION, '>=')) {
+        //     return false;
+        // }
 
         return true;
     }

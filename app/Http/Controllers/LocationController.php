@@ -1,10 +1,10 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Crater\Country;
-use Crater\State;
-use Crater\City;
+use Laraspace\Country;
+use Laraspace\State;
+use Laraspace\City;
 
 class LocationController extends Controller
 {

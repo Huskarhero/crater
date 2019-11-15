@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Mail;
+namespace Laraspace\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

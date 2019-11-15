@@ -1,9 +1,9 @@
 <?php
-namespace Crater\Console\Commands;
+namespace Laraspace\Console\Commands;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
-use Crater\Estimate;
+use Laraspace\Estimate;
 
 class CheckEstimateStatus extends Command
 {

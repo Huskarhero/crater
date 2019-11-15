@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Crater\TaxType;
+use Laraspace\TaxType;
 use Faker\Generator as Faker;
-use Crater\User;
+use Laraspace\User;
 
 $factory->define(TaxType::class, function (Faker $faker) {
     return [
