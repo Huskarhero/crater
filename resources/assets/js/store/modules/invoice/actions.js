@@ -47,7 +47,6 @@ export const fetchViewInvoice = ({ commit, dispatch, state }, id) => {
 export const sendEmail = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/invoices/send`, data).then((response) => {
-      commit(types.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'})
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -122,7 +121,7 @@ export const updateInvoice = ({ commit, dispatch, state }, data) => {
 export const markAsSent = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/invoices/mark-as-sent`, data).then((response) => {
-      commit(types.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'})
+      // commit(types.UPDATE_INVOICE, response.data)
       resolve(response)
     }).catch((err) => {
       reject(err)

@@ -260,6 +260,7 @@ class InvoicesController extends Controller
                 'error' => 'invalid_due_amount'
             ]);
         } elseif ($invoice->due_amount != 0 && $invoice->paid_status == Invoice::STATUS_PAID) {
+            $invoice->status = $invoice->getPreviousStatus();
             $invoice->paid_status = Invoice::STATUS_PARTIALLY_PAID;
         }
 
@@ -370,12 +371,6 @@ class InvoicesController extends Controller
     {
         $invoice = Invoice::findOrFail($request->id);
 
-        if ($invoice->status == Invoice::STATUS_DRAFT) {
-            $invoice->status = Invoice::STATUS_SENT;
-            $invoice->sent = true;
-            $invoice->save();
-        }
-
         $data['invoice'] = $invoice->toArray();
         $userId = $data['invoice']['user_id'];
         $data['user'] = User::find($userId)->toArray();
@@ -395,6 +390,12 @@ class InvoicesController extends Controller
             return response()->json([
                 'error' => 'notification_email_does_not_exist'
             ]);
+        }
+
+        if ($invoice->status == Invoice::STATUS_DRAFT) {
+            $invoice->status = Invoice::STATUS_SENT;
+            $invoice->sent = true;
+            $invoice->save();
         }
 
         \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
