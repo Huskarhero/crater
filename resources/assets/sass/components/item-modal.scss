@@ -23,16 +23,9 @@
 
 @media(max-width: $x-small-breakpoint ) {
 
-    .base-modal {
+    .base-modal .item-modal .input-label{
 
-        .item-modal {
-            width: 100vw;
-
-            .input-label {
-                text-align: left;
-            }
-
-        }
+        text-align: left;
 
     }
 

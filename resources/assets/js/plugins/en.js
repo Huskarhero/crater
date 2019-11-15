@@ -182,7 +182,7 @@ export default {
     list_of_items: 'This section will contain the list of items.',
     select_a_unit: 'select unit',
 
-    item_attached_message: 'Cannot delete an item already in use',
+    item_attached_message: 'Cannot delete an item which is already in use',
     confirm_delete: 'You will not be able to recover this Item | You will not be able to recover these Items',
     created_message: 'Item created successfully',
     updated_message: 'Item updated successfully',
@@ -227,7 +227,7 @@ export default {
     add_estimate: 'Add Estimate',
     save_estimate: 'Save Estimate',
     confirm_conversion: 'You want to convert this Estimate into Invoice?',
-    conversion_message: 'Conversion successful',
+    conversion_message: 'Invoice created successful',
     confirm_send_estimate: 'This estimate will be sent via email to the customer',
     confirm_mark_as_sent: 'This estimate will be marked as sent',
     confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
@@ -668,8 +668,13 @@ export default {
     },
     update_app: {
       title: 'Update App',
-      description: 'update app description',
-      update: 'Update'
+      description: 'You can easily update Crater by checking for a new update by clicking the button below',
+      check_update: 'Check for updates',
+      avail_update: 'New Update available',
+      next_version: 'Next version',
+      update: 'Update',
+      update_progress: 'Update in progress...',
+      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes'
     }
   },
   wizard: {

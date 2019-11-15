@@ -25,7 +25,6 @@
                 margin: 0 0 0 14px;
             }
         }
-
     }
 
     .invoice-input {
@@ -550,28 +549,6 @@
     }
 
     @media (max-width: $x-small-breakpoint) {
-
-        .page-header {
-            margin-bottom: 13px;
-
-            .invoice-action-btn {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                margin-top: 15px;
-                margin-right: 0px !important;
-            }
-
-        }
-
-        .invoice-customer-container {
-            padding-right: 0px;
-        }
-
-        .collapse-input {
-            padding-right: 0px;
-        }
-
         .page-actions {
             position: relative;
             -webkit-transform: none;
@@ -609,7 +586,6 @@
             }
 
             .invoice-total {
-                min-width: 346px;
                 margin-top: 25px;
             }
 
