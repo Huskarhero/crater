@@ -21,12 +21,12 @@ class Version101 extends Listener
      */
     public function handle(UpdateFinished $event)
     {
-        if (!$this->check($event)) {
-            return;
-        }
+        // if (!$this->check($event)) {
+        //     return;
+        // }
 
         Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-        Setting::setSetting('version', self::VERSION);
+        Setting::getSetting('version', self::VERSION);
     }
 }

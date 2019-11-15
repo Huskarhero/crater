@@ -233,8 +233,6 @@ export default {
     confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
     confirm_mark_as_rejected: 'This estimate will be marked as Rejected',
     no_matching_estimates: 'There are no matching estimates!',
-    mark_as_sent_successfully: 'Estimate marked as sent successfully',
-    send_estimate_successfully: 'Estimate sent successfully',
     errors: {
       required: 'Field is required'
     },
@@ -325,8 +323,6 @@ export default {
     list_of_invoices: 'This section will contain the list of invoices.',
     select_invoice: 'Select Invoice',
     no_matching_invoices: 'There are no matching invoices!',
-    mark_as_sent_successfully: 'Invoice marked as sent successfully',
-    send_invoice_successfully: 'Invoice sent successfully',
     item: {
       title: 'Item Title',
       description: 'Description',
@@ -776,7 +772,7 @@ export default {
     payment_greater_than_zero: 'Payment must be greater than zero.',
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
     quantity_maxlength: 'Quantity should not be greater than 10 digits.',
-    price_maxlength: 'Price should not be greater than 10 digits.',
+    price_maxlength: 'Price should not be greater than 20 digits.',
     price_minvalue: 'Price should be greater than 0.',
     amount_maxlength: 'Amount should not be greater than 10 digits.',
     amount_minvalue: 'Amount should be greater than 0.',
