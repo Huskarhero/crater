@@ -34,7 +34,7 @@
         </v-dropdown>
       </div>
     </div>
-    <div class="estimate-sidebar">
+    <div class="estimate-si debar">
       <base-loader v-if="isSearching" />
       <div v-else class="side-header">
         <base-input

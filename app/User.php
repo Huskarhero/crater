@@ -239,7 +239,6 @@ class User extends Authenticatable implements HasMedia
         if ($customer->addresses()->exists()) {
             $customer->addresses()->delete();
         }
-
         $customer->delete();
 
         return true;

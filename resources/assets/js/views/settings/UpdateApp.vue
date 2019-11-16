@@ -8,12 +8,12 @@
         </p>
         <label class="input-label">Current version</label><br>
         <label class="version">1.0.0</label>
-        <base-button :outline="true" :disabled="isCheckingforUpdate" size="large" color="theme" @click="checkUpdate" >
-          <font-awesome-icon :class="{'update': isCheckingforUpdate}" style="margin-right: 10px;" icon="sync-alt" />
+        <base-button :outline="true" size="large" color="theme" @click="checkUpdate">
+          <font-awesome-icon :class="{'update': isUpdateAvail}" style="margin-right: 5px;" icon="sync-alt" />
           {{ $t('settings.update_app.check_update') }}
         </base-button>
         <hr>
-        <div v-show="!isUpdating" v-if="isUpdateAvailable" class="mt-4 content">
+        <div class="mt-4 content">
           <h3 class="page-title">{{ $t('settings.update_app.avail_update') }}</h3>
           <label class="input-label">{{ $t('settings.update_app.next_version') }}</label><br>
           <label class="version">{{ updateData.version }}</label>
@@ -24,13 +24,13 @@
             {{ $t('settings.update_app.update') }}
           </base-button>
         </div>
-        <div v-if="isUpdating">
+        <!-- <div>
           <h3 class="page-title">{{ $t('settings.update_app.update_progress') }}</h3>
           <p class="page-sub-title">
             {{ $t('settings.update_app.progress_text') }}
           </p>
           <font-awesome-icon icon="spinner" class="fa-spin"/>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -41,9 +41,7 @@ export default {
   data () {
     return {
       isShowProgressBar: false,
-      isUpdateAvailable: false,
-      isUpdating: false,
-      isCheckingforUpdate: false,
+      isUpdateAvail: false,
       progress: 10,
       interval: null,
       description: '',
@@ -62,28 +60,17 @@ export default {
   },
   methods: {
     async onUpdateApp () {
-      this.isUpdating = true
       const data = this.updateData
       let response = await axios.post('/api/update', data)
-      this.isUpdating = false
-      this.isUpdateAvailable = false
+      console.log(response.data)
     },
     async checkUpdate () {
-      try {
-        this.isCheckingforUpdate = true
-        let response = await axios.get('/api/check/update')
-        this.isCheckingforUpdate = false
-
-        if (response.data) {
-          this.updateData.isMinor = response.data.is_minor
-          this.updateData.version = response.data.version
-          this.description = response.data.description
-          this.isUpdateAvailable = true
-        }
-      } catch (e) {
-        this.isUpdateAvailable = false
-        this.isCheckingforUpdate = false
-        window.toastr['error']('Something went wrong')
+      let response = await axios.get('/api/check/update')
+      console.log(response.data)
+      if (response.data) {
+        this.updateData.isMinor = response.data.is_minor
+        this.updateData.version = response.data.version.version
+        this.updateData.description = response.data.version.description
       }
     }
   }
