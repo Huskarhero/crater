@@ -1,22 +1,19 @@
 <template>
   <div class="invoice-create-page main-content">
-    <form v-if="!initLoading" action="" @submit.prevent="submitInvoiceData">
+    <form action="" @submit.prevent="submitInvoiceData">
       <div class="page-header">
-        <h3 v-if="$route.name === 'invoices.edit'" class="page-title">{{ $t('invoices.edit_invoice') }}</h3>
-        <h3 v-else class="page-title">{{ $t('invoices.new_invoice') }} </h3>
+        <h3 class="page-title">{{ $t('invoices.new_invoice') }}</h3>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><router-link slot="item-title" to="/admin/dashboard">{{ $t('general.home') }}</router-link></li>
           <li class="breadcrumb-item"><router-link slot="item-title" to="/admin/invoices">{{ $tc('invoices.invoice', 2) }}</router-link></li>
-          <li v-if="$route.name === 'invoices.edit'" class="breadcrumb-item">{{ $t('invoices.edit_invoice') }}</li>
-          <li v-else class="breadcrumb-item">{{ $t('invoices.new_invoice') }}</li>
+          <li class="breadcrumb-item">{{ $t('invoices.new_invoice') }}</li>
         </ol>
         <div class="page-actions row">
-          <a v-if="$route.name === 'invoices.edit'" :href="`/invoices/pdf/${newInvoice.unique_hash}`" target="_blank" class="mr-3 base-button btn btn-outline-primary default-size" outline color="theme">
-            {{ $t('general.view_pdf') }}
-          </a>
+          <base-button class="mr-3" outline color="theme">
+            {{ $t('general.download_pdf') }}
+          </base-button>
           <base-button
             :loading="isLoading"
-            :disabled="isLoading"
             icon="save"
             color="theme"
             type="submit">
@@ -27,82 +24,59 @@
       <div class="row invoice-input-group">
         <div class="col-md-5">
           <div
-            v-if="selectedCustomer" class="show-customer">
-            <div class="row px-2 mt-1">
+            v-if="selectedCustomer"
+            class="show-customer"
+          >
+            <div class="row p-2">
               <div class="col col-6">
-                <div v-if="selectedCustomer.billing_address" class="row address-menu">
+                <div v-if="selectedCustomer.billing_address != null" class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.bill_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
-                    <label v-if="selectedCustomer.billing_address.name">
-                      {{ selectedCustomer.billing_address.name }}
-                    </label>
-                    <label v-if="selectedCustomer.billing_address.address_street_1">
-                      {{ selectedCustomer.billing_address.address_street_1 }}
-                    </label>
-                    <label v-if="selectedCustomer.billing_address.address_street_2">
-                      {{ selectedCustomer.billing_address.address_street_2 }}
-                    </label>
-                    <label v-if="selectedCustomer.billing_address.city && selectedCustomer.billing_address.state">
+                    <label>{{ selectedCustomer.billing_address.name }}</label>
+                    <label>{{ selectedCustomer.billing_address.address_street_1 }}</label>
+                    <label>{{ selectedCustomer.billing_address.address_street_2 }}</label>
+                    <label>
                       {{ selectedCustomer.billing_address.city.name }}, {{ selectedCustomer.billing_address.state.name }} {{ selectedCustomer.billing_address.zip }}
                     </label>
-                    <label v-if="selectedCustomer.billing_address.country">
-                      {{ selectedCustomer.billing_address.country.name }}
-                    </label>
-                    <label v-if="selectedCustomer.billing_address.phone">
-                      {{ selectedCustomer.billing_address.phone }}
-                    </label>
+                    <label>{{ selectedCustomer.billing_address.country.name }}</label>
+                    <label>{{ selectedCustomer.billing_address.phone }}</label>
                   </div>
                 </div>
               </div>
               <div class="col col-6">
-                <div v-if="selectedCustomer.shipping_address" class="row address-menu">
+                <div v-if="selectedCustomer.shipping_address != null" class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.ship_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
-                    <label v-if="selectedCustomer.shipping_address.name">
-                      {{ selectedCustomer.shipping_address.name }}
-                    </label>
-                    <label v-if="selectedCustomer.shipping_address.address_street_1">
-                      {{ selectedCustomer.shipping_address.address_street_1 }}
-                    </label>
-                    <label v-if="selectedCustomer.shipping_address.address_street_2">
-                      {{ selectedCustomer.shipping_address.address_street_2 }}
-                    </label>
-                    <label v-if="selectedCustomer.shipping_address.city && selectedCustomer.shipping_address">
+                    <label>{{ selectedCustomer.shipping_address.name }}</label>
+                    <label>{{ selectedCustomer.shipping_address.address_street_1 }}</label>
+                    <label>{{ selectedCustomer.shipping_address.address_street_2 }}</label>
+                    <label v-show="selectedCustomer.shipping_address.city">
                       {{ selectedCustomer.shipping_address.city.name }}, {{ selectedCustomer.shipping_address.state.name }} {{ selectedCustomer.shipping_address.zip }}
                     </label>
-                    <label v-if="selectedCustomer.shipping_address.country" class="country">
-                      {{ selectedCustomer.shipping_address.country.name }}
-                    </label>
-                    <label v-if="selectedCustomer.shipping_address.phone" class="phone">
-                      {{ selectedCustomer.shipping_address.phone }}
-                    </label>
+                    <label class="country">{{ selectedCustomer.shipping_address.country.name }}</label>
+                    <label class="phone">{{ selectedCustomer.shipping_address.phone }}</label>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="customer-content mb-1">
-              <label class="email">{{ selectedCustomer.name }}</label>
+            <div class="customer-content">
+              <label class="email">{{ selectedCustomer.email ? selectedCustomer.email : selectedCustomer.name }}</label>
               <label class="action" @click="removeCustomer">{{ $t('general.remove') }}</label>
             </div>
           </div>
 
-          <base-popup v-else :class="['add-customer', {'customer-required': $v.selectedCustomer.$error}]" >
+          <base-popup v-else class="add-customer">
             <div slot="activator" class="add-customer-action">
               <font-awesome-icon icon="user" class="customer-icon"/>
-              <div>
-                <label>{{ $t('customers.new_customer') }} <span class="text-danger"> * </span></label>
-                <p v-if="$v.selectedCustomer.$error && !$v.selectedCustomer.required" class="text-danger">
-                  {{ $t('validation.required') }}
-                </p>
-              </div>
+              <label>{{ $t('customers.new_customer') }}<span class="text-danger"> * </span></label>
             </div>
-            <customer-select-popup type="invoice" />
+            <customer-select />
           </base-popup>
         </div>
         <div class="col invoice-input">
           <div class="row mb-3">
             <div class="col">
-              <label>{{ $tc('invoices.invoice',1) }} {{ $t('invoices.date') }}<span class="text-danger"> * </span></label>
+              <label>{{ $t('invoices.invoice_date') }}<span class="text-danger"> * </span></label>
               <base-date-picker
                 v-model="newInvoice.invoice_date"
                 :calendar-button="true"
@@ -137,14 +111,7 @@
             </div>
             <div class="col">
               <label>{{ $t('invoices.ref_number') }}</label>
-              <base-input
-                v-model="newInvoice.reference_number"
-                :invalid="$v.newInvoice.reference_number.$error"
-                icon="hashtag"
-                type="number"
-                @input="$v.newInvoice.reference_number.$touch()"
-              />
-              <div v-if="$v.newInvoice.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
+              <base-input icon="hashtag" type="number"/>
             </div>
           </div>
         </div>
@@ -152,9 +119,9 @@
 
       <table class="item-table">
         <colgroup>
-          <col style="width: 40%;">
+          <col style="width: 50%;">
           <col style="width: 10%;">
-          <col style="width: 15%;">
+          <col style="width: 10%;">
           <col v-if="discountPerItem === 'YES'" style="width: 15%;">
           <col style="width: 15%;">
         </colgroup>
@@ -187,10 +154,10 @@
             </th>
           </tr>
         </thead>
-        <draggable v-model="newInvoice.items" class="item-body" tag="tbody" handle=".handle">
+        <tbody class="item-body">
           <invoice-item
             v-for="(item, index) in newInvoice.items"
-            :key="item.id"
+            :key="'inv-item-' + item.id"
             :index="index"
             :item-data="item"
             :currency="currency"
@@ -200,7 +167,7 @@
             @update="updateItem"
             @itemValidate="checkItemsData"
           />
-        </draggable>
+        </tbody>
       </table>
       <div class="add-item-action" @click="addItem">
         <font-awesome-icon icon="shopping-basket" class="mr-2"/>
@@ -214,14 +181,10 @@
             v-model="newInvoice.notes"
             rows="3"
             cols="50"
-            @input="$v.newInvoice.notes.$touch()"
           />
-          <div v-if="$v.newInvoice.notes.$error">
-            <span v-if="!$v.newInvoice.notes.maxLength" class="text-danger">{{ $t('validation.notes_maxlength') }}</span>
-          </div>
           <label class="mt-3 mb-1 d-block">{{ $t('invoices.invoice_template') }} <span class="text-danger"> * </span></label>
-          <base-button type="button" class="btn-template" icon="pencil-alt" right-icon @click="openTemplateModal" >
-            <span class="mr-4"> {{ $t('invoices.template') }} {{ getTemplateId }} </span>
+          <base-button class="btn-template" icon="pencil-alt" right-icon @click="openTemplateModal" >
+            <span class="mr-4"> {{ $t('invoices.invoice_template') }} {{ getTemplateId }} </span>
           </base-button>
         </div>
 
@@ -246,9 +209,7 @@
             >
               <base-input
                 v-model="discount"
-                :invalid="$v.newInvoice.discount_val.$error"
                 input-class="item-discount"
-                @input="$v.newInvoice.discount_val.$touch()"
               />
               <v-dropdown :show-arrow="false">
                 <button
@@ -280,7 +241,7 @@
               v-for="(tax, index) in newInvoice.taxes"
               :index="index"
               :total="subtotalWithDiscount"
-              :key="tax.id"
+              :key="tax.taxKey"
               :tax="tax"
               :taxes="newInvoice.taxes"
               :currency="currency"
@@ -294,7 +255,7 @@
             <div slot="activator" class="float-right">
               + {{ $t('invoices.add_tax') }}
             </div>
-            <tax-select-popup :taxes="newInvoice.taxes" @select="onSelectTax"/>
+            <tax-select @select="onSelectTax"/>
           </base-popup>
 
           <div class="section border-top mt-3">
@@ -306,12 +267,11 @@
         </div>
       </div>
     </form>
-    <base-loader v-else />
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+
 import MultiSelect from 'vue-multiselect'
 import InvoiceItem from './Item'
 import InvoiceStub from '../../stub/invoice'
@@ -321,14 +281,13 @@ import { validationMixin } from 'vuelidate'
 import Guid from 'guid'
 import TaxStub from '../../stub/tax'
 import Tax from './InvoiceTax'
-const { required, between, maxLength } = require('vuelidate/lib/validators')
+const { required } = require('vuelidate/lib/validators')
 
 export default {
   components: {
     InvoiceItem,
     MultiSelect,
-    Tax,
-    draggable
+    Tax
   },
   mixins: [validationMixin],
   data () {
@@ -346,62 +305,38 @@ export default {
         discount_type: 'fixed',
         discount_val: 0,
         discount: 0,
-        reference_number: null,
         items: [{
           ...InvoiceStub,
-          id: Guid.raw(),
-          taxes: [{...TaxStub, id: Guid.raw()}]
+          id: 1
         }],
         taxes: []
       },
-      customers: [],
-      itemList: [],
       invoiceTemplates: [],
       selectedCurrency: '',
+      newItem: {
+        ...InvoiceStub
+      },
       taxPerItem: null,
       discountPerItem: null,
-      initLoading: false,
-      isLoading: false,
-      maxDiscount: 0
+      isLoading: false
     }
   },
-  validations () {
-    return {
-      newInvoice: {
-        invoice_date: {
-          required
-        },
-        due_date: {
-          required
-        },
-        invoice_number: {
-          required
-        },
-        discount_val: {
-          between: between(0, this.subtotal)
-        },
-        notes: {
-          maxLength: maxLength(255)
-        },
-        reference_number: {
-          maxLength: maxLength(10)
-        }
+  validations: {
+    newInvoice: {
+      invoice_date: {
+        required
       },
-      selectedCustomer: {
+      due_date: {
+        required
+      },
+      invoice_number: {
         required
       }
     }
   },
   computed: {
-    ...mapGetters('general', [
-      'itemDiscount'
-    ]),
     ...mapGetters('currency', [
       'defaultCurrency'
-    ]),
-    ...mapGetters('invoice', [
-      'getTemplateId',
-      'selectedCustomer'
     ]),
     currency () {
       return this.selectedCurrency
@@ -456,7 +391,7 @@ export default {
       }
 
       return window._.sumBy(this.newInvoice.items, function (tax) {
-        return tax.tax
+        return tax.totalTax
       })
     },
     allTaxes () {
@@ -482,11 +417,21 @@ export default {
       })
 
       return taxes
-    }
+    },
+    ...mapGetters('customer', [
+      'selectedCustomer'
+    ]),
+    ...mapGetters('invoice', [
+      'getTemplateId'
+    ]),
+    ...mapGetters('general', [
+      'itemDiscount'
+    ])
   },
   watch: {
     selectedCustomer (newVal) {
-      if (newVal && newVal.currency) {
+
+      if (newVal.currency !== null) {
         this.selectedCurrency = newVal.currency
       } else {
         this.selectedCurrency = this.defaultCurrency
@@ -498,26 +443,24 @@ export default {
       }
     }
   },
-  created () {
-    this.loadData()
-    this.fetchInitialItems()
-    this.resetSelectedCustomer()
-    window.hub.$on('newTax', this.onSelectTax)
+  mounted () {
+    this.$nextTick(() => {
+      this.loadData()
+    })
   },
   methods: {
     ...mapActions('modal', [
       'openModal'
     ]),
+    ...mapActions('customer', [
+      'resetSelectedCustomer'
+    ]),
+    ...mapActions('taxType', {
+      loadTaxTypes: 'indexLoadData'
+    }),
     ...mapActions('invoice', [
       'addInvoice',
-      'fetchCreateInvoice',
-      'fetchInvoice',
-      'resetSelectedCustomer',
-      'selectCustomer',
-      'updateInvoice'
-    ]),
-    ...mapActions('item', [
-      'fetchItems'
+      'fetchInvoice'
     ]),
     selectFixed () {
       if (this.newInvoice.discount_type === 'fixed') {
@@ -539,46 +482,18 @@ export default {
     updateTax (data) {
       Object.assign(this.newInvoice.taxes[data.index], {...data.item})
     },
-    async fetchInitialItems () {
-      await this.fetchItems({
-        filter: {},
-        orderByField: '',
-        orderBy: ''
-      })
-    },
     async loadData () {
-      if (this.$route.name === 'invoices.edit') {
-        this.initLoading = true
-        let response = await this.fetchInvoice(this.$route.params.id)
+      let response = await this.fetchInvoice(this.$route.params.id)
 
-        if (response.data) {
-          this.selectCustomer(response.data.invoice.user_id)
-          this.newInvoice = response.data.invoice
-          this.newInvoice.invoice_date = moment(response.data.invoice.invoice_date, 'YYYY-MM-DD').toString()
-          this.newInvoice.due_date = moment(response.data.invoice.due_date, 'YYYY-MM-DD').toString()
-          this.discountPerItem = response.data.discount_per_item
-          this.taxPerItem = response.data.tax_per_item
-          this.selectedCurrency = this.defaultCurrency
-          this.invoiceTemplates = response.data.invoiceTemplates
-        }
-        this.initLoading = false
-        return
-      }
+      this.loadTaxTypes()
 
-      this.initLoading = true
-      let response = await this.fetchCreateInvoice()
       if (response.data) {
+        this.newInvoice = response.data.invoice
         this.discountPerItem = response.data.discount_per_item
         this.taxPerItem = response.data.tax_per_item
         this.selectedCurrency = this.defaultCurrency
         this.invoiceTemplates = response.data.invoiceTemplates
-        let today = new Date()
-        this.newInvoice.invoice_date = moment(today).toString()
-        this.newInvoice.due_date = moment(today).add(7, 'days').toString()
-        this.newInvoice.invoice_number = response.data.nextInvoiceNumber
-        this.itemList = response.data.items
       }
-      this.initLoading = false
     },
     removeCustomer () {
       this.resetSelectedCustomer()
@@ -591,7 +506,7 @@ export default {
       })
     },
     addItem () {
-      this.newInvoice.items.push({...InvoiceStub, id: Guid.raw(), taxes: [{...TaxStub, id: Guid.raw()}]})
+      this.newInvoice.items.push({...this.newItem, id: (this.newInvoice.items.length + 1)})
     },
     removeItem (index) {
       this.newInvoice.items.splice(index, 1)
@@ -599,7 +514,7 @@ export default {
     updateItem (data) {
       Object.assign(this.newInvoice.items[data.index], {...data.item})
     },
-    submitInvoiceData () {
+    async submitInvoiceData () {
       if (!this.checkValid()) {
         return false
       }
@@ -620,42 +535,13 @@ export default {
       if (this.selectedCustomer != null) {
         data.user_id = this.selectedCustomer.id
       }
+      let response = await this.addInvoice(data)
 
-      if (this.$route.name === 'invoices.edit') {
-        this.submitUpdate(data)
-        return
+      if (response.data) {
+        window.toastr['success'](this.$t('invoices.created_message'))
+        this.isLoading = false
+        this.$route.push('/admin/invoices')
       }
-
-      this.submitSave(data)
-    },
-    submitSave (data) {
-      this.addInvoice(data).then((res) => {
-        if (res.data) {
-          window.toastr['success'](this.$t('invoices.created_message'))
-          this.$router.push('/admin/invoices')
-        }
-
-        this.isLoading = false
-      }).catch((err) => {
-        this.isLoading = false
-        console.log(err)
-      })
-    },
-    submitUpdate (data) {
-      this.updateInvoice(data).then((res) => {
-        this.isLoading = false
-        if (res.data.success) {
-          window.toastr['success'](this.$t('invoices.updated_message'))
-          this.$router.push('/admin/invoices')
-        }
-
-        if (res.data.error === 'invalid_due_amount') {
-          window.toastr['error'](this.$t('invoices.invalid_due_amount_message'))
-        }
-      }).catch((err) => {
-        this.isLoading = false
-        console.log(err)
-      })
     },
     checkItemsData (index, isValid) {
       this.newInvoice.items[index].valid = isValid
@@ -671,7 +557,7 @@ export default {
 
       this.newInvoice.taxes.push({
         ...TaxStub,
-        id: Guid.raw(),
+        taxKey: Guid.raw(),
         name: selectedTax.name,
         percent: selectedTax.percent,
         compound_tax: selectedTax.compound_tax,
@@ -686,8 +572,6 @@ export default {
     },
     checkValid () {
       this.$v.newInvoice.$touch()
-      this.$v.selectedCustomer.$touch()
-
       window.hub.$emit('checkItems')
       let isValid = true
       this.newInvoice.items.forEach((item) => {
@@ -695,7 +579,7 @@ export default {
           isValid = false
         }
       })
-      if (!this.$v.selectedCustomer.$invalid && this.$v.newInvoice.$invalid === false && isValid === true) {
+      if (this.$v.newInvoice.$invalid === false && isValid === true) {
         return true
       }
       return false
