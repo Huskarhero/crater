@@ -141,7 +141,6 @@
                 v-model="newInvoice.reference_number"
                 :invalid="$v.newInvoice.reference_number.$error"
                 icon="hashtag"
-                type="number"
                 @input="$v.newInvoice.reference_number.$touch()"
               />
               <div v-if="$v.newInvoice.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
@@ -384,7 +383,7 @@ export default {
           maxLength: maxLength(255)
         },
         reference_number: {
-          maxLength: maxLength(10)
+          maxLength: maxLength(255)
         }
       },
       selectedCustomer: {
@@ -554,6 +553,8 @@ export default {
         if (response.data) {
           this.selectCustomer(response.data.invoice.user_id)
           this.newInvoice = response.data.invoice
+          this.newInvoice.invoice_date = moment(response.data.invoice.invoice_date, 'YYYY-MM-DD').toString()
+          this.newInvoice.due_date = moment(response.data.invoice.due_date, 'YYYY-MM-DD').toString()
           this.discountPerItem = response.data.discount_per_item
           this.taxPerItem = response.data.tax_per_item
           this.selectedCurrency = this.defaultCurrency

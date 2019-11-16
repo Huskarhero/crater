@@ -1,9 +1,8 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\State;
-use Laraspace\Country;
+use Crater\State;
 
 class Country extends Model
 {

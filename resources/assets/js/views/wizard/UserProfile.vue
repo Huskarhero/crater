@@ -77,7 +77,6 @@
 <script>
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
-import Ls from '../../services/ls'
 const { required, requiredIf, sameAs, minLength, email } = require('vuelidate/lib/validators')
 
 export default {
@@ -108,7 +107,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(8)
+        minLength: minLength(5)
       },
       confirm_password: {
         required: requiredIf('isRequired'),

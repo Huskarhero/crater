@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Http\Requests;
+namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class ItemsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|digits_between:1,20',
         ];
     }
 }

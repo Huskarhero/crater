@@ -237,6 +237,8 @@ export default {
     confirm_mark_as_sent: 'Esta estimación se marcará como enviada',
     confirm_mark_as_accepted: 'Esta estimación se marcará como Aceptada',
     confirm_mark_as_rejected: 'Esta estimación se marcará como Rechazada',
+    mark_as_sent_successfully: 'Estimación marcada como enviada correctamente',
+    send_estimate_successfully: 'Estimación enviada con éxito',
     errors: {
       required: 'Se requiere campo'
     },
@@ -326,6 +328,8 @@ export default {
     no_invoices: '¡Aún no hay facturas!',
     list_of_invoices: 'Esta sección contendrá la lista de facturas.',
     select_invoice: 'Seleccionar factura',
+    mark_as_sent_successfully: 'Factura marcada como enviada con éxito',
+    send_invoice_successfully: 'Factura enviada exitosamente',
     item: {
       title: 'Título del artículo',
       description: 'Descripción',
@@ -529,7 +533,8 @@ export default {
       preferences: 'Preferencias',
       notifications: 'Notificaciones',
       tax_types: 'Tipos de impuestos',
-      expense_category: 'Categorías de gastos'
+      expense_category: 'Categorías de gastos',
+      update_app: 'Actualizar aplicación'
     },
     title: 'Configuraciones',
     setting: 'Configuraciones | Configuraciones',
@@ -555,6 +560,16 @@ export default {
       left: 'Izquierda',
       action: 'Acción',
       add_currency: 'Agregar moneda'
+    },
+    mail: {
+      host: 'Host de correo',
+      port: 'Puerto de correo',
+      driver: 'Conductor de correo',
+      password: 'Contraseña de correo',
+      username: 'Nombre de usuario de correo',
+      mail_config: 'Configuración de correo',
+      encryption: 'Cifrado de correo',
+      mail_config_desc: 'Los detalles a continuación se utilizarán para actualizar el entorno de correo. También puede cambiar los detalles en cualquier momento después de iniciar sesión.'
     },
     pdf: {
       title: 'Configuración de PDF',
@@ -651,6 +666,11 @@ export default {
       select_time_zone: 'selecciona la zona horaria',
       select_date_formate: 'seleccione formato de fecha',
       select_financial_year: 'seleccione año financiero'
+    },
+    update_app: {
+      title: 'Actualizar aplicación',
+      description: 'actualizar la descripción de la aplicación',
+      update: 'Actualizar'
     }
   },
   wizard: {
@@ -749,20 +769,20 @@ export default {
     numbers_only: 'Solo numeros.',
     characters_only: 'Solo personajes.',
     password_incorrect: 'Las contraseñas deben ser idénticas',
-    password_length: 'La contraseña debe tener 6 caracteres de longitud.',
+    password_length: 'La contraseña debe tener 5 caracteres de longitud.',
     qty_must_greater_than_zero: 'La cantidad debe ser mayor que cero.',
     price_greater_than_zero: 'El precio debe ser mayor que cero.',
     payment_greater_than_zero: 'El pago debe ser mayor que cero.',
     payment_greater_than_due_amount: 'El pago ingresado es mayor al monto adeudado de esta factura.',
-    quantity_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
-    price_maxlength: 'El precio no debe ser mayor de 10 dígitos.',
+    quantity_maxlength: 'La cantidad no debe ser mayor de 20 dígitos.',
+    price_maxlength: 'El precio no debe ser mayor de 20 dígitos.',
     price_minvalue: 'El precio debe ser mayor que 0 dígitos',
-    amount_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
+    amount_maxlength: 'La cantidad no debe ser mayor de 20 dígitos.',
     amount_minvalue: 'La cantidad debe ser mayor que 0 dígitos',
     description_maxlength: 'La descripción no debe tener más de 255 caracteres.',
     maximum_options_error: 'Máximo de {max} opciones seleccionadas. Primero elimine una opción seleccionada para seleccionar otra.',
     notes_maxlength: 'Las notas no deben tener más de 255 caracteres.',
     address_maxlength: 'La dirección no debe tener más de 255 caracteres.',
-    ref_number_maxlength: 'El número de referencia no debe tener más de 10 dígitos.'
+    ref_number_maxlength: 'El número de referencia no debe tener más de 255 caracteres.'
   }
 }

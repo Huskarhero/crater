@@ -50,7 +50,10 @@ import {
   faShare,
   faEllipsisH,
   faCopy,
-  faPaperPlane
+  faPaperPlane,
+  faEyeSlash,
+  faSyncAlt,
+  faRocket
 } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -108,10 +111,13 @@ library.add(
   faFilePdf,
   faEnvelope,
   faEye,
+  faEyeSlash,
   faShare,
   faEllipsisH,
   faCopy,
-  faPaperPlane
+  faPaperPlane,
+  faSyncAlt,
+  faRocket
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

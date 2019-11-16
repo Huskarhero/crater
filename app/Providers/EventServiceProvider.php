@@ -1,9 +1,11 @@
 <?php
-namespace Laraspace\Providers;
+namespace Crater\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Crater\Events\UpdateFinished;
+use Crater\Listeners\Updates\V10\Version101;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,8 +15,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Laraspace\Events\SomeEvent' => [
-            'Laraspace\Listeners\EventListener',
+        UpdateFinished::class=> [
+            Version101::class,
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

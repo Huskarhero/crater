@@ -141,7 +141,6 @@
                 v-model="newEstimate.reference_number"
                 :invalid="$v.newEstimate.reference_number.$error"
                 icon="hashtag"
-                type="number"
                 @input="$v.newEstimate.reference_number.$touch()"
               />
               <div v-if="$v.newEstimate.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
@@ -383,7 +382,7 @@ export default {
           maxLength: maxLength(255)
         },
         reference_number: {
-          maxLength: maxLength(10)
+          maxLength: maxLength(255)
         }
       },
       selectedCustomer: {
@@ -553,6 +552,8 @@ export default {
         if (response.data) {
           this.selectCustomer(response.data.estimate.user_id)
           this.newEstimate = response.data.estimate
+          this.newEstimate.estimate_date = moment(response.data.estimate.estimate_date, 'YYYY-MM-DD').toString()
+          this.newEstimate.expiry_date = moment(response.data.estimate.expiry_date, 'YYYY-MM-DD').toString()
           this.discountPerItem = response.data.discount_per_item
           this.taxPerItem = response.data.tax_per_item
           this.selectedCurrency = this.defaultCurrency

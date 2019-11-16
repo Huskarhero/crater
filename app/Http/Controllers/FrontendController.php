@@ -1,24 +1,17 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\Expense;
-use Laraspace\Http\Requests;
-use Laraspace\Invoice;
-use Laraspace\Payment;
-use Laraspace\PdfSetting;
+use Crater\Invoice;
 use PDF;
-use Laraspace\Currency;
-use Laraspace\CompanySetting;
-use Laraspace\Estimate;
-use Laraspace\Item;
-use Laraspace\User;
-use Laraspace\Company;
-use Laraspace\InvoiceTemplate;
-use Laraspace\EstimateTemplate;
-use Auth;
-use Laraspace\Mail\EstimateViewed;
-use Laraspace\Mail\InvoiceViewed;
+use Crater\CompanySetting;
+use Crater\Estimate;
+use Crater\User;
+use Crater\Company;
+use Crater\InvoiceTemplate;
+use Crater\EstimateTemplate;
+use Crater\Mail\EstimateViewed;
+use Crater\Mail\InvoiceViewed;
 
 class FrontendController extends Controller
 {

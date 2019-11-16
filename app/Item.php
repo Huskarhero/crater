@@ -1,9 +1,9 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\InvoiceItem;
-use Laraspace\EstimateItem;
+use Crater\InvoiceItem;
+use Crater\EstimateItem;
 use Carbon\Carbon;
 
 class Item extends Model
@@ -108,6 +108,7 @@ class Item extends Model
         if ($item->estimateItems()->exists() && $item->estimateItems()->count() > 0) {
             return false;
         }
+
         $item->delete();
 
         return true;
