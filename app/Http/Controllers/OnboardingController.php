@@ -38,8 +38,7 @@ class OnboardingController extends Controller
         $time_zones = TimeZones::get_list();
         $languages = [
             ["code"=>"en", "name" => "English"],
-            ["code"=>"fr", "name" => "French"],
-            ["code"=>"es", "name" => "Spanish"]
+            ["code"=>"de", "name" => "German"],
         ];
         $fiscal_years = [
             ['key' => 'january-december' , 'value' => '1-12'],

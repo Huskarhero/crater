@@ -26,7 +26,7 @@ class Updater
         if ($response instanceof RequestException) {
             return [
                 'success' => false,
-                'errors' => 'Download Exception',
+                'error' => 'Download Exception',
                 'data' => [
                     'path' => $path
                 ]
@@ -48,57 +48,49 @@ class Updater
             File::makeDirectory($temp_path2);
         }
 
+        $file = $temp_path . '/upload.zip';
+
+        // Add content to the Zip file
+        $uploaded = is_int(file_put_contents($file, $data)) ? true : false;
+
+        if (!$uploaded) {
+            return false;
+        }
+
+        // Unzip the file
+        $zip = new ZipArchive();
+
+        if ($zip->open($file)) {
+            $zip->extractTo($temp_path2);
+        }
+
+        $zip->close();
+
+        // Delete zip file
+        File::delete($file);
+
+        if (!File::copyDirectory($temp_path2.'/crater', base_path())) {
+            return false;
+        }
+
+        // Delete temp directory
+        File::deleteDirectory($temp_path);
+        File::deleteDirectory($temp_path2);
+
         try {
-
-            $file = $temp_path . '/upload.zip';
-
-            // Add content to the Zip file
-            $uploaded = is_int(file_put_contents($file, $data)) ? true : false;
-
-            if (!$uploaded) {
-                return false;
-            }
-
-            // Unzip the file
-            $zip = new ZipArchive();
-
-            if ($zip->open($file)) {
-                $zip->extractTo($temp_path2);
-            }
-
-            $zip->close();
-
-            // Delete zip file
-            File::delete($file);
-
-            if (!File::copyDirectory($temp_path2.'/Crater', base_path())) {
-                return false;
-            }
-
-            // Delete temp directory
-            File::deleteDirectory($temp_path);
-            File::deleteDirectory($temp_path2);
-
             if (!$isMinor) {
                 event(new UpdateFinished($installed, $version));
             }
 
             return [
                 'success' => true,
-                'errors' => false,
+                'error' => false,
                 'data' => []
             ];
         } catch (\Exception $e) {
-
-            if (File::isDirectory($temp_path)) {
-                // Delete temp directory
-                File::deleteDirectory($temp_path);
-                File::deleteDirectory($temp_path2);
-            }
-
             return [
                 'success' => false,
-                'errors' => 'Update error',
+                'error' => 'Update error',
                 'data' => []
             ];
         }
