@@ -38,20 +38,3 @@
         }
     }
 }
-
-@media (max-width: $x-small-breakpoint) {
-
-    .base-modal {
-
-        .template-modal {
-            width: 100vw;
-
-            .template-container {
-                justify-content: center;
-            }
-
-        }
-
-    }
-
-}
