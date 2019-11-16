@@ -105,6 +105,13 @@ class CompanyController extends Controller
             ['key' => 'december-november', 'value' => '12-11'],
         ];
 
+        $languages = [
+            "en" => "English",
+            "de" => "German",
+            "fr" => "French",
+            "es" => "Spanish"
+        ];
+
         $language = CompanySetting::getSetting('language', $request->header('company'));
         $carbon_date_format = CompanySetting::getSetting('carbon_date_format', $request->header('company'));
         $moment_date_format = CompanySetting::getSetting('moment_date_format', $request->header('company'));
@@ -114,6 +121,7 @@ class CompanyController extends Controller
 
         $languages = [
             ["code"=>"en", "name" => "English"],
+            ["code"=>"de", "name" => "German"],
             ["code"=>"fr", "name" => "French"],
             ["code"=>"es", "name" => "Spanish"]
         ];

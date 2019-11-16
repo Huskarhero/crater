@@ -52,8 +52,7 @@ import {
   faCopy,
   faPaperPlane,
   faEyeSlash,
-  faSyncAlt,
-  faRocket
+  faSyncAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -116,8 +115,7 @@ library.add(
   faEllipsisH,
   faCopy,
   faPaperPlane,
-  faSyncAlt,
-  faRocket
+  faSyncAlt
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

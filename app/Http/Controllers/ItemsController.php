@@ -55,7 +55,6 @@ class ItemsController extends Controller
 
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                $tax['company_id'] = $request->header('company');
                 $item->taxes()->create($tax);
             }
         }
@@ -76,16 +75,12 @@ class ItemsController extends Controller
         $item->price = $request->price;
         $item->save();
 
-        $oldTaxes = $item->taxes->toArray();
-
-        foreach ($oldTaxes as $oldTax) {
-            Tax::destroy($oldTax['id']);
-        }
-
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                $tax['company_id'] = $request->header('company');
-                $item->taxes()->create($tax);
+                $item->taxes()->updateOrCreate(
+                    ['tax_type_id' => $tax['tax_type_id']],
+                    ['amount' => $tax['amount'], 'percent' => $tax['percent'], 'name' => $tax['name']]
+                );
             }
         }
 

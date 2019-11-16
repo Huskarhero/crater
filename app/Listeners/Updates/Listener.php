@@ -15,10 +15,10 @@ class Listener
     protected function check($event)
     {
         // Do not apply to the same or newer versions
-        if (version_compare(static::VERSION, $event->old, '>')) {
-            return true;
+        if (version_compare($event->old, static::VERSION, '>=')) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
