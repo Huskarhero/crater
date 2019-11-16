@@ -305,12 +305,12 @@ export default {
         quantity: {
           required,
           minValue: minValue(1),
-          maxLength: maxLength(20)
+          maxLength: maxLength(10)
         },
         price: {
           required,
           minValue: minValue(1),
-          maxLength: maxLength(20)
+          maxLength: maxLength(10)
         },
         discount_val: {
           between: between(0, this.maxDiscount)

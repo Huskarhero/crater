@@ -211,7 +211,6 @@
           sort-as="total"
         >
           <template slot-scope="row">
-            <span> {{ $t('estimates.total') }}</span>
             <div v-html="$utils.formatMoney(row.total, row.user.currency)" />
           </template>
         </table-column>
