@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Crater\Currency;
+use Laraspace\Currency;
 
 class CurrenciesTableSeeder extends Seeder
 {

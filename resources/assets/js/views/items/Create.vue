@@ -92,7 +92,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
-const { required, minLength, numeric, minValue, maxLength } = require('vuelidate/lib/validators')
+const { required, minLength, numeric, alpha, minValue, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   mixins: {
@@ -112,8 +112,7 @@ export default {
         { name: 'kg', value: 'kg' },
         { name: 'km', value: 'km' },
         { name: 'lb', value: 'lb' },
-        { name: 'mg', value: 'mg' },
-        { name: 'pc', value: 'pc' }
+        { name: 'mg', value: 'mg' }
       ],
       formData: {
         name: '',
@@ -163,7 +162,7 @@ export default {
       price: {
         required,
         numeric,
-        maxLength: maxLength(20),
+        maxLength: maxLength(10),
         minValue: minValue(0.1)
       },
       description: {

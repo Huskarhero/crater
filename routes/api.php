@@ -106,8 +106,6 @@ Route::group(['middleware' => 'redirect-if-installed'], function () {
         'uses' => 'OnboardingController@companySettings'
     ]);
 });
-
-
 // App version
 // ----------------------------------
 
@@ -121,18 +119,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::group([
       'middleware' => 'admin'
     ], function () {
-
-        // Auto update routes
-        //----------------------------------
-        Route::post('/update', [
-            'as' => 'auto.update',
-            'uses' => 'UpdateController@update'
-        ]);
-
-        Route::get('/check/update', [
-            'as' => 'check.update',
-            'uses' => 'UpdateController@checkLatestVersion'
-        ]);
 
         Route::get('/bootstrap', [
             'as' => 'bootstrap',
@@ -335,21 +321,6 @@ Route::group(['middleware' => 'api'], function () {
             Route::put('/update-setting', [
                 'as' => 'admin.update.setting',
                 'uses' => 'CompanyController@updateSetting'
-            ]);
-
-            Route::get('/environment/mail', [
-                'as' => 'admin.environment.mail',
-                'uses' => 'EnvironmentController@getMailDrivers'
-            ]);
-
-            Route::get('/environment/mail-env', [
-                'as' => 'admin.mail.env',
-                'uses' => 'EnvironmentController@getMailEnvironment'
-            ]);
-
-            Route::post('/environment/mail', [
-                'as' => 'admin.environment.mail.save',
-                'uses' => 'EnvironmentController@saveMailEnvironment'
             ]);
 
         });

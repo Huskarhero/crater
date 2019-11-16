@@ -29,9 +29,16 @@
       >
         <table-column
           :sortable="true"
+          :filterable="true"
           :label="$t('settings.tax_types.tax_name')"
-          show="name"
-        />
+        >
+          <template slot-scope="row">
+            <span>{{ $t('settings.tax_types.tax_name') }}</span>
+            <span class="tax-name mt-3">
+              {{ row.name }}
+            </span>
+          </template>
+        </table-column>
         <table-column
           :sortable="true"
           :filterable="true"
@@ -106,7 +113,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
 export default {
   data () {
     return {
@@ -136,11 +142,10 @@ export default {
     ]),
     async getTaxSetting (val) {
       let response = await axios.get('/api/settings/get-setting?key=tax_per_item')
-
-      if (response.data && response.data.tax_per_item === 'YES') {
-        this.formData.tax_per_item = true
-      } else {
-        this.formData.tax_per_item = false
+      if (response.data) {
+        response.data.tax_per_item === 'YES' ?
+          this.formData.tax_per_item = true :
+          this.formData.tax_per_item = false
       }
     },
     async setTax (val) {
@@ -160,16 +165,15 @@ export default {
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (value) => {
-        if (value) {
+      }).then(async (willDelete) => {
+        if (willDelete) {
           let response = await this.deleteTaxType(id)
           if (response.data.success) {
             window.toastr['success'](this.$t('settings.tax_types.deleted_message'))
             this.id = null
             this.$refs.table.refresh()
             return true
-          }
-          window.toastr['error'](this.$t('settings.tax_types.already_in_use'))
+          }window.toastr['error'](this.$t('settings.tax_types.already_in_use'))
         }
       })
     },

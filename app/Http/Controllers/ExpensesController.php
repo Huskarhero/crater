@@ -1,14 +1,14 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
-use Crater\Expense;
-use Crater\User;
-use Crater\Currency;
-use Crater\Company;
-use Crater\CompanySetting;
+use Laraspace\Expense;
+use Laraspace\User;
+use Laraspace\Currency;
+use Laraspace\Company;
+use Laraspace\CompanySetting;
 use Illuminate\Http\Request;
-use Crater\ExpenseCategory;
-use Crater\Http\Requests\ExpenseRequest;
+use Laraspace\ExpenseCategory;
+use Laraspace\Http\Requests\ExpenseRequest;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 
@@ -90,7 +90,7 @@ class ExpensesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Expense $expense
+     * @param  \Laraspace\Expense $expense
      * @return \Illuminate\Http\Response
      */
     public function show(Expense $expense)
@@ -121,7 +121,7 @@ class ExpensesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Crater\Expense $expense
+     * @param  \Laraspace\Expense $expense
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseRequest $request, Expense $expense)
@@ -149,7 +149,7 @@ class ExpensesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Crater\Expense $expense
+     * @param  \Laraspace\Expense $expense
      * @return \Illuminate\Http\Response
      */
     public function destroy(Expense $expense)

@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Crater\Item;
-use Crater\Tax;
+use Laraspace\Item;
+use Laraspace\Tax;
 use Faker\Generator as Faker;
-use Crater\User;
+use Laraspace\User;
 
 $factory->define(Item::class, function (Faker $faker) {
     return [

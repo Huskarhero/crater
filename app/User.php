@@ -1,16 +1,16 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Crater\Conversation;
+use Laraspace\Conversation;
 use carbon\carbon;
-use Crater\MemberLoan;
-use Crater\Address;
-use Crater\Payment;
-use Crater\Company;
-use Crater\Notifications\MailResetPasswordNotification;
+use Laraspace\MemberLoan;
+use Laraspace\Address;
+use Laraspace\Payment;
+use Laraspace\Company;
+use Laraspace\Notifications\MailResetPasswordNotification;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Support\Facades\DB;
@@ -216,7 +216,7 @@ class User extends Authenticatable implements HasMedia
             $query->whereBetween(
                 'invoice_date',
                 [$start->format('Y-m-d'), $end->format('Y-m-d')]
-            );
+            )->where('paid_status', Invoice::STATUS_PAID);
         });
     }
 
@@ -239,7 +239,6 @@ class User extends Authenticatable implements HasMedia
         if ($customer->addresses()->exists()) {
             $customer->addresses()->delete();
         }
-
         $customer->delete();
 
         return true;

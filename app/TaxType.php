@@ -1,8 +1,8 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\Tax;
+use Laraspace\Tax;
 
 class TaxType extends Model
 {

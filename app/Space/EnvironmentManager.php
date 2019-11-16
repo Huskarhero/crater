@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Space;
+namespace Laraspace\Space;
 
 use Exception;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\DatabaseEnvironmentRequest;
-use Crater\Http\Requests\MailEnvironmentRequest;
+use Laraspace\Http\Requests\DatabaseEnvironmentRequest;
+use Laraspace\Http\Requests\MailEnvironmentRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 
@@ -49,20 +49,12 @@ class EnvironmentManager
         'DB_PASSWORD='.$request->database_password."\n\n";
 
         if (! $this->checkDatabaseConnection($request)) {
-
             return [
                 'error' => 'connection_failed'
             ];
-        } else {
-            if(count(DB::connection()->select('SHOW TABLES'))) {
-                return [
-                    'error' => 'database_should_be_empty'
-                ];
-            }
         }
 
         try {
-
             file_put_contents($this->envPath, str_replace(
                 $oldDatabaseData,
                 $newDatabaseData,
@@ -109,7 +101,7 @@ class EnvironmentManager
         'MAIL_USERNAME='.$request->mail_username."\n".
         'MAIL_PASSWORD='.$request->mail_password."\n".
         'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n";
-
+        // dd($newMailData);
         try {
 
             file_put_contents($this->envPath, str_replace(

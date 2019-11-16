@@ -254,7 +254,7 @@
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#" @click="markInvoiceAsSent(row.id)">
+                <a class="dropdown-item" href="#" @click="sentInvoice(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('invoices.mark_as_sent') }}
                 </a>
@@ -390,35 +390,35 @@ export default {
         icon: '/assets/icon/paper-plane-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (value) => {
-        if (value) {
+      }).then(async (Send_Invoice) => {
+        if (Send_Invoice) {
           const data = {
             id: id
           }
           let response = await this.sendEmail(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
+            window.toastr['success'](this.$tc('invoices.send_invoice'))
           }
         }
       })
     },
-    async markInvoiceAsSent (id) {
+    async sentInvoice (id) {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (value) => {
-        if (value) {
+      }).then(async (MarkAsSend_Invoice) => {
+        if (MarkAsSend_Invoice) {
           const data = {
             id: id
           }
           let response = await this.markAsSent(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('invoices.mark_as_sent_successfully'))
+            window.toastr['success'](this.$tc('invoices.mark_as_sent'))
           }
         }
       })
@@ -499,8 +499,8 @@ export default {
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (value) => {
-        if (value) {
+      }).then(async (willDelete) => {
+        if (willDelete) {
           let res = await this.deleteInvoice(this.id)
 
           if (res.data.success) {
@@ -529,8 +529,8 @@ export default {
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (value) => {
-        if (value) {
+      }).then(async (willDelete) => {
+        if (willDelete) {
           let res = await this.deleteMultipleInvoices()
           if (res.data.error === 'payment_attached') {
             window.toastr['error'](this.$t('invoices.payment_attached_message'), this.$t('general.action_failed'))

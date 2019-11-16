@@ -1,7 +1,8 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
+use Laraspace\User;
 
 class CompanySetting extends Model
 {

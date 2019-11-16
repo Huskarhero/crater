@@ -1,17 +1,17 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Crater\Conversation;
-use Crater\Group;
-use Crater\Http\Requests;
-use Crater\Notifications\CustomerAdded;
-use Crater\User;
+use Laraspace\Conversation;
+use Laraspace\Group;
+use Laraspace\Http\Requests;
+use Laraspace\Notifications\CustomerAdded;
+use Laraspace\User;
 use Illuminate\Support\Facades\Hash;
-use Crater\Currency;
-use Crater\CompanySetting;
-use Crater\Address;
+use Laraspace\Currency;
+use Laraspace\CompanySetting;
+use Laraspace\Address;
 use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller

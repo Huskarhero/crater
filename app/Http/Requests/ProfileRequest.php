@@ -1,9 +1,9 @@
 <?php
-namespace Crater\Http\Requests;
+namespace Laraspace\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Crater\User;
+use Laraspace\User;
 
 class ProfileRequest extends FormRequest
 {
@@ -31,8 +31,6 @@ class ProfileRequest extends FormRequest
                 return [
                     'name' => 'required',
                     'password' => 'required',
-                    'address_street_1' => 'max:255',
-                    'address_street_2' => 'max:255',
                     'email' => [
                         'required',
                         'email',
@@ -43,8 +41,6 @@ class ProfileRequest extends FormRequest
             case 'PUT':
                 return [
                     'name' => 'required',
-                    'address_street_1' => 'max:255',
-                    'address_street_2' => 'max:255',
                     'email' => 'required|email'
                 ];
                 break;

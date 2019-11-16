@@ -1,5 +1,5 @@
 <?php
-namespace Crater\Http\Requests;
+namespace Laraspace\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,7 +25,7 @@ class ExpenseRequest extends FormRequest
         return [
             'expense_date' => 'required',
             'expense_category_id' => 'required',
-            'amount' => 'required|digits_between:1,20'
+            'amount' => 'required'
         ];
     }
 }

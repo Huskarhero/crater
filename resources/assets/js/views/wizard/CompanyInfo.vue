@@ -1,6 +1,10 @@
 <template>
   <div class="card-body">
     <form action="" @submit.prevent="next()">
+      <!-- <div v-if="previewLogo" class="upload-logo">
+        <label class="form-label">{{ $t('wizard.logo_preview') }}</label><br>
+        <img v-if="previewLogo" :src="previewLogo" class="preview-logo">
+      </div> -->
       <p class="form-title">{{ $t('wizard.company_info') }}</p>
       <p class="form-desc">{{ $t('wizard.company_info_desc') }}</p>
       <div class="row mb-4">
@@ -90,27 +94,17 @@
         <div class="col-md-6">
           <label class="form-label">{{ $t('wizard.address') }}</label>
           <base-text-area
-            :invalid="$v.companyData.address_street_1.$error"
             v-model.trim="companyData.address_street_1"
             :placeholder="$t('general.street_1')"
             name="billing_street1"
             rows="2"
-            @input="$v.companyData.address_street_1.$touch()"
           />
-          <div v-if="$v.companyData.address_street_1.$error">
-            <span v-if="!$v.companyData.address_street_1.maxLength" class="text-danger">{{ $t('validation.description_maxlength') }}</span>
-          </div>
           <base-text-area
-            :invalid="$v.companyData.address_street_2.$error"
             v-model="companyData.address_street_2"
             :placeholder="$t('general.street_2')"
             name="billing_street2"
             rows="2"
-            @input="$v.companyData.address_street_2.$touch()"
           />
-          <div v-if="$v.companyData.address_street_2.$error">
-            <span v-if="!$v.companyData.address_street_2.maxLength" class="text-danger">{{ $t('validation.description_maxlength') }}</span>
-          </div>
         </div>
         <div class="col-md-6">
           <div class="row">
@@ -151,7 +145,8 @@
 import MultiSelect from 'vue-multiselect'
 import AvatarCropper from 'vue-avatar-cropper'
 import { validationMixin } from 'vuelidate'
-const { required, maxLength } = require('vuelidate/lib/validators')
+import Ls from '../../services/ls'
+const { required, minLength, email } = require('vuelidate/lib/validators')
 
 export default {
   components: {
@@ -202,12 +197,6 @@ export default {
       },
       country_id: {
         required
-      },
-      address_street_1: {
-        maxLength: maxLength(255)
-      },
-      address_street_2: {
-        maxLength: maxLength(255)
       }
     }
   },

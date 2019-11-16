@@ -19,7 +19,7 @@
         hr {
             color:rgba(0, 0, 0, 0.2);
             position: absolute;
-            top: 80px;
+            top: 140px;
             left: 0px;
             right: -70px;
             width: 100%;
@@ -37,7 +37,9 @@
             width: 100%;
             height: 150px;
             left: 0px;
-            top: -60px;
+            top: 0px;
+
+
         }
         .header-logo {
             position: absolute;
@@ -75,14 +77,10 @@
             color: rgba(0, 0, 0, 0.5);
         }
 
-        @page {
-            margin-top: 60px !important;
-        }
-
         .wrapper {
            display: block;
-           padding-top: 50px;
-           padding-bottom: 20px;
+           padding-top: 110px;
+           padding-bottom: 60px;
         }
 
         .address {
@@ -381,7 +379,6 @@
             margin-left: 30px;
             width: 442px;
             text-align: left;
-            page-break-inside: avoid;
         }
 
         .notes-label {
@@ -419,7 +416,7 @@
             </tr>
         </table>
     </div>
-    <hr style="border: 0.620315px solid #E8E8E8;">
+    <hr>
     <div class="wrapper">
         <div class="address">
             <div class="bill-add">

@@ -1,5 +1,5 @@
 <?php
-namespace Crater\Http\Requests;
+namespace Laraspace\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +26,7 @@ class PaymentRequest extends FormRequest
             'payment_date' => 'required',
             'payment_number' => 'required|unique:payments,payment_number',
             'user_id' => 'required',
-            'amount' => 'required|digits_between:1,20',
+            'amount' => 'required',
         ];
 
         if ($this->getMethod() == 'PUT') {

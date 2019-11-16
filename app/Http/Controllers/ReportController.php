@@ -1,14 +1,14 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Crater\User;
-use Crater\Invoice;
-use Crater\Company;
-use Crater\InvoiceItem;
-use Crater\Expense;
-use Crater\CompanySetting;
-use Crater\Tax;
+use Laraspace\User;
+use Laraspace\Invoice;
+use Laraspace\Company;
+use Laraspace\InvoiceItem;
+use Laraspace\Expense;
+use Laraspace\CompanySetting;
+use Laraspace\Tax;
 use PDF;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,7 +26,8 @@ class ReportController extends Controller
                 $query->whereBetween(
                     'invoice_date',
                     [$start->format('Y-m-d'), $end->format('Y-m-d')]
-                );
+                )
+                ->where('paid_status', Invoice::STATUS_PAID);
             }])
             ->customer()
             ->whereCompany($company->id)

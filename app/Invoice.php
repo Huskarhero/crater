@@ -1,9 +1,9 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\InvoiceTemplate;
-use Crater\Payment;
+use Laraspace\InvoiceTemplate;
+use Laraspace\Payment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -90,7 +90,7 @@ class Invoice extends Model
 
     public function items()
     {
-        return $this->hasMany('Crater\InvoiceItem');
+        return $this->hasMany('Laraspace\InvoiceItem');
     }
 
     public function taxes()
@@ -105,25 +105,12 @@ class Invoice extends Model
 
     public function user()
     {
-        return $this->belongsTo('Crater\User');
+        return $this->belongsTo('Laraspace\User');
     }
 
     public function invoiceTemplate()
     {
         return $this->belongsTo(InvoiceTemplate::class);
-    }
-
-    public function getPreviousStatus()
-    {
-        if ($this->due_date < Carbon::now()) {
-            return self::STATUS_OVERDUE;
-        } elseif ($this->viewed) {
-            return self::STATUS_VIEWED;
-        } elseif ($this->sent) {
-            return self::STATUS_SENT;
-        } else {
-            return self::STATUS_DRAFT;
-        }
     }
 
     private function strposX($haystack, $needle, $number)

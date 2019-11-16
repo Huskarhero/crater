@@ -4,7 +4,7 @@
     <input
       ref="baseInput"
       v-model="inputValue"
-      :type="toggleType"
+      :type="type"
       :disabled="disabled"
       :readonly="readOnly"
       :name="name"
@@ -19,9 +19,6 @@
       @keydown="handleKeyDownEnter"
       @blur="handleFocusOut"
     >
-    <div v-if="showPassword && isAlignLeftIcon" style="cursor: pointer" @click="showPass = !showPass" >
-      <font-awesome-icon :icon="!showPass ?'eye-slash': 'eye'" class="right-icon" />
-    </div>
     <font-awesome-icon v-if="icon && !isAlignLeftIcon" :icon="icon" class="right-icon" />
   </div>
 </template>
@@ -80,17 +77,12 @@ export default {
     autocomplete: {
       type: String,
       default: 'on'
-    },
-    showPassword: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
     return {
       inputValue: this.value,
-      focus: false,
-      showPass: false
+      focus: false
     }
   },
   computed: {
@@ -102,12 +94,6 @@ export default {
         return true
       }
       return false
-    },
-    toggleType () {
-      if (this.showPass) {
-        return 'text'
-      }
-      return this.type
     }
   },
   watch: {

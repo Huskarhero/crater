@@ -182,7 +182,7 @@ export default {
     list_of_items: 'This section will contain the list of items.',
     select_a_unit: 'select unit',
 
-    item_attached_message: 'Cannot delete an item which is already in use',
+    item_attached_message: 'Cannot delete an item already in use',
     confirm_delete: 'You will not be able to recover this Item | You will not be able to recover these Items',
     created_message: 'Item created successfully',
     updated_message: 'Item updated successfully',
@@ -227,14 +227,12 @@ export default {
     add_estimate: 'Add Estimate',
     save_estimate: 'Save Estimate',
     confirm_conversion: 'You want to convert this Estimate into Invoice?',
-    conversion_message: 'Invoice created successful',
+    conversion_message: 'Conversion successful',
     confirm_send_estimate: 'This estimate will be sent via email to the customer',
     confirm_mark_as_sent: 'This estimate will be marked as sent',
     confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
     confirm_mark_as_rejected: 'This estimate will be marked as Rejected',
     no_matching_estimates: 'There are no matching estimates!',
-    mark_as_sent_successfully: 'Estimate marked as sent successfully',
-    send_estimate_successfully: 'Estimate sent successfully',
     errors: {
       required: 'Field is required'
     },
@@ -310,6 +308,7 @@ export default {
     invoice_template: 'Invoice Template',
     template: 'Template',
     mark_as_sent: 'Mark as sent',
+    confirm_send_invoice: 'This invoice will be sent via email to the customer',
     invoice_mark_as_sent: 'This invoice will be marked as sent',
     confirm_send: 'This invoice will be sent via email to the customer',
     invoice_date: 'Invoice Date',
@@ -325,8 +324,6 @@ export default {
     list_of_invoices: 'This section will contain the list of invoices.',
     select_invoice: 'Select Invoice',
     no_matching_invoices: 'There are no matching invoices!',
-    mark_as_sent_successfully: 'Invoice marked as sent successfully',
-    send_invoice_successfully: 'Invoice sent successfully',
     item: {
       title: 'Item Title',
       description: 'Description',
@@ -532,8 +529,7 @@ export default {
       preferences: 'Preferences',
       notifications: 'Notifications',
       tax_types: 'Tax Types',
-      expense_category: 'Expense Categories',
-      update_app: 'Update App'
+      expense_category: 'Expense Categories'
     },
     title: 'Settings',
     setting: 'Settings | Settings',
@@ -615,6 +611,8 @@ export default {
       estimate_viewed_desc: 'When your customer views the estimate sent via crater dashboard.',
       save: 'Save',
       email_save_message: 'Email saved successfully',
+      // invoice_viewed_message: 'Invoice viewed updated successfully',
+      // estimate_viewed_message: 'Estimate viewed updated successfully',
       please_enter_email: 'Please Enter Email'
     },
     tax_types: {
@@ -624,6 +622,7 @@ export default {
       add_new_tax: 'Add New Tax',
       tax_settings: 'Tax Settings',
       tax_per_item: 'Tax Per Item',
+      // tax_per_item_switch: 'Tax Per Item updated successfully',
       tax_name: 'Tax Name',
       compound_tax: 'Compound Tax',
       percent: 'Percent',
@@ -661,22 +660,11 @@ export default {
       preference: 'Preference | Preferences',
       general_settings: 'Default preferences for the system.',
       updated_message: 'Preferences updated successfully',
+      // set_discount_per_item_message: 'Discount set per item updated successfully',
       select_language: 'select language',
       select_time_zone: 'select Time Zone',
       select_date_formate: 'select Date Formate',
       select_financial_year: 'select financial year'
-    },
-    update_app: {
-      title: 'Update App',
-      description: 'You can easily update Crater by checking for a new update by clicking the button below',
-      check_update: 'Check for updates',
-      avail_update: 'New Update available',
-      next_version: 'Next version',
-      update: 'Update Now',
-      update_progress: 'Update in progress...',
-      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
-      update_success: 'App has been updated successfully',
-      latest_message: 'No update available! You are on the latest version.'
     }
   },
   wizard: {
@@ -747,8 +735,7 @@ export default {
       migrate_failed: 'Migrate Failed',
       database_variables_save_error: 'Unable to connect to the DB with Provided Values.',
       mail_variables_save_error: 'Email configuration failed.',
-      connection_failed: 'Database connection failed',
-      database_should_be_empty: 'Database should be empty'
+      connection_failed: 'Database Connection Failed'
     },
     success: {
       mail_variables_save_successfully: 'Email configured successfully',
@@ -780,17 +767,17 @@ export default {
     password_length: 'Password must be {count} character long.',
     qty_must_greater_than_zero: 'Quantity must be greater than zero.',
     price_greater_than_zero: 'Price must be greater than zero.',
-    payment_greater_than_zero: 'Payment must be greater than   zero.',
+    payment_greater_than_zero: 'Payment must be greater than zero.',
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
-    quantity_maxlength: 'Quantity should not be greater than 20 digits.',
-    price_maxlength: 'Price should not be greater than 20 digits.',
+    quantity_maxlength: 'Quantity should not be greater than 10 digits.',
+    price_maxlength: 'Price should not be greater than 10 digits.',
     price_minvalue: 'Price should be greater than 0.',
-    amount_maxlength: 'Amount should not be greater than 20 digits.',
+    amount_maxlength: 'Amount should not be greater than 10 digits.',
     amount_minvalue: 'Amount should be greater than 0.',
     description_maxlength: 'Description should not be greater than 255 characters.',
     maximum_options_error: 'Maximum  of {max} options selected. First remove a selected option to select another.',
     notes_maxlength: 'Notes should not be greater than 255 characters.',
     address_maxlength: 'Address should not be greater than 255 characters.',
-    ref_number_maxlength: 'Ref Number should not be greater than 255 characters.'
+    ref_number_maxlength: 'Ref Number should not be greater than 10 digits'
   }
 }

@@ -1,8 +1,8 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
-use Crater\User;
-use Crater\Invoice;
+use Laraspace\User;
+use Laraspace\Invoice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 

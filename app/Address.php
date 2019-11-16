@@ -1,11 +1,11 @@
 <?php
-namespace Crater;
+namespace Laraspace;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\User;
-use Crater\Country;
-use Crater\State;
-use Crater\City;
+use Laraspace\User;
+use Laraspace\Country;
+use Laraspace\State;
+use Laraspace\City;
 
 class Address extends Model
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Crater\Http\Middleware;
+namespace Laraspace\Http\Middleware;
 
 use Auth;
 use Closure;

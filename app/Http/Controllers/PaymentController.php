@@ -1,15 +1,15 @@
 <?php
-namespace Crater\Http\Controllers;
+namespace Laraspace\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Crater\CompanySetting;
-use Crater\Currency;
-use Crater\Invoice;
-use Crater\Payment;
+use Laraspace\CompanySetting;
+use Laraspace\Currency;
+use Laraspace\Invoice;
+use Laraspace\Payment;
 use Carbon\Carbon;
 use function MongoDB\BSON\toJSON;
-use Crater\User;
-use Crater\Http\Requests\PaymentRequest;
+use Laraspace\User;
+use Laraspace\Http\Requests\PaymentRequest;
 
 class PaymentController extends Controller
 {
@@ -170,7 +170,6 @@ class PaymentController extends Controller
                 $invoice->status = Invoice::STATUS_COMPLETED;
                 $invoice->paid_status = Invoice::STATUS_PAID;
             } else {
-                $invoice->status = $invoice->getPreviousStatus();
                 $invoice->paid_status = Invoice::STATUS_PARTIALLY_PAID;
             }
 
@@ -212,7 +211,16 @@ class PaymentController extends Controller
                 $invoice->paid_status = Invoice::STATUS_PARTIALLY_PAID;
             }
 
-            $invoice->status = $invoice->getPreviousStatus();
+            if ($invoice->due_date < Carbon::now()) {
+                $invoice->status = Invoice::STATUS_OVERDUE;
+            } elseif ($invoice->viewed) {
+                $invoice->status = Invoice::STATUS_VIEWED;
+            } elseif ($invoice->sent) {
+                $invoice->status = Invoice::STATUS_SENT;
+            } else {
+                $invoice->status = Invoice::STATUS_DRAFT;
+            }
+
             $invoice->save();
         }
 
@@ -238,7 +246,16 @@ class PaymentController extends Controller
                     $invoice->paid_status = Invoice::STATUS_PARTIALLY_PAID;
                 }
 
-                $invoice->status = $invoice->getPreviousStatus();
+                if ($invoice->due_date < Carbon::now()) {
+                    $invoice->status = Invoice::STATUS_OVERDUE;
+                } elseif ($invoice->sent) {
+                    $invoice->status = Invoice::STATUS_SENT;
+                } elseif ($invoice->viewed) {
+                    $invoice->status = Invoice::STATUS_VIEWED;
+                } else {
+                    $invoice->status = Invoice::STATUS_DRAFT;
+                }
+
                 $invoice->save();
             }
 
