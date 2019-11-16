@@ -11,7 +11,7 @@ trait SiteApi
 
     protected static function getRemote($url, $data = array())
     {
-        $base = 'https://craterapp.com/';
+        $base = 'http://crater-main.test/';
 
         $client = new Client(['verify' => false, 'base_uri' => $base]);
 
