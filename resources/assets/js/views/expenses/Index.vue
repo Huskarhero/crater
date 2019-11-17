@@ -171,7 +171,6 @@
           sort-as="expense_date"
         >
           <template slot-scope="row">
-            <span>{{ $t('expenses.note') }}</span>
             <div class="notes">
               <div class="note">{{ row.notes }}</div>
             </div>
