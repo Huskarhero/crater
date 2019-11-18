@@ -127,7 +127,7 @@
             <a :class="['tab-link', {'a-active': filters.status === 'SENT'}]" href="#" >{{ $t('general.sent') }}</a>
           </li>
           <li class="tab" @click="getStatus('')">
-            <a :class="['tab-link', {'a-active': filters.status === '' || filters.status === null}]" href="#">{{ $t('general.all') }}</a>
+            <a :class="['tab-link', {'a-active': filters.status === '' || filters.status !== 'DRAFT' && filters.status !== 'SENT'}]" href="#">{{ $t('general.all') }}</a>
           </li>
         </ul>
         <transition name="fade">
@@ -245,31 +245,31 @@
                 </router-link>
               </v-dropdown-item>
               <v-dropdown-item>
-                <a class="dropdown-item" href="#" @click="convertInToinvoice(row.id)">
-                  <font-awesome-icon icon="envelope" class="dropdown-item-icon" />
+                <a class="dropdown-item" href="#/" @click="convertInToinvoice(row.id)">
+                  <font-awesome-icon icon="file-alt" class="dropdown-item-icon" />
                   {{ $t('estimates.convert_to_invoice') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status !== 'SENT'">
-                <a class="dropdown-item" href="#" @click.self="onMarkAsSent(row.id)">
+                <a class="dropdown-item" href="#/" @click.self="onMarkAsSent(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_sent') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status !== 'SENT'">
-                <a class="dropdown-item" href="#" @click.self="sendEstimate(row.id)">
+                <a class="dropdown-item" href="#/" @click.self="sendEstimate(row.id)">
                   <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
                   {{ $t('estimates.send_estimate') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status !== 'ACCEPTED'">
-                <a class="dropdown-item" href="#" @click.self="onMarkAsAccepted(row.id)">
+                <a class="dropdown-item" href="#/" @click.self="onMarkAsAccepted(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_accepted') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status !== 'REJECTED'">
-                <a class="dropdown-item" href="#" @click.self="onMarkAsRejected(row.id)">
+                <a class="dropdown-item" href="#/" @click.self="onMarkAsRejected(row.id)">
                   <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_rejected') }}
                 </a>
@@ -424,9 +424,9 @@ export default {
           let response = await this.markAsAccepted(data)
           this.refreshTable()
           if (response.data) {
-            this.filters.status = 'ACCEPTED'
+            this.filters.status = ''
             this.$refs.table.refresh()
-            window.toastr['success'](this.$tc('estimates.confirm_mark_as_accepted'))
+            window.toastr['success'](this.$tc('estimates.marked_as_accepted_message'))
           }
         }
       })
@@ -446,7 +446,7 @@ export default {
           let response = await this.markAsRejected(data)
           this.refreshTable()
           if (response.data) {
-            this.filters.status = 'REJECTED'
+            this.filters.status = ''
             this.$refs.table.refresh()
             window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
           }
@@ -512,7 +512,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_conversion'),
-        icon: '/assets/icon/envelope-solid.svg',
+        icon: '/assets/icon/file-alt-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willConvertInToinvoice) => {
