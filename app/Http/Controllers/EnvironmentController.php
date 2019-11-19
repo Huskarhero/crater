@@ -81,8 +81,10 @@ class EnvironmentController extends Controller
             'mail_mailgun_endpoint' => config('services.mailgun.endpoint'),
             'mail_mailgun_domain' => config('services.mailgun.domain'),
             'mail_mailgun_secret' => config('services.mailgun.secret'),
+            'mail_sparkpost_secret' => config('services.sparkpost.secret'),
             'mail_ses_key' => config('services.ses.key'),
             'mail_ses_secret' => config('services.ses.secret'),
+            'mail_mandrill_secret' => config('services.mandrill.secret'),
         ];
 
 
@@ -100,7 +102,9 @@ class EnvironmentController extends Controller
             'mail',
             'sendmail',
             'mailgun',
-            'ses'
+            'mandrill',
+            'ses',
+            'sparkpost'
         ];
 
         return response()->json($drivers);

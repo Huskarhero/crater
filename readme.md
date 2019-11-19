@@ -1,27 +1,49 @@
-# Laravel PHP Framework
+<img height="150px" src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png">
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Introduction
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Crater is an open-source web & mobile app that helps you track expenses, payments & create professional invoices & estimates.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Web Application is made using Laravel & VueJS while the Mobile Apps are built using React Native.
 
-## Official Documentation
+# Table of Contents
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+1. [Documentation](#documentation)
+2. [Download](#download)
+5. [Mobile Apps](#mobile-apps)
+5. [Roadmap](#roadmap)
+6. [License](#license)
 
-## Contributing
+## Documentation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+- [Installation Steps](https://docs.craterapp.com/installation.html)
+- [User Guide](https://docs.craterapp.com/)
+- [Developer Guide](https://docs.craterapp.com/developer-guide.html)
+- [API Documentation](https://docs.craterapp.com/api-documentation.html)
 
-## Security Vulnerabilities
+## Download
+- [Download Link](https://craterapp.com/downloads)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Mobile Apps
+- [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
+- IOS - Coming Soon
+- [Source](https://github.com/bytefuryco/crater-mobile)
+
+## Roadmap
+
+~~Here's a rough roadmap of things to come (not in order):
+-   [x] Automatic Update
+-   [x] Email Configuration
+-   [x] Installation Wizard
+-   [ ] Available as a docker image
+-   [ ] Performance Improvements
+-   [ ] Customer Portal
+-   [ ] Accept Payments (Stripe Integration)
+-   [ ] Add and Use Custom Fields on Invoices & Estimates.
+-   [ ] Multiple Companies
+-   [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
+-   [ ] Vendors, Inventory & Bills
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Crater is released under the Attribution Assurance License.
+See [LICENSE](LICENSE) for details.

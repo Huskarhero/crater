@@ -9,7 +9,6 @@
           :invalid="$v.mailConfigData.mail_driver.$error"
           :options="mailDrivers"
           :searchable="true"
-          :allow-empty="false"
           :show-labels="false"
           @input="onChangeDriver"
         />
@@ -89,8 +88,8 @@
           <span v-if="!$v.mailConfigData.from_mail.required" class="text-danger">
             {{ $tc('validation.required') }}
           </span>
-          <span v-if="!$v.mailConfigData.from_mail.email" class="text-danger">
-            {{ $tc('validation.email_incorrect') }}
+          <span v-if="!$v.mailConfigData.from_mail.numeric" class="text-danger">
+            {{ $tc('validation.numbers_only') }}
           </span>
         </div>
       </div>
@@ -119,7 +118,7 @@
           :invalid="$v.mailConfigData.mail_ses_key.$error"
           v-model.trim="mailConfigData.mail_ses_key"
           type="text"
-          name="mail_ses_key"
+          name="name"
           @input="$v.mailConfigData.mail_ses_key.$touch()"
         />
         <div v-if="$v.mailConfigData.mail_ses_key.$error">
@@ -135,7 +134,7 @@
           :invalid="$v.mailConfigData.mail_ses_secret.$error"
           v-model.trim="mailConfigData.mail_ses_secret"
           type="password"
-          name="mail_ses_secret"
+          name="name"
           show-password
           @input="$v.mailConfigData.mail_ses_secret.$touch()"
         />

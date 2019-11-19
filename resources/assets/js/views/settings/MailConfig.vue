@@ -25,17 +25,21 @@ import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
 import Smtp from './mailDriver/Smtp'
 import Mailgun from './mailDriver/Mailgun'
+import Sparkpost from './mailDriver/Sparkpost'
 import Ses from './mailDriver/Ses'
 import Basic from './mailDriver/Basic'
+import Mandrill from './mailDriver/Mandrill'
 
 export default {
   components: {
     MultiSelect,
     Smtp,
     Mailgun,
+    Sparkpost,
     Ses,
     sendmail: Basic,
-    mail: Basic
+    mail: Basic,
+    Mandrill
   },
   mixins: [validationMixin],
   data () {

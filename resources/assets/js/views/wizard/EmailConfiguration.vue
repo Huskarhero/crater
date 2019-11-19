@@ -19,17 +19,21 @@ import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
 import Smtp from './mailDriver/Smtp'
 import Mailgun from './mailDriver/Mailgun'
+import Sparkpost from './mailDriver/Sparkpost'
 import Ses from './mailDriver/Ses'
 import Basic from './mailDriver/Basic'
+import Mandrill from './mailDriver/Mandrill'
 
 export default {
   components: {
     MultiSelect,
     Smtp,
     Mailgun,
+    Sparkpost,
     Ses,
     sendmail: Basic,
-    mail: Basic
+    mail: Basic,
+    Mandrill
   },
   mixins: [validationMixin],
   data () {
@@ -59,7 +63,7 @@ export default {
     async next (mailConfigData) {
       this.loading = true
       try {
-        let response = await window.axios.post('/api/admin/onboarding/environment/mail', mailConfigData)
+        let response = await window.axios.post('/api/settings/environment/mail', mailConfigData)
         if (response.data.success) {
           this.$emit('next')
           window.toastr['success'](this.$t('wizard.success.' + response.data.success))
