@@ -166,7 +166,7 @@ export default {
         user_id: null,
         payment_number: null,
         payment_date: null,
-        amount: 0,
+        amount: 100,
         payment_mode: null,
         invoice_id: null,
         notes: null

@@ -31,9 +31,7 @@ export default {
   [types.UPDATE_INVOICE_STATUS] (state, data) {
     let pos = state.invoices.findIndex(invoice => invoice.id === data.id)
 
-    if (state.invoices[pos]) {
-      state.invoices[pos].status = data.status
-    }
+    state.invoices[pos].status = data.status
   },
 
   [types.RESET_SELECTED_INVOICES] (state, data) {

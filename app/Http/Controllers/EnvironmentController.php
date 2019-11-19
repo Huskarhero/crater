@@ -39,7 +39,7 @@ class EnvironmentController extends Controller
             Artisan::call('config:clear');
             Artisan::call('key:generate --force');
             Artisan::call('migrate --seed --force');
-            Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations', '--force' => true]);
+            Artisan::call('migrate --force', ['--path' => 'vendor/laravel/passport/database/migrations']);
 
             \Storage::disk('local')->put('database_created', 'database_created');
 
@@ -75,16 +75,8 @@ class EnvironmentController extends Controller
             'mail_port' => config('mail.port'),
             'mail_username' => config('mail.username'),
             'mail_password' => config('mail.password'),
-            'mail_encryption' => config('mail.encryption'),
-            'from_name' => config('mail.from.name'),
-            'from_mail' => config('mail.from.address'),
-            'mail_mailgun_endpoint' => config('services.mailgun.endpoint'),
-            'mail_mailgun_domain' => config('services.mailgun.domain'),
-            'mail_mailgun_secret' => config('services.mailgun.secret'),
-            'mail_ses_key' => config('services.ses.key'),
-            'mail_ses_secret' => config('services.ses.secret'),
+            'mail_encryption' => config('mail.encryption')
         ];
-
 
         return response()->json($MailData);
     }
@@ -100,7 +92,9 @@ class EnvironmentController extends Controller
             'mail',
             'sendmail',
             'mailgun',
-            'ses'
+            'mandrill',
+            'ses',
+            'sparkpost'
         ];
 
         return response()->json($drivers);

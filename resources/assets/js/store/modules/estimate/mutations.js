@@ -40,9 +40,7 @@ export default {
   [types.UPDATE_ESTIMATE_STATUS] (state, data) {
     let pos = state.estimates.findIndex(estimate => estimate.id === data.id)
 
-    if (state.estimates[pos]) {
-      state.estimates[pos].status = data.status
-    }
+    state.estimates[pos].status = data.status
   },
 
   [types.RESET_SELECTED_ESTIMATES] (state, data) {
