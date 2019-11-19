@@ -135,8 +135,8 @@ Route::group(['middleware' => 'api'], function () {
             'uses' => 'UpdateController@update'
         ]);
 
-        Route::post('/update/finish', [
-            'as' => 'auto.update.finish',
+        Route::post('/finish/update', [
+            'as' => 'auto.finish.update',
             'uses' => 'UpdateController@finishUpdate'
         ]);
 
