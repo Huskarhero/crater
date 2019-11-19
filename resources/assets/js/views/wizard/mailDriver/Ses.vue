@@ -118,7 +118,7 @@
           :invalid="$v.mailConfigData.mail_ses_key.$error"
           v-model.trim="mailConfigData.mail_ses_key"
           type="text"
-          name="mail_ses_key"
+          name="name"
           @input="$v.mailConfigData.mail_ses_key.$touch()"
         />
         <div v-if="$v.mailConfigData.mail_ses_key.$error">
@@ -134,7 +134,7 @@
           :invalid="$v.mailConfigData.mail_ses_secret.$error"
           v-model.trim="mailConfigData.mail_ses_secret"
           type="password"
-          name="mail_ses_secret"
+          name="name"
           show-password
           @input="$v.mailConfigData.mail_ses_secret.$touch()"
         />

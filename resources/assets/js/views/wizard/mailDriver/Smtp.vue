@@ -135,7 +135,7 @@
           :invalid="$v.mailConfigData.from_name.$error"
           v-model.trim="mailConfigData.from_name"
           type="text"
-          name="from_name"
+          name="name"
           @input="$v.mailConfigData.from_name.$touch()"
         />
         <div v-if="$v.mailConfigData.from_name.$error">
