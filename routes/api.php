@@ -127,11 +127,17 @@ Route::group(['middleware' => 'api'], function () {
       'middleware' => 'admin'
     ], function () {
 
+
         // Auto update routes
         //----------------------------------
         Route::post('/update', [
             'as' => 'auto.update',
             'uses' => 'UpdateController@update'
+        ]);
+
+        Route::post('/update/finish', [
+            'as' => 'auto.update.finish',
+            'uses' => 'UpdateController@finishUpdate'
         ]);
 
         Route::get('/check/update', [

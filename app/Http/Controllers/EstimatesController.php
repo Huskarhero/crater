@@ -13,7 +13,6 @@ use Crater\User;
 use Crater\Item;
 use Validator;
 use Crater\CompanySetting;
-use Crater\Company;
 use Crater\Mail\EstimatePdf;
 use Crater\TaxType;
 use Crater\Tax;
@@ -148,7 +147,6 @@ class EstimatesController extends Controller
             $data['estimate'] = $estimate->toArray();
             $userId = $data['estimate']['user_id'];
             $data['user'] = User::find($userId)->toArray();
-            $data['company'] = Company::find($estimate->company_id);
             $email = $data['user']['email'];
             $notificationEmail = CompanySetting::getSetting(
                 'notification_email',
@@ -312,8 +310,6 @@ class EstimatesController extends Controller
         $data['estimate'] = $estimate->toArray();
         $userId = $data['estimate']['user_id'];
         $data['user'] = User::find($userId)->toArray();
-        $data['company'] = Company::find($estimate->company_id);
-
         $email = $data['user']['email'];
         $notificationEmail = CompanySetting::getSetting(
             'notification_email',

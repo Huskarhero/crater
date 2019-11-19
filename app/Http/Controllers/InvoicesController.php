@@ -3,7 +3,6 @@ namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Crater\CompanySetting;
-use Crater\Company;
 use Illuminate\Support\Collection;
 use Crater\Currency;
 use Crater\InvoiceTemplate;
@@ -149,7 +148,6 @@ class InvoicesController extends Controller
         if ($request->has('invoiceSend')) {
             $data['invoice'] = Invoice::findOrFail($invoice->id)->toArray();
             $data['user'] = User::find($request->user_id)->toArray();
-            $data['company'] = Company::find($invoice->company_id);
 
             $notificationEmail = CompanySetting::getSetting(
                 'notification_email',
@@ -376,7 +374,6 @@ class InvoicesController extends Controller
         $data['invoice'] = $invoice->toArray();
         $userId = $data['invoice']['user_id'];
         $data['user'] = User::find($userId)->toArray();
-        $data['company'] = Company::find($invoice->company_id);
         $email = $data['user']['email'];
         $notificationEmail = CompanySetting::getSetting(
             'notification_email',
