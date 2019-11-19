@@ -69,7 +69,6 @@ export default {
         let res = await window.axios.post('/api/update', this.updateData)
 
         if (res.data.success) {
-          await window.axios.post('/api/update/finish', this.updateData)
           this.isUpdateAvailable = false
           window.toastr['success'](this.$t('settings.update_app.update_success'))
           this.currentVersion = this.updateData.version
@@ -84,7 +83,6 @@ export default {
 
       this.isUpdating = false
     },
-
     async checkUpdate () {
       try {
         this.isCheckingforUpdate = true
