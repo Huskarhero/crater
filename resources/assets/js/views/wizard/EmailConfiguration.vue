@@ -14,6 +14,7 @@
     </form>
   </div>
 </template>
+
 <script>
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
@@ -35,9 +36,9 @@ export default {
   data () {
     return {
       mailConfigData: {
-        mail_driver: 'mail'
+        mail_driver: 'smtp'
       },
-      mail_driver: 'mail',
+      mail_driver: 'smtp',
       loading: false,
       mail_drivers: []
     }
