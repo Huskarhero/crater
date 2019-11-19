@@ -1,4 +1,4 @@
-<img height="150px" src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png">
+<p align="center"><img height="150px" src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png"></p>
 
 ## Introduction
 
@@ -31,7 +31,7 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 
 ## Roadmap
 
-~~Here's a rough roadmap of things to come (not in any specific order):
+~~Here's a rough roadmap of things to come (not in order):
 -   [x] Automatic Update
 -   [x] Email Configuration
 -   [x] Installation Wizard

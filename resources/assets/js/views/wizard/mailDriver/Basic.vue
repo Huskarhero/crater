@@ -8,6 +8,7 @@
           v-model="mailConfigData.mail_driver"
           :invalid="$v.mailConfigData.mail_driver.$error"
           :options="mailDrivers"
+          :allow-empty="false"
           :searchable="true"
           :show-labels="false"
           @input="onChangeDriver"
@@ -49,6 +50,9 @@
         <div v-if="$v.mailConfigData.from_mail.$error">
           <span v-if="!$v.mailConfigData.from_mail.required" class="text-danger">
             {{ $tc('validation.required') }}
+          </span>
+          <span v-if="!$v.mailConfigData.from_mail.email" class="text-danger">
+            {{ $tc('validation.email_incorrect') }}
           </span>
         </div>
       </div>
