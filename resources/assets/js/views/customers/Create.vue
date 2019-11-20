@@ -608,20 +608,16 @@ export default {
           this.formData.currency_id = this.currency.id
         }
         this.isLoading = true
-        try {
-          let response = await this.updateCustomer(this.formData)
-          if (response.data) {
-            window.toastr['success'](this.$t('customers.updated_message'))
-            this.$router.push('/admin/customers')
-            this.isLoading = false
-            return true
-          }
-        } catch (err) {
-          if (err.response.data.errors.email) {
-            this.isLoading = false
-            window.toastr['error'](this.$t('validation.email_already_taken'))
-          }
+        let response = await this.updateCustomer(this.formData)
+
+        if (response.data) {
+          window.toastr['success'](this.$t('customers.updated_message'))
+          this.$router.push('/admin/customers')
+          this.isLoading = false
+          return true
         }
+
+        window.toastr['error'](response.data.error)
       } else {
         this.isLoading = true
         if (this.currency) {

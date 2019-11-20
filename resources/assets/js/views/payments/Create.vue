@@ -246,19 +246,14 @@ export default {
   watch: {
     customer (newValue) {
       this.formData.user_id = newValue.id
-      this.invoice = null
-      this.formData.amount = 0
-      this.invoiceList = []
       if (!this.isEdit) {
         this.fetchCustomerInvoices(newValue.id)
       }
     },
     invoice (newValue) {
-      if (newValue) {
-        this.formData.invoice_id = newValue.id
-        if (!this.isEdit) {
-          this.setPaymentAmountByInvoiceData(newValue.id)
-        }
+      this.formData.invoice_id = newValue.id
+      if (!this.isEdit) {
+        this.setPaymentAmountByInvoiceData(newValue.id)
       }
     }
   },
