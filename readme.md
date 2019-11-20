@@ -10,9 +10,8 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 
 1. [Documentation](#documentation)
 2. [Download](#download)
-3. [Mobile Apps](#mobile-apps)
-4. [Roadmap](#roadmap)
-5. [Credits](#credits)
+5. [Mobile Apps](#mobile-apps)
+5. [Roadmap](#roadmap)
 6. [License](#license)
 
 ## Documentation
@@ -28,7 +27,7 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 ## Mobile Apps
 - [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
 - IOS - Coming Soon
-- [Source](https://github.com/bytefury/crater-mobile)
+- [Source](https://github.com/bytefuryco/crater-mobile)
 
 ## Roadmap
 
@@ -38,17 +37,12 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 -   [x] Installation Wizard
 -   [ ] Available as a docker image
 -   [ ] Performance Improvements
--   [ ] Customer View page
 -   [ ] Customer Portal
 -   [ ] Accept Payments (Stripe Integration)
 -   [ ] Add and Use Custom Fields on Invoices & Estimates.
 -   [ ] Multiple Companies
 -   [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
 -   [ ] Vendors, Inventory & Bills
-
-
-## Credits
-Crater is a product of [Bytefury](https://bytefury.com)
 
 ## License
 Crater is released under the Attribution Assurance License.
