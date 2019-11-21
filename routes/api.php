@@ -308,11 +308,6 @@ Route::group(['middleware' => 'api'], function () {
                 'uses' => 'CompanyController@updateAdminProfile'
             ]);
 
-            Route::post('/profile/upload-avatar', [
-                'as' => 'admin.profile.avatar',
-                'uses' => 'CompanyController@uploadAdminAvatar'
-            ]);
-
             Route::post('/company/upload-logo', [
                 'as' => 'upload.admin.company.logo',
                 'uses' => 'CompanyController@uploadCompanyLogo'
