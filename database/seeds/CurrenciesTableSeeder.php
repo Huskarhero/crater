@@ -80,14 +80,6 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => '.'
             ],
             [
-                'name' => 'Kuwaiti Dinar',
-                'code' => 'KWD',
-                'symbol' => 'KWD ',
-                'precision' => '3',
-                'thousand_separator' => ',',
-                'decimal_separator' => '.'
-            ],
-            [
                 'name' => 'Canadian Dollar',
                 'code' => 'CAD',
                 'symbol' => 'C$',
