@@ -5,9 +5,10 @@ namespace Crater\Listeners\Updates\v1;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
+use Crater\Listeners\Updates\Listener;
 use Crater\Setting;
 
-class Version110
+class Version110 extends Listener
 {
     const VERSION = '1.1.0';
 
@@ -29,7 +30,7 @@ class Version110
      */
     public function handle(UpdateFinished $event)
     {
-        if (!$this->check($event)) {
+        if ($this->isListenerFired($event)) {
             return;
         }
 
