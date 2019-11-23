@@ -5,11 +5,9 @@ namespace Crater\Listeners\Updates\v1;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
-use Crater\Listeners\Updates\Listener;
 use Crater\Setting;
-use Crater\Currency;
 
-class Version110 extends Listener
+class Version110
 {
     const VERSION = '1.1.0';
 
@@ -31,85 +29,11 @@ class Version110 extends Listener
      */
     public function handle(UpdateFinished $event)
     {
-        if ($this->isListenerFired($event)) {
+        if (!$this->check($event)) {
             return;
         }
 
-        // Add currencies
-        $this->addCurrencies();
-
         // Update Crater app version
         Setting::setSetting('version', static::VERSION);
-    }
-
-    private function addCurrencies() {
-
-        $currencies = [
-            '13' => [
-                'symbol' => 'S$'
-            ],
-            '16' => [
-                'symbol' => '₫'
-            ],
-            '17' => [
-                'symbol' => 'Fr.'
-            ],
-            '21' => [
-                'symbol' => '฿'
-            ],
-            '22' => [
-                'symbol' => '₦'
-            ],
-            '26' => [
-                'symbol' => 'HK$'
-            ],
-            '35' => [
-                'symbol' => 'NAƒ'
-            ],
-            '38' => [
-                'symbol' => 'GH₵'
-            ],
-            '39' => [
-                'symbol' => 'Лв.'
-            ],
-            '42' => [
-                'symbol' => 'RON'
-            ],
-            '44' => [
-                'symbol' => 'SِAR'
-            ],
-            '46' => [
-                'symbol' => 'Rf'
-            ],
-            '47' => [
-                'symbol' => '₡'
-            ],
-            '54' => [
-                'symbol' => '‎د.ت'
-            ],
-            '55' => [
-                'symbol' => '₽'
-            ],
-            '57' => [
-                'symbol' => 'ر.ع.'
-            ],
-            '58' => [
-                'symbol' => '₴'
-            ],
-
-        ];
-
-        foreach ($currencies as $key => $currency) {
-            Currency::updateOrCreate(['id' => $key], $currency);
-        }
-
-        Currency::create([
-            'name' => 'Kuwaiti Dinar',
-            'code' => 'KWD',
-            'symbol' => 'KWD ',
-            'precision' => '3',
-            'thousand_separator' => ',',
-            'decimal_separator' => '.'
-        ]);
     }
 }
