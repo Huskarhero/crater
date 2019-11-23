@@ -83,7 +83,7 @@
                   :allow-empty="false"
                   :disabled="isEdit"
                   :placeholder="$t('invoices.select_invoice')"
-                  label="invoice_number"
+                  :custom-label="invoiceWithAmount"
                   track-by="invoice_number"
                 />
               </div>
@@ -263,9 +263,6 @@ export default {
     }
   },
   async mounted () {
-    // if (!this.$route.params.id) {
-    //   this.$refs.baseSelect.$refs.search.focus()
-    // }
     this.$nextTick(() => {
       this.loadData()
       if (this.$route.params.id && !this.isEdit) {
@@ -283,6 +280,9 @@ export default {
       'updatePayment',
       'fetchPayment'
     ]),
+    invoiceWithAmount ({ invoice_number, due_amount }) {
+      return `${invoice_number} (${this.$utils.formatGraphMoney(due_amount, this.customer.currency)})`
+    },
     async loadData () {
       if (this.isEdit) {
         let response = await this.fetchPayment(this.$route.params.id)
