@@ -58,7 +58,7 @@
             aria-expanded="false"
             class="avatar"
           >
-            <img :src="profilePicture" alt="Avatar">
+            <img :src="ProfilePicture" alt="Avatar">
           </a>
           <v-dropdown-item>
             <router-link class="dropdown-item" to="/admin/settings">
@@ -87,7 +87,7 @@ export default {
     ...mapGetters('userProfile', [
       'user'
     ]),
-    profilePicture () {
+    ProfilePicture () {
       if (this.user && this.user.avatar !== null) {
         return this.user.avatar
       } else {

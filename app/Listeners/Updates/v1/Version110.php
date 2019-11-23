@@ -29,7 +29,7 @@ class Version110
      */
     public function handle(UpdateFinished $event)
     {
-        if ($this->isListenerFired($event)) {
+        if (!$this->check($event)) {
             return;
         }
 

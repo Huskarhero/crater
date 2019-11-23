@@ -55,22 +55,13 @@ export default {
       }
     }
   },
-  created () {
-    window.addEventListener('beforeunload', (event) => {
-      if (this.isUpdating) {
-        event.returnValue = 'Update is in progress!'
-      }
-    })
-  },
+
   mounted () {
     window.axios.get('/api/settings/app/version').then((res) => {
       this.currentVersion = res.data.version
     })
   },
   methods: {
-    closeHandler () {
-      console.log('closing')
-    },
     async onUpdateApp () {
       try {
         this.isUpdating = true
@@ -82,10 +73,6 @@ export default {
           this.isUpdateAvailable = false
           window.toastr['success'](this.$t('settings.update_app.update_success'))
           this.currentVersion = this.updateData.version
-
-          setTimeout(() => {
-            location.reload()
-          }, 2000)
         } else {
           console.log(res.data)
           window.toastr['error'](res.data.error)
