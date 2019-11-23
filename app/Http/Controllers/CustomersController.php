@@ -160,7 +160,6 @@ class CustomersController extends Controller
             if ($verifyEmail) {
                 if ($verifyEmail->id !== $customer->id) {
                     return response()->json([
-                        'success' => false,
                         'error' => 'Email already in use'
                     ]);
                 }
