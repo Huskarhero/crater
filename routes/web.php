@@ -49,6 +49,11 @@ Route::group(['prefix' => 'reports'], function () {
 
 });
 
+Route::get('/newinvoice', function() {
+
+
+    return 'success';
+});
 
 Route::get('/invoices/pdf/{id}', [
     'as' => 'get.invoice.pdf',
