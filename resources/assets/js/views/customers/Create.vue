@@ -119,10 +119,16 @@
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.state') }}</label>
-                <base-input
-                  v-model="billing.state"
-                  name="billing.state"
-                  type="text"
+                <base-select
+                  v-model="billing_state"
+                  :options="billingStates"
+                  :searchable="true"
+                  :show-labels="false"
+                  :tabindex="9"
+                  :disabled="isDisabledBillingState"
+                  :placeholder="$t('general.select_state')"
+                  label="name"
+                  track-by="id"
                 />
               </div>
               <div class="form-group">
@@ -170,10 +176,16 @@
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.city') }}</label>
-                <base-input
-                  v-model="billing.city"
-                  name="billing.city"
-                  type="text"
+                <base-select
+                  v-model="billing_city"
+                  :options="billingCities"
+                  :searchable="true"
+                  :show-labels="false"
+                  :disabled="isDisabledBillingCity"
+                  :tabindex="10"
+                  :placeholder="$t('general.select_city')"
+                  label="name"
+                  track-by="id"
                 />
               </div>
               <div class="form-group">
@@ -221,10 +233,16 @@
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.state') }}</label>
-                <base-input
-                  v-model="shipping.state"
-                  name="shipping.state"
-                  type="text"
+                <base-select
+                  v-model="shipping_state"
+                  :options="shippingStates"
+                  :searchable="true"
+                  :show-labels="false"
+                  :tabindex="17"
+                  :disabled="isDisabledShippingState"
+                  :placeholder="$t('general.select_state')"
+                  label="name"
+                  track-by="id"
                 />
               </div>
               <div class="form-group">
@@ -272,10 +290,16 @@
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.city') }}</label>
-                <base-input
-                  v-model="shipping.city"
-                  name="shipping.city"
-                  type="text"
+                <base-select
+                  v-model="shipping_city"
+                  :options="shippingCities"
+                  :searchable="true"
+                  :show-labels="false"
+                  :tabindex="18"
+                  :disabled="isDisabledShippingCity"
+                  :placeholder="$t('general.select_city')"
+                  label="name"
+                  track-by="id"
                 />
               </div>
               <div class="form-group">
@@ -320,7 +344,7 @@ import { mapActions, mapGetters } from 'vuex'
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
 import AddressStub from '../../stub/address'
-const { required, minLength, email, url, maxLength } = require('vuelidate/lib/validators')
+const { required, minLength, email, numeric, url, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: { MultiSelect },
@@ -342,8 +366,8 @@ export default {
       billing: {
         name: null,
         country_id: null,
-        state: null,
-        city: null,
+        state_id: null,
+        city_id: null,
         phone: null,
         zip: null,
         address_street_1: null,
@@ -353,8 +377,8 @@ export default {
       shipping: {
         name: null,
         country_id: null,
-        state: null,
-        city: null,
+        state_id: null,
+        city_id: null,
         phone: null,
         zip: null,
         address_street_1: null,
@@ -362,12 +386,26 @@ export default {
         type: 'shipping'
       },
       currencyList: [],
+      isDisabledBillingState: true,
+      isDisabledBillingCity: true,
+      isDisabledShippingState: true,
+      isDisabledShippingCity: true,
 
       billing_country: null,
+      billing_city: null,
+      billing_state: null,
+
       shipping_country: null,
+      shipping_city: null,
+      shipping_state: null,
 
       billingCountries: [],
-      shippingCountries: []
+      billingStates: [],
+      billingCities: [],
+
+      shippingCountries: [],
+      shippingStates: [],
+      shippingCities: []
     }
   },
   validations: {
@@ -417,12 +455,60 @@ export default {
       if (newCountry) {
         this.billing.country_id = newCountry.id
         this.isDisabledBillingState = false
+        this.billing_state = null
+        this.billing_city = null
+        this.fetchBillingState()
+      }
+    },
+    billing_state (newState) {
+      if (newState) {
+        this.billing.state_id = newState.id
+        this.isDisabledBillingCity = false
+        this.billing_city = null
+        this.fetchBillingCities()
+        return true
+      }
+      this.billing_city = null
+      this.isDisabledBillingCity = true
+      return true
+    },
+    billing_city (newCity) {
+      if (newCity) {
+        this.billing.city_id = newCity.id
       }
     },
     shipping_country (newCountry) {
       if (newCountry) {
         this.shipping.country_id = newCountry.id
+        this.isDisabledShippingState = false
+        this.fetchShippingState()
+        if (this.isCopyFromBilling) {
+          return true
+        }
+        this.shipping_state = null
+        this.shipping_city = null
         return true
+      }
+    },
+    shipping_state (newState) {
+      if (newState) {
+        this.shipping.state_id = newState.id
+        this.isDisabledShippingCity = false
+        this.fetchShippingCities()
+        if (this.isCopyFromBilling) {
+          this.isCopyFromBilling = false
+          return true
+        }
+        this.shipping_city = null
+        return true
+      }
+      this.shipping_city = null
+      this.isDisabledShippingCity = true
+      return true
+    },
+    shipping_city (newCity) {
+      if (newCity) {
+        this.shipping.city_id = newCity.id
       }
     }
   },
@@ -537,6 +623,42 @@ export default {
             window.toastr['error'](this.$t('validation.email_already_taken'))
           }
         }
+      }
+    },
+    async fetchBillingState () {
+      let res = await window.axios.get(`/api/states/${this.billing_country.id}`)
+      if (res) {
+        this.billingStates = res.data.states
+      }
+      if (this.isEdit) {
+        this.billing_state = this.billingStates.find((state) => state.id === this.billing.state_id)
+      }
+    },
+    async fetchBillingCities () {
+      let res = await window.axios.get(`/api/cities/${this.billing_state.id}`)
+      if (res) {
+        this.billingCities = res.data.cities
+      }
+      if (this.isEdit) {
+        this.billing_city = this.billingCities.find((city) => city.id === this.billing.city_id)
+      }
+    },
+    async fetchShippingState () {
+      let res = await window.axios.get(`/api/states/${this.shipping_country.id}`)
+      if (res) {
+        this.shippingStates = res.data.states
+      }
+      if (this.isEdit) {
+        this.shipping_state = this.shippingStates.find((s) => s.id === this.shipping.state_id)
+      }
+    },
+    async fetchShippingCities () {
+      let res = await window.axios.get(`/api/cities/${this.shipping_state.id}`)
+      if (res) {
+        this.shippingCities = res.data.cities
+      }
+      if (this.isEdit) {
+        this.shipping_city = this.shippingCities.find((c) => c.id === this.shipping.city_id)
       }
     }
   }

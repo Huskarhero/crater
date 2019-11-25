@@ -4,11 +4,11 @@ namespace Crater;
 use Illuminate\Database\Eloquent\Model;
 use Crater\State;
 
-class Country extends Model
+class City extends Model
 {
-    public function states()
+    public function state()
     {
-        return $this->hasMany(State::class);
+        return $this->belongsTo(State::class);
     }
 
     public function address()

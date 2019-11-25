@@ -122,7 +122,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Singapore Dollar',
                 'code' => 'SGD',
-                'symbol' => 'S$',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -147,7 +147,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Vietnamese Dong',
                 'code' => 'VND',
-                'symbol' => '₫',
+                'symbol' => '',
                 'precision' => '0',
                 'thousand_separator' => '.',
                 'decimal_separator' => ','
@@ -155,7 +155,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Swiss Franc',
                 'code' => 'CHF',
-                'symbol' => 'Fr.',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => '\'',
                 'decimal_separator' => '.'
@@ -187,7 +187,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Thai Baht',
                 'code' => 'THB',
-                'symbol' => '฿',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -195,7 +195,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Nigerian Naira',
                 'code' => 'NGN',
-                'symbol' => '₦',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -227,7 +227,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Hong Kong Dollar',
                 'code' => 'HKD',
-                'symbol' => 'HK$',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -299,7 +299,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Netherlands Antillean Guilder',
                 'code' => 'ANG',
-                'symbol' => 'NAƒ',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => '.',
                 'decimal_separator' => ','
@@ -323,7 +323,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Ghanaian Cedi',
                 'code' => 'GHS',
-                'symbol' => '‎GH₵',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -331,7 +331,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Bulgarian Lev',
                 'code' => 'BGN',
-                'symbol' => 'Лв.',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ' ',
                 'decimal_separator' => '.'
@@ -355,7 +355,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Romanian New Leu',
                 'code' => 'RON',
-                'symbol' => 'RON',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -371,7 +371,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Saudi Riyal',
                 'code' => 'SAR',
-                'symbol' => '‎SِAR',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -387,7 +387,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Maldivian Rufiyaa',
                 'code' => 'MVR',
-                'symbol' => 'Rf',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -395,7 +395,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Costa Rican Colón',
                 'code' => 'CRC',
-                'symbol' => '₡',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -454,7 +454,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Tunisian Dinar',
                 'code' => 'TND',
-                'symbol' => '‎د.ت',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -462,7 +462,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Russian Ruble',
                 'code' => 'RUB',
-                'symbol' => '₽',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -479,7 +479,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Omani Rial',
                 'code' => 'OMR',
-                'symbol' => 'ر.ع.',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
@@ -487,7 +487,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Ukrainian Hryvnia',
                 'code' => 'UAH',
-                'symbol' => '₴',
+                'symbol' => '',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
