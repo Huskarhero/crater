@@ -49,6 +49,7 @@ Route::group(['prefix' => 'reports'], function () {
 
 });
 
+
 Route::get('/invoices/pdf/{id}', [
     'as' => 'get.invoice.pdf',
     'uses' => 'FrontendController@getInvoicePdf'
