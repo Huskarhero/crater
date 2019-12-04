@@ -17,7 +17,9 @@
           <h3 class="page-title mb-3">{{ $t('settings.update_app.avail_update') }}</h3>
           <label class="input-label">{{ $t('settings.update_app.next_version') }}</label><br>
           <label class="version">{{ updateData.version }}</label>
-          <p class="page-sub-title" style="white-space: pre-wrap;">{{ description }}</p>
+          <p class="page-sub-title">
+            {{ description }}
+          </p>
           <base-button size="large" icon="rocket" color="theme" @click="onUpdateApp">
             {{ $t('settings.update_app.update') }}
           </base-button>
@@ -53,22 +55,13 @@ export default {
       }
     }
   },
-  created () {
-    window.addEventListener('beforeunload', (event) => {
-      if (this.isUpdating) {
-        event.returnValue = 'Update is in progress!'
-      }
-    })
-  },
+
   mounted () {
     window.axios.get('/api/settings/app/version').then((res) => {
       this.currentVersion = res.data.version
     })
   },
   methods: {
-    closeHandler () {
-      console.log('closing')
-    },
     async onUpdateApp () {
       try {
         this.isUpdating = true
@@ -76,17 +69,10 @@ export default {
         let res = await window.axios.post('/api/update', this.updateData)
 
         if (res.data.success) {
-          setTimeout(async () => {
-            await window.axios.post('/api/update/finish', this.updateData)
-
-            window.toastr['success'](this.$t('settings.update_app.update_success'))
-            this.currentVersion = this.updateData.version
-            this.isUpdateAvailable = false
-
-            setTimeout(() => {
-              location.reload()
-            }, 2000)
-          }, 1000)
+          await window.axios.post('/api/update/finish', this.updateData)
+          this.isUpdateAvailable = false
+          window.toastr['success'](this.$t('settings.update_app.update_success'))
+          this.currentVersion = this.updateData.version
         } else {
           console.log(res.data)
           window.toastr['error'](res.data.error)
@@ -106,7 +92,7 @@ export default {
         this.isCheckingforUpdate = false
 
         if (!response.data.version) {
-          window.toastr['info'](this.$t('settings.update_app.latest_message'))
+          window.toastr['warning'](this.$t('settings.update_app.latest_message'))
 
           return
         }
