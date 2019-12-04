@@ -83,7 +83,8 @@ class ReportController extends Controller
     {
         $company = Company::where('unique_hash', $hash)->first();
 
-        $items = InvoiceItem::whereCompany($company->id)
+        $items = InvoiceItem::with('item')
+            ->whereCompany($company->id)
             ->applyInvoiceFilters($request->only(['from_date', 'to_date']))
             ->itemAttributes()
             ->get();

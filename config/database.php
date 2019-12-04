@@ -51,7 +51,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => false,
+            'strict' => true,
             'engine' => null,
         ],
 
