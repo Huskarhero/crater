@@ -351,8 +351,7 @@ fieldset[disabled] .multiselect {
     color: $ls-color-gray;
 }
 
-.multiselect--disabled .multiselect__input,
-.multiselect--disabled .multiselect__single {
+.multiselect--disabled .multiselect__input {
     background: $ls-color-gray--light;
     color: $ls-color-gray;
 }

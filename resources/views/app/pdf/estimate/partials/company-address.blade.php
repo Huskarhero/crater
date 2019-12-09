@@ -12,10 +12,10 @@
             {{$company_address->addresses[0]['address_street_2']}} <br>
         @endif
         @if($company_address->addresses[0]['city'])
-            {{$company_address->addresses[0]['city']}}
+            {{$company_address->addresses[0]['city']->name}}
         @endif
         @if($company_address->addresses[0]['state'])
-            {{$company_address->addresses[0]['state']}}
+            {{$company_address->addresses[0]['state']->name}}
         @endif
         @if($company_address->addresses[0]['zip'])
             {{$company_address->addresses[0]['zip']}} <br>

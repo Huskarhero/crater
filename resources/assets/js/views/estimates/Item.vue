@@ -36,7 +36,7 @@
               <base-input
                 v-model="item.quantity"
                 :invalid="$v.item.quantity.$error"
-                type="text"
+                type="number"
                 small
                 @keyup="updateItem"
                 @input="$v.item.quantity.$touch()"
@@ -353,7 +353,7 @@ export default {
       this.item.name = val
     },
     deselectItem () {
-      this.item = {...EstimateStub, id: this.item.id, taxes: [{...TaxStub, id: Guid.raw()}]}
+      this.item = {...EstimateStub, id: this.item.id}
       this.$nextTick(() => {
         this.$refs.itemSelect.$refs.baseSelect.$refs.search.focus()
       })

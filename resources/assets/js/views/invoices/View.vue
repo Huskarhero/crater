@@ -154,7 +154,6 @@ export default {
       id: null,
       count: null,
       invoices: [],
-      invoice: null,
       currency: null,
       searchData: {
         orderBy: null,
@@ -168,7 +167,9 @@ export default {
     }
   },
   computed: {
-
+    invoice () {
+      return this.$store.getters['invoice/getInvoice'](this.$route.params.id)
+    },
     getOrderBy () {
       if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
         return true
@@ -179,14 +180,8 @@ export default {
       return `/invoices/pdf/${this.invoice.unique_hash}`
     }
   },
-  watch: {
-    $route (to, from) {
-      this.loadInvoice()
-    }
-  },
   created () {
     this.loadInvoices()
-    this.loadInvoice()
     this.onSearch = _.debounce(this.onSearch, 500)
   },
   methods: {
@@ -197,20 +192,12 @@ export default {
       'markAsSent',
       'sendEmail',
       'deleteInvoice',
-      'selectInvoice',
-      'fetchViewInvoice'
+      'selectInvoice'
     ]),
     async loadInvoices () {
       let response = await this.fetchInvoices()
       if (response.data) {
         this.invoices = response.data.invoices.data
-      }
-    },
-    async loadInvoice () {
-      let response = await this.fetchViewInvoice(this.$route.params.id)
-
-      if (response.data) {
-        this.invoice = response.data.invoice
       }
     },
     async onSearch () {
@@ -299,7 +286,7 @@ export default {
           let request = await this.deleteInvoice(this.id)
           if (request.data.success) {
             window.toastr['success'](this.$tc('invoices.deleted_message', 1))
-            this.$router.push('/admin/invoices')
+            this.$router.push('/admin/invoices/')
           } else if (request.data.error) {
             window.toastr['error'](request.data.message)
           }
