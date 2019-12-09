@@ -31,19 +31,11 @@
         &:last-child {
             margin-bottom: 98px;
         }
-        
-        &.router-link-exact-active {
-            border-left: 3px solid $crater-theme;
-        }
-        
-        &.router-link-exact-active {
-            background-color: $gray--very-light;
-        }
-        
+
         &:hover {
-            background-color: $gray--very-light;
+            background-color: $ls-color-gray--very-light;
         }
- 
+
         .left {
 
             .status-expired {
