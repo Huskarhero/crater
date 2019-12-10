@@ -16,12 +16,12 @@
             {{$estimate->user->shippingaddress->address_street_2}}<br>
         @endif
 
-        @if($estimate->user->shippingaddress->city && $estimate->user->shippingaddress->city)
-            {{$estimate->user->shippingaddress->city}},
+        @if($estimate->user->shippingaddress->city && $estimate->user->shippingaddress->city->name)
+            {{$estimate->user->shippingaddress->city->name}},
         @endif
 
-        @if($estimate->user->shippingaddress->state && $estimate->user->shippingaddress->state)
-            {{$estimate->user->shippingaddress->state}}.
+        @if($estimate->user->shippingaddress->state && $estimate->user->shippingaddress->state->name)
+            {{$estimate->user->shippingaddress->state->name}}.
         @endif
 
         @if($estimate->user->shippingaddress->zip)

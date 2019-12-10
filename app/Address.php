@@ -4,6 +4,8 @@ namespace Crater;
 use Illuminate\Database\Eloquent\Model;
 use Crater\User;
 use Crater\Country;
+use Crater\State;
+use Crater\City;
 
 class Address extends Model
 {
@@ -14,8 +16,8 @@ class Address extends Model
         'name',
         'address_street_1',
         'address_street_2',
-        'city',
-        'state',
+        'city_id',
+        'state_id',
         'country_id',
         'zip',
         'phone',
@@ -32,5 +34,15 @@ class Address extends Model
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }
