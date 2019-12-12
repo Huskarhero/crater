@@ -3,11 +3,9 @@
 <head>
     <title>Invoice</title>
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
     <style type="text/css">
         body {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
         }
 
         html {
@@ -61,13 +59,13 @@
             margin-left:160px;
         }
         .header {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -348,7 +346,7 @@
         }
 
         .notes {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -361,7 +359,7 @@
         }
 
         .notes-label {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
@@ -418,8 +416,9 @@
         <div class="bill-add">
             <div class="bill-address-container">
                     @include('app.pdf.invoice.partials.billing-address')
+
             </div>
-            @if($invoice->user->billingaddress && ($invoice->user->billingaddress->name || $invoice->user->billingaddress->address_street_1 || $invoice->user->billingaddress->address_street_2 || $invoice->user->billingaddress->country || $invoice->user->billingaddress->state || $invoice->user->billingaddress->city || $invoice->user->billingaddress->zip || $invoice->user->billingaddress->phone))
+            @if($invoice->user->billingaddress->name || $invoice->user->billingaddress->address_street_1 || $invoice->user->billingaddress->address_street_2 || $invoice->user->billingaddress->country || $invoice->user->billingaddress->state || $invoice->user->billingaddress->city || $invoice->user->billingaddress->zip || $invoice->user->billingaddress->phone)
                 <div class="ship-address-container">
             @else
                 <div class="ship-address-container " style="float:left;padding-left:0px;">

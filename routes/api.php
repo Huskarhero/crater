@@ -46,6 +46,16 @@ Route::get('/countries', [
     'uses' => 'LocationController@getCountries'
 ]);
 
+Route::get('/states/{id}', [
+    'as' => 'states',
+    'uses' => 'LocationController@getStates'
+]);
+
+Route::get('/cities/{id}', [
+    'as' => 'cities',
+    'uses' => 'LocationController@getCities'
+]);
+
 
 // Onboarding
 //----------------------------------
@@ -346,6 +356,16 @@ Route::group(['middleware' => 'api'], function () {
             Route::put('/update-setting', [
                 'as' => 'admin.update.setting',
                 'uses' => 'CompanyController@updateSetting'
+            ]);
+
+            Route::get('/get-customize-setting', [
+                'as' => 'admin.get.customize.setting',
+                'uses' => 'CompanyController@getCustomizeSetting'
+            ]);
+
+            Route::put('/update-customize-setting', [
+                'as' => 'admin.update.customize.setting',
+                'uses' => 'CompanyController@updateCustomizeSetting'
             ]);
 
             Route::get('/environment/mail', [
