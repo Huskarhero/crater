@@ -60,10 +60,6 @@ Join the Crater discord server to discuss:
 ## Credits
 Crater is a product of [Bytefury](https://bytefury.com)
 
-**Special thanks to:**
-* [Birkhoff Lee](https://github.com/BirkhoffLee)
-
-
 ## Translate
 Help us translate on [Transifex](https://www.transifex.com/bytefury/crater-invoice)
 
