@@ -3,11 +3,9 @@
 <head>
     <title>Estimate</title>
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
     <style type="text/css">
         body {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
         }
 
         html {
@@ -64,13 +62,13 @@
             margin-left:160px;
         }
         .header {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -366,7 +364,7 @@
         }
 
         .notes {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -379,7 +377,7 @@
         }
 
         .notes-label {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
