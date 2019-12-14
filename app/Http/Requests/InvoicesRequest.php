@@ -25,6 +25,7 @@ class InvoicesRequest extends FormRequest
         $rules = [
             'invoice_date' => 'required',
             'due_date' => 'required',
+            'invoice_number' => 'required|unique:invoices,invoice_number',
             'user_id' => 'required',
             'discount' => 'required',
             'discount_val' => 'required',
@@ -39,6 +40,10 @@ class InvoicesRequest extends FormRequest
             'items.*.quantity' => 'required',
             'items.*.price' => 'required'
         ];
+
+        if ($this->getMethod() == 'PUT') {
+            $rules['invoice_number'] = $rules['invoice_number'].','.$this->get('id');
+        }
 
         return $rules;
     }

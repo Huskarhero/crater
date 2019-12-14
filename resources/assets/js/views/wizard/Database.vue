@@ -203,10 +203,8 @@ export default {
           this.$emit('next')
           window.toastr['success'](this.$t('wizard.success.' + response.data.success))
           return true
-        } else if (response.data.error) {
+        } else {
           window.toastr['error'](this.$t('wizard.errors.' + response.data.error))
-        } else if (response.data.error_message) {
-          window.toastr['error'](response.data.error_message)
         }
       } catch (e) {
         window.toastr['error'](e.response.data.message)

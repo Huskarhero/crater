@@ -1,5 +1,7 @@
 @if($invoice->user->shippingaddress)
-    <p class="ship-to">Ship To,</p>
+    @if($invoice->user->shippingaddress->name || $invoice->user->shippingaddress->address_street_1 || $invoice->user->shippingaddress->address_street_2 || $invoice->user->shippingaddress->country || $invoice->user->shippingaddress->state || $invoice->user->shippingaddress->city || $invoice->user->shippingaddress->zip || $invoice->user->phone)
+        <p class="ship-to">Ship To,</p>
+    @endif
     @if($invoice->user->shippingaddress->name)
         <p class="ship-user-name">
             {{$invoice->user->shippingaddress->name}}

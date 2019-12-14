@@ -14,7 +14,6 @@
             <base-select
               v-model="formData.currency"
               :options="currencies"
-              :custom-label="currencyNameWithCode"
               :class="{'error': $v.formData.currency.$error }"
               :searchable="true"
               :show-labels="false"
@@ -180,9 +179,6 @@ export default {
     this.getDiscountSettings()
   },
   methods: {
-    currencyNameWithCode ({name, code}) {
-      return `${code} - ${name}`
-    },
     ...mapActions('currency', [
       'setDefaultCurrency'
     ]),

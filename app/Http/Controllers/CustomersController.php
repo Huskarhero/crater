@@ -177,7 +177,6 @@ class CustomersController extends Controller
         $customer->enable_portal = $request->enable_portal;
         $customer->save();
 
-        $customer->addresses()->delete();
         if ($request->addresses) {
             foreach ($request->addresses as $address) {
                 $newAddress = $customer->addresses()->firstOrNew(['type' => $address["type"]]);
