@@ -5,7 +5,7 @@
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <style type="text/css">
         body {
-            font-family: "DejaVu Sans";
+            font-family: 'Roboto', sans-serif;
         }
 
         /* html {
@@ -222,14 +222,10 @@
                     <table class="expenses-table">
                         <tr>
                             <td>
-                                <p class="expense-title">
-                                    {{ $item->name }}
-                                </p>
+                                <p class="expense-title">{{ $item->name }}</p>
                             </td>
                             <td>
-                                <p class="expense-money">
-                                    {!! format_money_pdf($item->total_amount) !!}
-                                </p>
+                                <p class="expense-money">{!! format_money_pdf($item->total_amount) !!}</p>
                             </td>
                         </tr>
                     </table>
@@ -239,9 +235,7 @@
                 <table class="expense-total-table">
                     <tr>
                         <td class="expense-total-cell">
-                            <p class="expense-total">
-                                {!! format_money_pdf($totalAmount) !!}
-                            </p>
+                            <p class="expense-total">{!! format_money_pdf($totalAmount) !!}</p>
                         </td>
                     </tr>
                 </table>
@@ -254,9 +248,7 @@
                     <p class="profit-title">TOTAL SALES</p>
                 </td>
                 <td>
-                    <p class="profit-money">
-                        {!! format_money_pdf($totalAmount) !!}
-                    </p>
+                    <p class="profit-money">{!! format_money_pdf($totalAmount) !!}</p>
                 </td>
             </tr>
         </table>

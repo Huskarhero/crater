@@ -162,7 +162,7 @@
                   :options="billingCountries"
                   :searchable="true"
                   :show-labels="false"
-                  :allow-empty="true"
+                  :allow-empty="false"
                   :tabindex="8"
                   :placeholder="$t('general.select_country')"
                   label="name"
@@ -265,7 +265,7 @@
                   :searchable="true"
                   :show-labels="false"
                   :tabindex="16"
-                  :allow-empty="true"
+                  :allow-empty="false"
                   :placeholder="$t('general.select_country')"
                   label="name"
                   track-by="id"
@@ -411,36 +411,6 @@ export default {
         return true
       }
       return false
-    },
-    hasBillingAdd () {
-      let billing = this.billing
-      if (
-        billing.name ||
-        billing.country_id ||
-        billing.state ||
-        billing.city ||
-        billing.phone ||
-        billing.zip ||
-        billing.address_street_1 ||
-        billing.address_street_2) {
-        return true
-      }
-      return false
-    },
-    hasShippingAdd () {
-      let shipping = this.shipping
-      if (
-        shipping.name ||
-        shipping.country_id ||
-        shipping.state ||
-        shipping.city ||
-        shipping.phone ||
-        shipping.zip ||
-        shipping.address_street_1 ||
-        shipping.address_street_2) {
-        return true
-      }
-      return false
     }
   },
   watch: {
@@ -448,16 +418,12 @@ export default {
       if (newCountry) {
         this.billing.country_id = newCountry.id
         this.isDisabledBillingState = false
-      } else {
-        this.billing.country_id = null
       }
     },
     shipping_country (newCountry) {
       if (newCountry) {
         this.shipping.country_id = newCountry.id
         return true
-      } else {
-        this.shipping.country_id = null
       }
     }
   },
@@ -480,14 +446,7 @@ export default {
     ]),
     async loadCustomer () {
       let { data: { customer, currencies, currency } } = await this.fetchCustomer(this.$route.params.id)
-
-      this.formData.id = customer.id
-      this.formData.name = customer.name
-      this.formData.contact_name = customer.contact_name
-      this.formData.email = customer.email
-      this.formData.phone = customer.phone
-      this.formData.currency_id = customer.currency_id
-      this.formData.website = customer.website
+      this.formData = customer
 
       if (customer.billing_address) {
         this.billing = customer.billing_address
@@ -536,16 +495,7 @@ export default {
       if (this.$v.$invalid) {
         return true
       }
-      if (this.hasBillingAdd && this.hasShippingAdd) {
-        this.formData.addresses = [{...this.billing}, {...this.shipping}]
-      } else {
-        if (this.hasBillingAdd) {
-          this.formData.addresses = [{...this.billing}]
-        }
-        if (this.hasShippingAdd) {
-          this.formData.addresses = [{...this.shipping}]
-        }
-      }
+      this.formData.addresses = [{...this.billing}, {...this.shipping}]
 
       if (this.isEdit) {
         if (this.currency) {

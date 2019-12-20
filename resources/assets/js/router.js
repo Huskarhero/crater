@@ -66,7 +66,6 @@ import ReportLayout from './views/reports/layout/Index.vue'
 // Settings
 import SettingsLayout from './views/settings/layout/Index.vue'
 import CompanyInfo from './views/settings/CompanyInfo.vue'
-import Customization from './views/settings/Customization.vue'
 import Notifications from './views/settings/Notifications.vue'
 import Preferences from './views/settings/Preferences.vue'
 import UserProfile from './views/settings/UserProfile.vue'
@@ -309,11 +308,6 @@ const routes = [
             path: 'company-info',
             name: 'company.info',
             component: CompanyInfo
-          },
-          {
-            path: 'customization',
-            name: 'customization',
-            component: Customization
           },
           {
             path: 'user-profile',
