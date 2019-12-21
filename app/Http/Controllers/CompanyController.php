@@ -146,7 +146,8 @@ class CompanyController extends Controller
         $languages = [
             ["code"=>"en", "name" => "English"],
             ["code"=>"fr", "name" => "French"],
-            ["code"=>"es", "name" => "Spanish"]
+            ["code"=>"es", "name" => "Spanish"],
+            ["code"=>"ar", "name" => "العربية"],
         ];
 
         return response()->json([
@@ -190,7 +191,7 @@ class CompanyController extends Controller
             'success' => true
         ]);
     }
-
+  
     public function getCustomizeSetting (Request $request)
     {
         $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
