@@ -41,14 +41,10 @@ function clean_slug($string)
  * @param $money
  * @return formated_money
  */
-function format_money_pdf($money, $currency = null)
+function format_money_pdf($money)
 {
     $money = $money / 100;
-
-    if (!$currency) {
-        $currency = Currency::findOrFail(CompanySetting::getSetting('currency', 1));
-    }
-
+    $currency = Currency::findOrFail(CompanySetting::getSetting('currency', 1));
     $format_money = number_format(
         $money,
         $currency->precision,

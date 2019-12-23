@@ -18,13 +18,6 @@ use Illuminate\Support\Facades\Artisan;
 
 class OnboardingController extends Controller
 {
-
-    /**
-     * Retrieve Onboarding data.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function getOnboardingData(Request $request)
     {
         if (!\Storage::disk('local')->has('database_created')) {
@@ -79,13 +72,6 @@ class OnboardingController extends Controller
         ]);
     }
 
-
-    /**
-     * Setup Admin Profile.
-     *
-     * @param  \Crater\Http\Requests\ProfileRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function adminProfile(ProfileRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -111,12 +97,6 @@ class OnboardingController extends Controller
         ]);
     }
 
-    /**
-     * Setup Admin Avatar.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function uploadAdminAvatar(Request $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -143,12 +123,6 @@ class OnboardingController extends Controller
         ]);
     }
 
-    /**
-     * Setup Admin Company.
-     *
-     * @param  \Crater\Http\Requests\CompanyRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function adminCompany(CompanyRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -200,13 +174,6 @@ class OnboardingController extends Controller
         ]);
     }
 
-
-    /**
-     * Setup Company Settings.
-     *
-     * @param  \Crater\Http\Requests\CompanySettingRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function companySettings(CompanySettingRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -231,45 +198,6 @@ class OnboardingController extends Controller
             CompanySetting::setSetting(
                 $key,
                 $request->$key,
-                $user->company_id
-            );
-        }
-
-        $invoices = [
-            'invoice_auto_generate' => 'YES',
-            'invoice_prefix' => 'INV'
-        ];
-
-        foreach ($invoices as $key => $value) {
-            CompanySetting::setSetting(
-                $key,
-                $value,
-                $user->company_id
-            );
-        }
-
-        $estimates = [
-            'estimate_prefix' => 'EST',
-            'estimate_auto_generate' => 'YES'
-        ];
-
-        foreach ($estimates as $key => $value) {
-            CompanySetting::setSetting(
-                $key,
-                $value,
-                $user->company_id
-            );
-        }
-
-        $payments = [
-            'payment_prefix' => 'PAY',
-            'payment_auto_generate' => 'YES'
-        ];
-
-        foreach ($payments as $key => $value) {
-            CompanySetting::setSetting(
-                $key,
-                $value,
                 $user->company_id
             );
         }
@@ -310,14 +238,7 @@ class OnboardingController extends Controller
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
-                'PROXY_OAUTH_CLIENT_SECRET='.config('auth.proxy.client_secret'),
-                'PROXY_OAUTH_CLIENT_SECRET='.$client->secret,
-                file_get_contents($path)
-            ));
-            file_put_contents($path, str_replace(
-                'APP_DEBUG=true',
-                'APP_DEBUG=false',
-                file_get_contents($path)
+                'PROXY_OAUTH_CLIENT_SECRET='.config('auth.proxy.client_secret'), 'PROXY_OAUTH_CLIENT_SECRET='.$client->secret, file_get_contents($path)
             ));
         }
 

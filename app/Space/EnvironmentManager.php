@@ -61,7 +61,7 @@ class EnvironmentManager
         } catch (Exception $e) {
 
             return [
-                'error_message' => $e->getMessage()
+                'error' => $e->getMessage()
             ];
         }
 

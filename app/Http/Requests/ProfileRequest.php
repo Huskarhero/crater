@@ -30,7 +30,7 @@ class ProfileRequest extends FormRequest
             case 'POST':
                 return [
                     'name' => 'required',
-                    'password' => 'required|min:8',
+                    'password' => 'required',
                     'address_street_1' => 'max:255',
                     'address_street_2' => 'max:255',
                     'email' => [

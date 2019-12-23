@@ -1,5 +1,7 @@
 @if($invoice->user->billingaddress)
-    <p class="bill-to">Bill To,</p>
+    @if($invoice->user->billingaddress->name || $invoice->user->billingaddress->address_street_1 || $invoice->user->billingaddress->address_street_2 || $invoice->user->billingaddress->country || $invoice->user->billingaddress->state || $invoice->user->billingaddress->city || $invoice->user->billingaddress->zip || $invoice->user->billingaddress->phone)
+        <p class="bill-to">Bill To,</p>
+    @endif
     @if($invoice->user->billingaddress->name)
         <p class="bill-user-name">
             {{$invoice->user->billingaddress->name}}
