@@ -18,7 +18,7 @@
           </div>
         </div>
         <avatar-cropper
-          :labels="{ submit: 'submit', cancel: 'Cancle'}"
+          :labels="{ submit: 'submit', cancel: 'Cancel'}"
           :cropper-options="cropperOptions"
           :output-options="cropperOutputOptions"
           :output-quality="0.8"
@@ -54,7 +54,7 @@
           />
           <div v-if="$v.profileData.email.$error">
             <span v-if="!$v.profileData.email.required" class="text-danger">{{ $tc('validation.required') }}</span>
-            <span v-if="!$v.profileData.email.email" class="text-danger">{{ $tc('validation.required') }}</span>
+            <span v-if="!$v.profileData.email.email" class="text-danger">{{ $tc('validation.email_incorrect') }}</span>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(5)
+        minLength: minLength(8)
       },
       confirm_password: {
         required: requiredIf('isRequired'),
