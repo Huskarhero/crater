@@ -1,6 +1,6 @@
 @component('mail::message')
 # Introduction
-{{ $data['user']['name'] }} viewed this Invoice.
+Customer viewed this Invoice.
 
 @component('mail::button', ['url' => url('/admin/invoices/'.$data['invoice']['id'].'/view')])
 Invoice

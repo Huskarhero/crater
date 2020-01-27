@@ -12,14 +12,17 @@ class EstimatePdf extends Mailable
 
     public $data = [];
 
+    public $notificationEmail = '';
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $notificationEmail)
     {
         $this->data = $data;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -29,9 +32,6 @@ class EstimatePdf extends Mailable
      */
     public function build()
     {
-        $company = $this->data['company']['name'];
-
-        return $this->subject("Estimate from $company")
-                    ->markdown('emails.send.estimate', ['data', $this->data]);
+        return $this->from($this->notificationEmail)->markdown('emails.send.estimate', ['data', $this->data]);
     }
 }
