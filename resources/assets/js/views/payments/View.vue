@@ -118,7 +118,7 @@
           </div>
         </router-link>
         <p v-if="!payments.length" class="no-result">
-          {{ $t('payments.no_matching_payments') }}
+          {{ $t('payments.no_matching_invoices') }}
         </p>
       </div>
     </div>

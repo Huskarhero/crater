@@ -7,11 +7,11 @@
     @endif
     <p class="bill-user-address">
         @if($estimate->user->billingaddress->address_street_1)
-            {!! nl2br(htmlspecialchars($estimate->user->billingaddress->address_street_1)) !!}<br>
+            {{$estimate->user->billingaddress->address_street_1}}<br>
         @endif
 
         @if($estimate->user->billingaddress->address_street_2)
-            {!! nl2br(htmlspecialchars($estimate->user->billingaddress->address_street_2)) !!}<br>
+            {{$estimate->user->billingaddress->address_street_2}}<br>
         @endif
 
         @if($estimate->user->billingaddress->city)

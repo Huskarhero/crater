@@ -121,7 +121,7 @@ export default {
     this.loadProfitLossLink(this.url + '&download=true')
   },
   methods: {
-    ...mapActions('profitLossReport', [
+    ...mapActions('profitLossReport',[
       'loadProfitLossLink'
     ]),
     getThisDate (type, time) {
@@ -203,8 +203,11 @@ export default {
       if (!this.getReports()) {
         return false
       }
-
-      window.open(this.getReportUrl + '&download=true')
+      if (navigator.appVersion.indexOf('Mac') !== -1) {
+        this.url += '&download=true'
+      } else {
+        window.open(this.getReportUrl + '&download=true')
+      }
       setTimeout(() => {
         this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
       }, 200)

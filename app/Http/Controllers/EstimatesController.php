@@ -168,6 +168,10 @@ class EstimatesController extends Controller
             $data['user'] = User::find($userId)->toArray();
             $data['company'] = Company::find($estimate->company_id);
             $email = $data['user']['email'];
+            $notificationEmail = CompanySetting::getSetting(
+                'notification_email',
+                $request->header('company')
+            );
 
             if (!$email) {
                 return response()->json([
@@ -175,13 +179,13 @@ class EstimatesController extends Controller
                 ]);
             }
 
-            if (!config('mail.from.name')) {
+            if (!$notificationEmail) {
                 return response()->json([
-                    'error' => 'from_email_does_not_exist'
+                    'error' => 'notification_email_does_not_exist'
                 ]);
             }
 
-            \Mail::to($email)->send(new EstimatePdf($data));
+            \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));
         }
 
         $estimate = Estimate::with([
@@ -336,6 +340,10 @@ class EstimatesController extends Controller
         $data['company'] = Company::find($estimate->company_id);
 
         $email = $data['user']['email'];
+        $notificationEmail = CompanySetting::getSetting(
+            'notification_email',
+            $request->header('company')
+        );
 
         if (!$email) {
             return response()->json([
@@ -343,13 +351,13 @@ class EstimatesController extends Controller
             ]);
         }
 
-        if (!config('mail.from.name')) {
+        if (!$notificationEmail) {
             return response()->json([
-                'error' => 'from_email_does_not_exist'
+                'error' => 'notification_email_does_not_exist'
             ]);
         }
 
-        \Mail::to($email)->send(new EstimatePdf($data));
+        \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));
 
         if ($estimate->status == Estimate::STATUS_DRAFT) {
             $estimate->status = Estimate::STATUS_SENT;

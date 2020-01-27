@@ -7,11 +7,11 @@
     @endif
     <p class="ship-user-address">
         @if($estimate->user->shippingaddress->address_street_1)
-            {!! nl2br(htmlspecialchars($estimate->user->shippingaddress->address_street_1)) !!}<br>
+            {{$estimate->user->shippingaddress->address_street_1}}<br>
         @endif
 
         @if($estimate->user->shippingaddress->address_street_2)
-            {!! nl2br(htmlspecialchars($estimate->user->shippingaddress->address_street_2)) !!}<br>
+            {{$estimate->user->shippingaddress->address_street_2}}<br>
         @endif
 
         @if($estimate->user->shippingaddress->city && $estimate->user->shippingaddress->city)
