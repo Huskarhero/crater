@@ -88,27 +88,17 @@ window.axios.interceptors.request.use(function (config) {
 
 global.axios.interceptors.response.use(undefined, function (err) {
   // Do something with request error
-  if (!err.response) {
-    window.toastr['error']('Network error: Please check your internet connection or wait until servers are back online')
-    console.log('Network error: Please check your internet connection.')
-  } else {
+  return new Promise((resolve, reject) => {
     console.log(err.response)
-    if (err.response.data && (err.response.statusText === 'Unauthorized' || err.response.data === ' Unauthorized.')) {
-      // Unauthorized and log out
-      window.toastr['error']((err.response.data.message) ? err.response.data.message : 'Unauthorized')
-      store.dispatch('auth/logout', true)
-    } else if (err.response.data.errors) {
-      // Show a notification per error
-      const errors = JSON.parse(JSON.stringify(err.response.data.errors))
-      for (const i in errors) {
-        window.toastr['error'](errors[i])
-      }
-    } else {
-      // Unknown error
-      window.toastr['error']((err.response.data.message) ? err.response.data.message : 'Unknown error occurred')
+    if (err.response.data.error === 'invalid_credentials') {
+      window.toastr['error']('Invalid Credentials')
     }
-  }
-  return Promise.reject(err)
+    if (err.response.data && (err.response.statusText === 'Unauthorized' || err.response.data === ' Unauthorized.')) {
+      store.dispatch('auth/logout', true)
+    } else {
+      throw err
+    }
+  })
 })
 
 /**
