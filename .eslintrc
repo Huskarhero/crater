@@ -2,17 +2,9 @@
   "root": true,
   "extends": [
     "plugin:vue/recommended",
-    "eslint:recommended",
-    "prettier/vue",
-    "plugin:prettier/recommended"
+    "standard"
   ],
   "rules": {
-    "vue/max-attributes-per-line": ["error", {
-      "singleline": 10,
-      "multiline": {
-        "max": 1,
-        "allowFirstLine": false
-      }
-    }]    
+    "vue/max-attributes-per-line" : 3
   }
 }

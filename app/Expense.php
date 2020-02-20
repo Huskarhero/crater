@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Crater\ExpenseCategory;
-use Crater\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +16,6 @@ class Expense extends Model implements HasMedia
         'expense_category_id',
         'amount',
         'company_id',
-        'user_id',
         'expense_date',
         'notes',
         'attachment_receipt'
@@ -32,11 +30,6 @@ class Expense extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(ExpenseCategory::class, 'expense_category_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function getFormattedExpenseDateAttribute($value)
@@ -88,21 +81,12 @@ class Expense extends Model implements HasMedia
         return $query->where('expenses.expense_category_id', $categoryId);
     }
 
-    public function scopeWhereUser($query, $user_id)
-    {
-        return $query->where('expenses.user_id', $user_id);
-    }
-
     public function scopeApplyFilters($query, array $filters)
     {
         $filters = collect($filters);
 
         if ($filters->get('expense_category_id')) {
             $query->whereCategory($filters->get('expense_category_id'));
-        }
-
-        if ($filters->get('user_id')) {
-            $query->whereUser($filters->get('user_id'));
         }
 
         if ($filters->get('from_date') && $filters->get('to_date')) {
