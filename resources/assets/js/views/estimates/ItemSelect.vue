@@ -112,7 +112,6 @@ export default {
     ]),
     async searchItems (search) {
       let data = {
-        search,
         filter: {
           name: search,
           unit: '',
