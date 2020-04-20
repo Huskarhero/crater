@@ -24,11 +24,9 @@ class ExpensesController extends Controller
         $limit = $request->has('limit') ? $request->limit : 10;
 
         $expenses = Expense::with('category')
-            ->leftJoin('users', 'users.id', '=', 'expenses.user_id')
             ->join('expense_categories', 'expense_categories.id', '=', 'expenses.expense_category_id')
             ->applyFilters($request->only([
                 'expense_category_id',
-                'user_id',
                 'search',
                 'from_date',
                 'to_date',
@@ -36,16 +34,11 @@ class ExpensesController extends Controller
                 'orderBy'
             ]))
             ->whereCompany($request->header('company'))
-            ->select('expenses.*', 'expense_categories.name', 'users.name as user_name')
+            ->select('expenses.*', 'expense_categories.name')
             ->paginate($limit);
-
-        $customers = User::customer()
-            ->whereCompany($request->header('company'))
-            ->get();
 
         return response()->json([
             'expenses' => $expenses,
-            'customers' => $customers,
             'currency' => Currency::findOrFail(
                 CompanySetting::getSetting('currency', $request->header('company'))
             )
@@ -60,13 +53,9 @@ class ExpensesController extends Controller
     public function create(Request $request)
     {
         $categories = ExpenseCategory::whereCompany($request->header('company'))->get();
-        $customers = User::customer()
-            ->whereCompany($request->header('company'))
-            ->get();
 
         return response()->json([
-            'categories' => $categories,
-            'customers' => $customers
+            'categories' => $categories
         ]);
     }
 
@@ -83,7 +72,6 @@ class ExpensesController extends Controller
         $expense = new Expense();
         $expense->notes = $request->notes;
         $expense->expense_category_id = $request->expense_category_id;
-        $expense->user_id = $request->user_id;
         $expense->amount = $request->amount;
         $expense->company_id = $request->header('company');
         $expense->expense_date = $expense_date;
@@ -119,9 +107,7 @@ class ExpensesController extends Controller
     public function edit(Request $request,$id)
     {
         $categories = ExpenseCategory::whereCompany($request->header('company'))->get();
-        $customers = User::customer()
-            ->whereCompany($request->header('company'))
-            ->get();
+        $customers = User::where('role', 'customer')->whereCompany($request->header('company'))->get();
         $expense = Expense::with('category')->where('id', $id)->first();
 
         return response()->json([
@@ -146,7 +132,6 @@ class ExpensesController extends Controller
         $expense->notes = $request->notes;
         $expense->expense_category_id = $request->expense_category_id;
         $expense->amount = $request->amount;
-        $expense->user_id = $request->user_id;
         $expense->expense_date = $expense_date;
         $expense->save();
 
@@ -220,7 +205,7 @@ class ExpensesController extends Controller
      * Retrive details of an expense receipt from storage.
      * @param   int $id
      * @return  \Illuminate\Http\JsonResponse
-     */
+     */ 
     public function showReceipt($id)
     {
         $expense = Expense::find($id);
@@ -254,7 +239,7 @@ class ExpensesController extends Controller
      * @param   int $id
      * @param   strig $hash
      * @return  \Symfony\Component\HttpFoundation\BinaryFileResponse | \Illuminate\Http\JsonResponse
-     */
+     */    
     public function downloadReceipt($id, $hash)
     {
         $company = Company::where('unique_hash', $hash)->first();
