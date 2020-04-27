@@ -143,14 +143,13 @@ class CompanyController extends Controller
         $currency = CompanySetting::getSetting('currency', $request->header('company'));
         $fiscal_year = CompanySetting::getSetting('fiscal_year', $request->header('company'));
 
-        $languages = [  // alphabetical order
-            ["code"=>"pt_BR", "name" => "Brazilian Portuguese"],
+        $languages = [
             ["code"=>"en", "name" => "English"],
             ["code"=>"fr", "name" => "French"],
-            ["code"=>"de", "name" => "German"],
-            ["code"=>"it", "name" => "Italian"],
             ["code"=>"es", "name" => "Spanish"],
             ["code"=>"ar", "name" => "العربية"],
+            ["code"=>"de", "name" => "German"],
+            ["code"=>"pt_BR", "name" => "Brazilian Portuguese"],
         ];
 
         return response()->json([
