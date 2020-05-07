@@ -8,6 +8,15 @@
             font-family: "DejaVu Sans";
         }
 
+        /* html {
+            margin: 0px;
+            padding: 0px;
+        } */
+
+        table {
+            border-collapse: collapse;
+        }
+
         .main-container {
             /* padding: 30px 80px; */
         }
@@ -20,11 +29,8 @@
             width: 100%;
         }
 
-        table {
-            border-collapse: collapse;
-        }
-
         .heading-text {
+            font-style: normal;
             font-weight: 600;
             font-size: 24px;
             color: #5851D8;
@@ -35,6 +41,7 @@
         }
 
         .heading-date-range {
+            font-style: normal;
             font-weight: 600;
             font-size: 15px;
             color: #A5ACC1;
@@ -45,6 +52,7 @@
         }
 
         .sub-heading-text {
+            font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 21px;
@@ -54,55 +62,90 @@
             margin-top: 30px;
         }
 
-        .sales-cusutomer-name {
+        .income-table {
+            margin-top: 53px;
+            width: 100%;
+        }
+
+        .income-title {
+            padding: 0px;
+            margin: 0px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 21px;
+            color: #040405;
+            text-align: left;
+        }
+
+        .income-money {
+            padding: 0px;
+            margin: 0px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 21px;
+            text-align: right;
+            color: #040405;
+            text-align: right;
+        }
+
+        .expenses-title {
             margin-top: 20px;
             padding-left: 3px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 16px;
             line-height: 21px;
             color: #040405;
         }
 
-        .sales-table-container {
+        .expenses-table-container {
             padding-left: 10px;
         }
 
-        .sales-table {
+        .expenses-table {
             width: 100%;
             padding-bottom: 10px;
         }
 
-        .sales-information-text {
+        .expense-title {
             padding: 0px;
             margin: 0px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             color: #595959;
         }
 
-        .sales-amount {
+        .expense-money {
             padding: 0px;
             margin: 0px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             text-align: right;
             color: #595959;
         }
 
-        .sales-total-indicator-table {
+        .expense-total-table {
             border-top: 1px solid #EAF1FB;
             width: 100%;
         }
 
-        .sales-total-cell {
+        .expense-total-cell {
             padding-top: 10px;
         }
 
-        .sales-total-amount {
+        .expense-total {
             padding-top: 10px;
             padding-right: 30px;
             padding: 0px;
             margin: 0px;
             text-align: right;
+            font-style: normal;
             font-weight: 500;
             font-size: 16px;
             line-height: 21px;
@@ -110,7 +153,7 @@
             color: #040405;
         }
 
-        .profit-indicator-table {
+        .profit-table {
             width: 100%;
             margin-top: 40px;
             padding: 15px 20px;
@@ -122,16 +165,18 @@
             padding: 0px;
             margin: 0px;
             text-align: left;
+            font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 21px;
             color: #595959;
         }
 
-        .profit-amount {
+        .profit-money {
             padding: 0px;
             margin: 0px;
             text-align: right;
+            font-style: normal;
             font-weight: 500;
             font-size: 20px;
             line-height: 21px;
@@ -161,19 +206,29 @@
                 </tr>
             </table>
 
+            {{-- <table class="income-table">
+                <tr>
+                    <td>
+                        <p class="income-title">Income</p>
+                    </td>
+                    <td>
+                        <p class="income-money">{{ $income }}</p>
+                    </td>
+                </tr>
+            </table> --}}
             @foreach ($customers as $customer)
-                <p class="sales-cusutomer-name">{{ $customer->name }}</p>
-                <div class="sales-table-container">
-                    <table class="sales-table">
+                <p class="expenses-title">{{ $customer->name }}</p>
+                <div class="expenses-table-container">
+                    <table class="expenses-table">
                         @foreach ($customer->invoices as $invoice)
                             <tr>
                                 <td>
-                                    <p class="sales-information-text">
+                                    <p class="expense-title">
                                         {{ $invoice->formattedInvoiceDate }} ({{ $invoice->invoice_number }})
                                     </p>
                                 </td>
                                 <td>
-                                    <p class="sales-amount">
+                                    <p class="expense-money">
                                         {!! format_money_pdf($invoice->total) !!}
                                     </p>
                                 </td>
@@ -181,10 +236,10 @@
                         @endforeach
                     </table>
                 </div>
-                <table class="sales-total-indicator-table">
+                <table class="expense-total-table">
                     <tr>
-                        <td class="sales-total-cell">
-                            <p class="sales-total-amount">
+                        <td class="expense-total-cell">
+                            <p class="expense-total">
                                 {!! format_money_pdf($customer->totalAmount) !!}
                             </p>
                         </td>
@@ -194,13 +249,13 @@
         </div>
 
 
-        <table class="profit-indicator-table">
+        <table class="profit-table">
             <tr>
                 <td>
                     <p class="profit-title">TOTAL SALES</p>
                 </td>
                 <td>
-                    <p class="profit-amount">
+                    <p class="profit-money">
                         {!! format_money_pdf($totalAmount) !!}
                     </p>
                 </td>
