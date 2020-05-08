@@ -2,24 +2,35 @@
 <html lang="en">
 <head>
     <title>Profit & Loss Report</title>
+    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";
+        }
+
+        html {
+            margin: 0px;
+            padding: 0px;
         }
 
         table {
             border-collapse: collapse;
         }
 
+        .main-container {
+            padding: 30px 60px;
+        }
+
         .sub-container{
             padding: 0px 20px;
         }
 
-        .report-header {
+        .header {
             width: 100%;
         }
 
         .heading-text {
+            font-style: normal;
             font-weight: 600;
             font-size: 24px;
             color: #5851D8;
@@ -30,6 +41,7 @@
         }
 
         .heading-date-range {
+            font-style: normal;
             font-weight: 600;
             font-size: 15px;
             color: #A5ACC1;
@@ -40,8 +52,10 @@
         }
 
         .sub-heading-text {
+            font-style: normal;
             font-weight: 600;
             font-size: 16px;
+            /* line-height: 21px; */
             color: #595959;
             padding: 0px;
             margin: 0px;
@@ -56,15 +70,18 @@
         .income-title {
             padding: 0px;
             margin: 0px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 16px;
             line-height: 21px;
             color: #040405;
             text-align: left;
         }
 
-        .income-amount {
+        .income-money {
             padding: 0px;
             margin: 0px;
+            font-style: normal;
             font-weight: 500;
             font-size: 16px;
             line-height: 21px;
@@ -76,6 +93,8 @@
         .expenses-title {
             margin-top: 20px;
             padding-left: 3px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 16px;
             line-height: 21px;
             color: #040405;
@@ -93,21 +112,25 @@
         .expense-title {
             padding: 0px;
             margin: 0px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             color: #595959;
         }
 
-        .expense-amount {
+        .expense-money {
             padding: 0px;
             margin: 0px;
+            font-style: normal;
+            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             text-align: right;
             color: #595959;
         }
 
-        .expense-total-indicator-table {
+        .expense-total-table {
             border-top: 1px solid #EAF1FB;
             width: 100%;
         }
@@ -123,6 +146,7 @@
             padding: 0px;
             margin: 0px;
             text-align: right;
+            font-style: normal;
             font-weight: 500;
             font-size: 16px;
             line-height: 21px;
@@ -130,7 +154,7 @@
             color: #040405;
         }
 
-        .report-footer {
+        .profit-table {
             width: 100%;
             margin-top: 40px;
             padding: 15px 20px;
@@ -138,20 +162,22 @@
             box-sizing: border-box;
         }
 
-        .report-footer-label {
+        .profit-title {
             padding: 0px;
             margin: 0px;
             text-align: left;
+            font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 21px;
             color: #595959;
         }
 
-        .report-footer-value {
+        .profit-money {
             padding: 0px;
             margin: 0px;
             text-align: right;
+            font-style: normal;
             font-weight: 500;
             font-size: 20px;
             line-height: 21px;
@@ -160,71 +186,73 @@
     </style>
 </head>
 <body>
-    <div class="sub-container">
-        <table class="report-header">
-            <tr>
-                <td>
-                    <p class="heading-text">{{ $company->name }}</p>
-                </td>
-                <td>
-                    <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <p class="sub-heading-text">PROFIT & LOSS REPORT</p>
-                </td>
-            </tr>
-        </table>
-
-        <table class="income-table">
-            <tr>
-                <td>
-                    <p class="income-title">Income</p>
-                </td>
-                <td>
-                    <p class="income-amount">{!! format_money_pdf($income) !!}</p>
-                </td>
-            </tr>
-        </table>
-        <p class="expenses-title">Expenses</p>
-        <div class="expenses-table-container">
-            <table class="expenses-table">
-                @foreach ($expenseCategories as $expenseCategory)
-                    <tr>
-                        <td>
-                            <p class="expense-title">
-                                {{ $expenseCategory->category->name }}
-                            </p>
-                        </td>
-                        <td>
-                            <p class="expense-amount">
-                                {!! format_money_pdf($expenseCategory->total_amount) !!}
-                            </p>
-                        </td>
-                    </tr>
-                @endforeach
-
+    <div class="main-container">
+        <div class="sub-container">
+            <table class="header">
+                <tr>
+                    <td>
+                        <p class="heading-text">{{ $company->name }}</p>
+                    </td>
+                    <td>
+                        <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="sub-heading-text">PROFIT & LOSS REPORT</p>
+                    </td>
+                </tr>
             </table>
-        </div>
-    </div>
 
-    <table class="expense-total-indicator-table">
-        <tr>
-            <td class="expense-total-cell">
-                <p class="expense-total">{!! format_money_pdf($totalExpense) !!}</p>
-            </td>
-        </tr>
-    </table>
-    <table class="report-footer">
-        <tr>
-            <td>
-                <p class="report-footer-label">NET PROFIT</p>
-            </td>
-            <td>
-                <p class="report-footer-value">{!! format_money_pdf(($income-$totalExpense)) !!}</p>
-            </td>
-        </tr>
-    </table>
+            <table class="income-table">
+                <tr>
+                    <td>
+                        <p class="income-title">Income</p>
+                    </td>
+                    <td>
+                        <p class="income-money">{!! format_money_pdf($income) !!}</p>
+                    </td>
+                </tr>
+            </table>
+            <p class="expenses-title">Expenses</p>
+            <div class="expenses-table-container">
+                <table class="expenses-table">
+                    @foreach ($expenseCategories as $expenseCategory)
+                        <tr>
+                            <td>
+                                <p class="expense-title">
+                                    {{ $expenseCategory->category->name }}
+                                </p>
+                            </td>
+                            <td>
+                                <p class="expense-money">
+                                    {!! format_money_pdf($expenseCategory->total_amount) !!}
+                                </p>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </table>
+            </div>
+        </div>
+
+        <table class="expense-total-table">
+            <tr>
+                <td class="expense-total-cell">
+                    <p class="expense-total">{!! format_money_pdf($totalExpense) !!}</p>
+                </td>
+            </tr>
+        </table>
+        <table class="profit-table">
+            <tr>
+                <td>
+                    <p class="profit-title">NET PROFIT</p>
+                </td>
+                <td>
+                    <p class="profit-money">{!! format_money_pdf(($income-$totalExpense)) !!}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
