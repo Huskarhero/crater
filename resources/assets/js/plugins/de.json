@@ -161,7 +161,8 @@
     "select_currency": "Währung wählen",
     "select_a_customer": "Wählen Sie einen Kunden",
     "type_or_click": "Eingeben oder anklicken zum auswählen",
-    "confirm_delete": "Sie können diesen Kunden und alle zugehörigen Rechnungen, Schätzungen und Zahlungen nicht wiederherstellen. | Sie können diesen Kunden und alle zugehörigen Rechnungen, Schätzungen und Zahlungen nicht wiederherstellen.",
+    "confirm_delete": "Sie können diesen Kunden nicht wiederherstellen | Sie können diese Kunden nicht wiederherstellen",
+    "created_message": "Kunde erfolgreich erstellt",
     "updated_message": "Kunde erfolgreich aktualisiert",
     "deleted_message": "Kunden erfolgreich gelöscht | Kunden erfolgreich gelöscht"
   },
