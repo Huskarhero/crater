@@ -26,6 +26,7 @@ class Updater
             $url = 'https://craterapp.com/downloads/file/'.$version.'?type=update';
         }
 
+
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
         // Exception
