@@ -138,7 +138,7 @@ export default {
     openItemModal () {
       this.$emit('onSelectItem')
       this.openModal({
-        'title': this.$t('items.add_item'),
+        'title': 'Add Item',
         'componentName': 'ItemModal',
         'data': {taxPerItem: this.taxPerItem, taxes: this.taxes}
       })
