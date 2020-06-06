@@ -15,7 +15,6 @@ class Invoice extends Model
     const STATUS_OVERDUE = 'OVERDUE';
     const STATUS_COMPLETED = 'COMPLETED';
 
-    const STATUS_DUE = 'DUE';
     const STATUS_UNPAID = 'UNPAID';
     const STATUS_PARTIALLY_PAID = 'PARTIALLY_PAID';
     const STATUS_PAID = 'PAID';
@@ -190,14 +189,6 @@ class Invoice extends Model
         return $query->where('invoices.paid_status', $status);
     }
 
-    public function scopeWhereDueStatus($query, $status)
-    {
-        return $query->whereIn('invoices.paid_status', [
-            self::STATUS_UNPAID,
-            self::STATUS_PARTIALLY_PAID
-        ]);
-    }
-
     public function scopeWhereInvoiceNumber($query, $invoiceNumber)
     {
         return $query->where('invoices.invoice_number', 'LIKE', '%'.$invoiceNumber.'%');
@@ -241,8 +232,6 @@ class Invoice extends Model
                 $filters->get('status') == self::STATUS_PAID
             ) {
                 $query->wherePaidStatus($filters->get('status'));
-            } elseif ($filters->get('status') == self::STATUS_DUE) {
-                $query->whereDueStatus($filters->get('status'));
             } else {
                 $query->whereStatus($filters->get('status'));
             }
