@@ -11,4 +11,3 @@ Homestead.yaml
 .rnd
 /.expo
 /.vscode
-/docker-compose/db/data
