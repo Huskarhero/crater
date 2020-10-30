@@ -540,14 +540,6 @@ class CurrenciesTableSeeder extends Seeder
                 'thousand_separator' => '.',
                 'decimal_separator' => ','
             ],
-            [
-                'name' => 'Iraqi Dinar',
-                'code' => 'IQD',
-                'symbol' => 'ع.د',
-                'precision' => '2',
-                'thousand_separator' => ',',
-                'decimal_separator' => '.'
-            ],
         ];
 
         foreach ($currencies as $currency) {

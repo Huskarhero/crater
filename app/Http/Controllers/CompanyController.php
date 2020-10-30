@@ -151,7 +151,6 @@ class CompanyController extends Controller
             ["code"=>"de", "name" => "German"],
             ["code"=>"it", "name" => "Italian"],
             ["code"=>"es", "name" => "Spanish"],
-            ["code"=>"sr_LA", "name" => "Srpski"],
             ["code"=>"ar", "name" => "العربية"],
         ];
 
