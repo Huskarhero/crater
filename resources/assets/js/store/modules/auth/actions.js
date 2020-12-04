@@ -48,3 +48,16 @@ export const logout = ({ state, commit }) => {
       })
   })
 }
+
+export const checkMail = ({ commit }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios
+      .post('/api/v1/is-registered', data)
+      .then((response) => {
+        resolve(response)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}

@@ -97,7 +97,7 @@ global.axios.interceptors.response.use(undefined, function (err) {
   }
   if (!err.response) {
     window.toastr['error'](
-      'Please check your internet connection or wait until servers are back online', 'Network Error'
+      'Network error: Please check your internet connection or wait until servers are back online'
     )
   } else {
     if (
@@ -121,7 +121,7 @@ global.axios.interceptors.response.use(undefined, function (err) {
       window.toastr['error'](
         err.response.data.message
           ? err.response.data.message
-          : err.response.data || 'Unknown error occurred', 'Error'
+          : 'Unknown error occurred'
       )
     }
   }

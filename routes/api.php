@@ -96,6 +96,12 @@ Route::prefix('/v1')->group(function () {
     Route::get('/app/version', AppVersionController::class);
 
 
+    // Email is registered
+    // ----------------------------------
+
+    Route::get('/is/registered', IsRegisteredController::class);
+
+
     // Authentication & Password Reset
     //----------------------------------
 
@@ -106,7 +112,7 @@ Route::prefix('/v1')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
         // Send reset password mail
-        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware("throttle:10,2");;
+        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 
         // handle reset password form process
         Route::post('reset/password', [ResetPasswordController::class, 'reset']);

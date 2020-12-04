@@ -20,24 +20,19 @@
       </div>
     </div>
     <sw-button
-      :loading="isLoading"
+      v-if="!isSent"
       :disabled="isLoading"
       type="submit"
       variant="primary"
     >
-      <div v-if="!isSent">
-        {{ $t('validation.send_reset_link') }}
-      </div>
-      <div v-else>
-        {{ $t('validation.not_yet') }}
-      </div>
+      {{ $t('validation.send_reset_link') }}
+    </sw-button>
+    <sw-button v-else :disabled="isLoading" variant="primary" type="submit">
+      {{ $t('validation.not_yet') }}
     </sw-button>
 
     <div class="mt-4 mb-4 text-sm">
-      <router-link
-        to="/login"
-        class="text-sm text-primary-400 hover:text-gray-700"
-      >
+      <router-link to="/login">
         {{ $t('general.back_to_login') }}
       </router-link>
     </div>
@@ -57,6 +52,7 @@ export default {
       },
       isSent: false,
       isLoading: false,
+      isRegisteredUser: false,
     }
   },
   validations: {
@@ -68,9 +64,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions('auth'),
+    ...mapActions('auth', ['checkMail']),
     async validateBeforeSubmit(e) {
       this.$v.formData.$touch()
+      let { data } = await this.checkMail()
+      if (data === false) {
+        toastr['error'](this.$t('validation.email_does_not_exist'))
+        return
+      }
       if (!this.$v.formData.$invalid) {
         try {
           this.isLoading = true
@@ -86,10 +87,19 @@ export default {
           this.isSent = true
           this.isLoading = false
         } catch (err) {
-          this.isLoading = false
+          if (err.response && err.response.status === 403) {
+            toastr['error'](err.response.data, 'Error')
+          }
         }
       }
     },
+    // async checkMail() {
+    //   let response = await window.axios.post(
+    //     '/api/v1/is-registered',
+    //     this.formData
+    //   )
+    //   return response.data
+    // },
   },
 }
 </script>
