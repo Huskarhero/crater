@@ -41,19 +41,19 @@ return [
 
     'connections' => [
         Invoice::class => [
-            'salt' => Invoice::class.config('app.key'),
+            'salt' => Invoice::class.'7623e9b0009feff8e024a689d6ef59ce',
             'length' => '20',
-            'alphabet' => 'XKyIAR7mgt8jD2vbqPrOSVenNGpiYLx4M61T'
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
         ],
         Estimate::class => [
-            'salt' => Estimate::class.config('app.key'),
+            'salt' => Estimate::class.'7623e9b0009feff8e024a689d6ef59ce',
             'length' => '20',
-            'alphabet' => 'yLJWP79M8rYVqbn1NXjulO6IUDdvekRQGo40'
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
         ],
         Payment::class => [
-            'salt' => Payment::class.config('app.key'),
+            'salt' => Payment::class.'7623e9b0009feff8e024a689d6ef59ce',
             'length' => '20',
-            'alphabet' => 'asqtW3eDRIxB65GYl7UVLS1dybn9XrKTZ4zO'
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
         ],
     ],
 
