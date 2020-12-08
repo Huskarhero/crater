@@ -118,7 +118,7 @@
                 :loading="isLoading"
                 variant="primary"
                 size="lg"
-                class="flex justify-center w-full md:w-auto"
+                class="flex w-full justify-center md:w-auto"
               >
                 <save-icon v-if="!isLoading" class="mr-2 -ml-1" />
                 {{ isEdit ? $t('items.update_item') : $t('items.save_item') }}
@@ -293,7 +293,7 @@ export default {
       },
 
       description: {
-        maxLength: maxLength(65000),
+        maxLength: maxLength(255),
       },
     },
   },

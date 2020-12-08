@@ -302,7 +302,7 @@ export default {
       },
 
       notes: {
-        maxLength: maxLength(65000),
+        maxLength: maxLength(255),
       },
     },
   },
