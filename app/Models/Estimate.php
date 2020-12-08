@@ -430,12 +430,7 @@ class Estimate extends Model implements HasMedia
         $company = Company::find($this->company_id);
         $logo = $company->getMedia('logo')->first();
 
-       $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
-       $isLocalhost = config('session.domain') === 'localhost';
-
-        if ($logo && $isLocalhost && $isSystem) {
-            $logo = $logo->getPath();
-        } else if($logo) {
+        if ($logo) {
             $logo = $logo->getFullUrl();
         }
 
