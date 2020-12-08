@@ -1,57 +1,47 @@
 <template>
   <form id="loginForm" @submit.prevent="validateBeforeSubmit">
-    <div class="mb-4 form-group">
-      <sw-input-group :label="$t('login.email')" required>
-        <sw-input
-          v-model.trim="formData.email"
-          :invalid="$v.formData.email.$error"
-          :placeholder="$t('login.enter_email')"
-          type="email"
-          name="email"
-          @input="$v.formData.email.$touch()"
-        />
-      </sw-input-group>
+    <div class="form-group">
+      <sw-input
+        v-model.trim="formData.email"
+        :invalid="$v.formData.email.$error"
+        :placeholder="$t('login.enter_email')"
+        type="email"
+        name="email"
+        @input="$v.formData.email.$touch()"
+      />
       <div v-if="$v.formData.email.$error">
-        <span
-          v-if="!$v.formData.email.required"
-          class="text-sm help-block text-danger"
-        >
+        <span v-if="!$v.formData.email.required" class="help-block text-danger">
           {{ $t('validation.required') }}
         </span>
-        <span
-          v-if="!$v.formData.email.email"
-          class="text-sm help-block text-danger"
-        >
+        <span v-if="!$v.formData.email.email" class="help-block text-danger">
           {{ $t('validation.email_incorrect') }}
         </span>
       </div>
     </div>
-    <div class="mb-4 form-group">
-      <sw-input-group :label="$t('login.password')" required>
-        <sw-input
-          id="password"
-          v-model.trim="formData.password"
-          :invalid="$v.formData.password.$error"
-          :placeholder="$t('login.enter_password')"
-          type="password"
-          name="password"
-          @input="$v.formData.password.$touch()"
-        />
-      </sw-input-group>
+    <div class="form-group">
+      <sw-input
+        id="password"
+        v-model.trim="formData.password"
+        :invalid="$v.formData.password.$error"
+        :placeholder="$t('login.enter_password')"
+        type="password"
+        name="password"
+        @input="$v.formData.password.$touch()"
+      />
       <div v-if="$v.formData.password.$error">
         <span
           v-if="!$v.formData.password.required"
-          class="text-sm help-block text-danger"
+          class="help-block text-danger"
         >
           {{ $t('validation.required') }}
         </span>
         <span
           v-if="!$v.formData.password.minLength"
-          class="text-sm help-block text-danger"
+          class="help-block text-danger"
         >
           {{
             $tc(
-              'validation.password_length ',
+              'validation.password_length',
               $v.formData.password.minLength.min,
               { count: $v.formData.password.$params.minLength.min }
             )
@@ -59,21 +49,19 @@
         </span>
       </div>
     </div>
-    <div class="mb-8 form-group">
-      <sw-input-group :label="$t('login.retype_password')" required>
-        <sw-input
-          v-model.trim="formData.password_confirmation"
-          :invalid="$v.formData.password_confirmation.$error"
-          :placeholder="$t('login.retype_password')"
-          type="password"
-          name="password_confirmation"
-          @input="$v.formData.password_confirmation.$touch()"
-        />
-      </sw-input-group>
+    <div class="form-group">
+      <sw-input
+        v-model.trim="formData.password_confirmation"
+        :invalid="$v.formData.password_confirmation.$error"
+        :placeholder="$t('login.retype_password')"
+        type="password"
+        name="password_confirmation"
+        @input="$v.formData.password_confirmation.$touch()"
+      />
       <div v-if="$v.formData.password_confirmation.$error">
         <span
           v-if="!$v.formData.password_confirmation.sameAsPassword"
-          class="text-sm help-block text-danger"
+          class="help-block text-danger"
         >
           {{ $t('validation.password_incorrect') }}
         </span>
