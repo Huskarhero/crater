@@ -122,7 +122,12 @@ export default {
           }
           window.toastr['error'](response.data.error)
         } catch (err) {
-          this.isLoading = false
+          if (err.response.data.errors.name) {
+            this.isLoading = false
+            window.toastr['error'](
+              this.$t('validation.payment_mode_already_taken')
+            )
+          }
         }
       }
     },
