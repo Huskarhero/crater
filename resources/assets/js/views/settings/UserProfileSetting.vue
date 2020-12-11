@@ -313,56 +313,59 @@ export default {
         name: this.formData.name,
         email: this.formData.email,
       }
-      try {
-        if (
-          this.formData.password != null &&
-          this.formData.password !== undefined &&
-          this.formData.password !== ''
-        ) {
-          data = { ...data, password: this.formData.password }
-        }
 
-        let response = await this.updateCurrentUser(data)
+      if (
+        this.formData.password != null &&
+        this.formData.password !== undefined &&
+        this.formData.password !== ''
+      ) {
+        data = { ...data, password: this.formData.password }
+      }
 
-        let languageData = {
-          settings: {
-            language: this.language.code,
-          },
-        }
+      let response = await this.updateCurrentUser(data)
 
-        let languageRes = await this.updateUserSettings(languageData)
+      let languageData = {
+        settings: {
+          language: this.language.code,
+        },
+      }
 
-        // if(languageRes) {
-        //   window.i18n.locale = this.language.code
-        // }
+      let languageRes = await this.updateUserSettings(languageData)
 
-        if (response.data.success) {
-          this.isLoading = false
+      // if(languageRes) {
+      //   window.i18n.locale = this.language.code
+      // }
 
-          if (this.fileObject && this.previewAvatar) {
-            let avatarData = new FormData()
-
-            avatarData.append(
-              'admin_avatar',
-              JSON.stringify({
-                name: this.fileObject.name,
-                data: this.previewAvatar,
-              })
-            )
-            this.uploadAvatar(avatarData)
-          }
-
-          window.toastr['success'](
-            this.$t('settings.account_settings.updated_message')
-          )
-
-          this.formData.password = ''
-          this.formData.confirm_password = ''
-        }
-      } catch (error) {
+      if (response.data.success) {
         this.isLoading = false
+
+        if (this.fileObject && this.previewAvatar) {
+          let avatarData = new FormData()
+
+          avatarData.append(
+            'admin_avatar',
+            JSON.stringify({
+              name: this.fileObject.name,
+              data: this.previewAvatar,
+            })
+          )
+          this.uploadAvatar(avatarData)
+        }
+
+        window.toastr['success'](
+          this.$t('settings.account_settings.updated_message')
+        )
+
+        this.formData.password = ''
+        this.formData.confirm_password = ''
         return true
       }
+
+      window.toastr['error'](response.data.error)
+
+      this.isLoading = false
+
+      return true
     },
   },
 }
