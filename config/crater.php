@@ -17,11 +17,10 @@ return [
         ["code"=>"fr", "name" => "French"],
         ["code"=>"de", "name" => "German"],
         ["code"=>"it", "name" => "Italian"],
-        ["code"=>"lv", "name" => "Latvian"],
         ["code"=>"pt_BR", "name" => "Portuguese (Brazilian)"],
-        ["code"=>"sr_LA", "name" => "Serbian Latin"],
         ["code"=>"es", "name" => "Spanish"],
-        ["code"=>"sv", "name"=>"Svenska"]
+        ["code"=>"lv", "name" => "Latvian"],
+        ["code"=>"sr", "name" => "Serbian Latin"],
     ],
 
     /*
