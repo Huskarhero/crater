@@ -59,7 +59,7 @@
               :calendar-button="true"
               class="mt-1"
               calendar-button-icon="calendar"
-              @input="$v.formData.payment_date.$touch()"
+              @change="$v.formData.payment_date.$touch()"
             />
           </sw-input-group>
 

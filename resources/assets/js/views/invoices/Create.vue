@@ -76,7 +76,7 @@
               :calendar-button="true"
               calendar-button-icon="calendar"
               class="mt-2"
-              @input="$v.newInvoice.invoice_date.$touch()"
+              @change="$v.newInvoice.invoice_date.$touch()"
             />
           </sw-input-group>
 
@@ -91,7 +91,7 @@
               :calendar-button="true"
               calendar-button-icon="calendar"
               class="mt-2"
-              @input="$v.newInvoice.due_date.$touch()"
+              @change="$v.newInvoice.due_date.$touch()"
             />
           </sw-input-group>
 
