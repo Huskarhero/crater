@@ -76,7 +76,6 @@ Crater is a product of [Bytefury](https://bytefury.com)
 Help us translate on https://crowdin.com/project/crater-invoice
 
 **Thanks to Translation Contributors:**
-
 - [Hassan A. Ba Abdullah (Arabic)](https://github.com/hsnapps)
 - [Clément de Louvencourt (French)](https://github.com/PHClement)
 - [Robin Delattre (French)](https://github.com/RobinDev)
@@ -88,4 +87,4 @@ Help us translate on https://crowdin.com/project/crater-invoice
 ## License
 
 Crater is released under the Attribution Assurance License.
-See [LICENSE](https://craterapp.com/license) for full details & use-cases.
+See [LICENSE](LICENSE) for details.

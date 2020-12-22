@@ -314,7 +314,7 @@
                         <h1 class="header-logo"> {{$invoice->user->company->name}} </h1>
                     @endif
                 </td>
-                <td width="50%" class="company-address-container company-address text-right">
+                <td width="50%" class="company-address-container company-address">
                     {!! $company_address !!}
                 </td>
             </tr>

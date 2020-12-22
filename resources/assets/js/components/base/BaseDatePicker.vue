@@ -130,6 +130,7 @@ export default {
   methods: {
     onDateChange(date) {
       this.$emit('input', date)
+      this.$emit('change', date)
     },
   },
 }
