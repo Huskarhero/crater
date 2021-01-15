@@ -31,7 +31,7 @@ class Payment extends Model implements HasMedia
     const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
     const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
-    protected $dates = ['created_at', 'updated_at', 'payment_date'];
+    protected $dates = ['created_at', 'updated_at'];
 
     protected $guarded = ['id'];
 
@@ -373,7 +373,16 @@ class Payment extends Model implements HasMedia
     {
         $company = Company::find($this->company_id);
 
-        $logo = $company->logo;
+        $logo = $company->getMedia('logo')->first();
+
+        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
+        $isLocalhost = config('session.domain') === 'localhost';
+
+        if ($logo && $isLocalhost && $isSystem) {
+            $logo = $logo->getPath();
+        } else if($logo) {
+            $logo = $logo->getFullUrl();
+        }
 
         view()->share([
             'payment' => $this,

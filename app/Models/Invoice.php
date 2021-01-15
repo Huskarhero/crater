@@ -39,9 +39,7 @@ class Invoice extends Model implements HasMedia
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
-        'invoice_date',
-        'due_date'
+        'deleted_at'
     ];
 
     protected $casts = [
@@ -512,7 +510,16 @@ class Invoice extends Model implements HasMedia
 
         $company = Company::find($this->company_id);
 
-        $logo = $company->logo;
+        $logo = $company->getMedia('logo')->first();
+
+        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
+        $isLocalhost = config('session.domain') === 'localhost';
+
+        if ($logo && $isLocalhost && $isSystem) {
+            $logo = $logo->getPath();
+        } else if ($logo) {
+            $logo = $logo->getFullUrl();
+        }
 
         view()->share([
             'invoice' => $this,

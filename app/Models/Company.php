@@ -22,17 +22,10 @@ class Company extends Model implements HasMedia
     public function getLogoAttribute()
     {
         $logo = $this->getMedia('logo')->first();
-
-        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
-
         if ($logo) {
-            if ($isSystem) {
-                return $logo->getPath();
-            } else  {
-                return $logo->getFullUrl();
-            }
+            return  asset($logo->getUrl());
         }
-        return null;
+        return ;
     }
 
     public function user()
