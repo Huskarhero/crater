@@ -256,6 +256,7 @@
         }
 
         .total-display-table {
+            box-sizing: border-box;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
