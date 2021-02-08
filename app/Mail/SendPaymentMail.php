@@ -14,17 +14,15 @@ class SendPaymentMail extends Mailable
     use Queueable, SerializesModels;
 
     public $data = [];
-    public $pdfData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $pdfData)
+    public function __construct($data)
     {
         $this->data = $data;
-        $this->pdfData = $pdfData;
     }
 
     /**
@@ -43,17 +41,9 @@ class SendPaymentMail extends Mailable
             'mailable_id' => $this->data['payment']['id']
         ]);
 
-        $mailContent = $this->from($this->data['from'])
-            ->subject($this->data['subject'])
-            ->markdown('emails.send.payment', ['data', $this->data]);
-        
-        if ($this->pdfData) {
-            $mailContent->attachData(
-                $this->pdfData->output(), 
-                $this->data['payment']['payment_number'] . '.pdf'
-            );
-        }
-        
-        return $mailContent;
+        return $this->from($this->data['from'])
+                    ->subject($this->data['subject'])
+                    ->markdown('emails.send.payment', ['data', $this->data]);
+
     }
 }

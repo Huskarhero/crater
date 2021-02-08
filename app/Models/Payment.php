@@ -124,9 +124,8 @@ class Payment extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = Company::find($this->company_id);
         $data['body'] = $this->getEmailBody($data['body']);
-        $pdfData = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
-        \Mail::to($data['to'])->send(new SendPaymentMail($data, $pdfData));
+        \Mail::to($data['to'])->send(new SendPaymentMail($data));
 
         return [
             'success' => true
@@ -399,17 +398,6 @@ class Payment extends Model implements HasMedia
         $format = CompanySetting::getSetting('payment_from_customer_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
-    }
-
-    public function getEmailAttachmentSetting()
-    {
-        $paymentAsAttachment = CompanySetting::getSetting('payment_email_attachment', $this->company_id);
-
-        if($paymentAsAttachment == 'NO') {
-            return false;
-        }
-
-        return true;
     }
 
     public function getNotes()
