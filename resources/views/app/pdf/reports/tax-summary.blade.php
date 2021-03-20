@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@lang('pdf_tax_summery_label')</title>
+    <title>Tax Summary Report</title>
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";

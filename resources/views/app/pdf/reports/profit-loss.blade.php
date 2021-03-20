@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@lang('pdf_profit_loss_label')</title>
+    <title>Profit & Loss Report</title>
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";
