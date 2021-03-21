@@ -172,7 +172,7 @@
               :color="$utils.getBadgeStatusColor(estimate.status).color"
               class="px-1 text-xs"
             >
-              {{ $utils.getStatusTranslation(estimate.status) }}
+              {{ estimate.status }}
             </sw-badge>
           </div>
 

@@ -254,7 +254,7 @@
               :color="$utils.getBadgeStatusColor(row.status).color"
               class="px-3 py-1"
             >
-              {{ $utils.getStatusTranslation(row.status) }}
+              {{ row.status }}
             </sw-badge>
           </template>
         </sw-table-column>

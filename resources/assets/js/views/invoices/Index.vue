@@ -241,7 +241,7 @@
               :bg-color="$utils.getBadgeStatusColor(row.status).bgColor"
               :color="$utils.getBadgeStatusColor(row.status).color"
             >
-              {{ $utils.getStatusTranslation(row.status.replace('_', ' ')) }}
+              {{ row.status.replace('_', ' ') }}
             </sw-badge>
           </template>
         </sw-table-column>
@@ -258,7 +258,7 @@
               :bg-color="$utils.getBadgeStatusColor(row.status).bgColor"
               :color="$utils.getBadgeStatusColor(row.status).color"
             >
-              {{ $utils.getStatusTranslation(row.paid_status.replace('_', ' ')) }}
+              {{ row.paid_status.replace('_', ' ') }}
             </sw-badge>
           </template>
         </sw-table-column>

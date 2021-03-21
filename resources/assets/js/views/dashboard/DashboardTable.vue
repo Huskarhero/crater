@@ -65,11 +65,9 @@
                 :color="$utils.getBadgeStatusColor(row.status).color"
               >
                 {{
-                  $utils.getStatusTranslation(
-                    row.status != 'PARTIALLY_PAID'
-                      ? row.status
-                      : row.status.replace('_', ' ')
-                  )
+                  row.status != 'PARTIALLY_PAID'
+                    ? row.status
+                    : row.status.replace('_', ' ')
                 }}
               </sw-badge>
             </template>

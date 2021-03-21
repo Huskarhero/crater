@@ -189,7 +189,7 @@
             <span>{{ $t('items.unit') }}</span>
 
             <span>
-              {{ row.unit_name ? row.unit_name : $t('items.not_selected') }}
+              {{ row.unit_name ? row.unit_name : 'Not selected' }}
             </span>
           </template>
         </sw-table-column>
