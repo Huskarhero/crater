@@ -17,11 +17,9 @@
     @slot('subcopy')
         @component('mail::subcopy')
             {!! $data['body'] !!}
-            @if(!$data['attach']['data'])
-                @component('mail::button', ['url' => url('/customer/estimates/pdf/'.$data['estimate']['unique_hash'])])
-                    View Estimate
-                @endcomponent
-            @endif
+            @component('mail::button', ['url' => url('/customer/estimates/pdf/'.$data['estimate']['unique_hash'])])
+                View Estimate
+            @endcomponent
         @endcomponent
     @endslot
 

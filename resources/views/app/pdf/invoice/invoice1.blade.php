@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>@lang('pdf_invoice_label') - {{$invoice->invoice_number}}</title>
+    <title>Invoice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">

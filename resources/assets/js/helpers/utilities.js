@@ -1,3 +1,5 @@
+import i18n from '../plugins/i18n';
+
 export default {
   addClass(el, className) {
     if (el.classList) el.classList.add(className)
@@ -23,13 +25,7 @@ export default {
 
     amount = amount / 100
 
-    let {
-      precision,
-      decimal_separator,
-      thousand_separator,
-      symbol,
-      swap_currency_symbol,
-    } = currency
+    let { precision, decimal_separator, thousand_separator, symbol } = currency
 
     try {
       precision = Math.abs(precision)
@@ -43,22 +39,20 @@ export default {
       let j = i.length > 3 ? i.length % 3 : 0
 
       let moneySymbol = `<span style="font-family: sans-serif">${symbol}</span>`
-      let thousandText = j ? i.substr(0, j) + thousand_separator : ''
-      let amountText = i
-        .substr(j)
-        .replace(/(\d{3})(?=\d)/g, '$1' + thousand_separator)
-      let precisionText = precision
-        ? decimal_separator +
-          Math.abs(amount - i)
-            .toFixed(precision)
-            .slice(2)
-        : ''
-      let combinedAmountText =
-        negativeSign + thousandText + amountText + precisionText
 
-      return swap_currency_symbol
-        ? combinedAmountText + ' ' + moneySymbol
-        : moneySymbol + ' ' + combinedAmountText
+      return (
+        moneySymbol +
+        ' ' +
+        negativeSign +
+        (j ? i.substr(0, j) + thousand_separator : '') +
+        i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousand_separator) +
+        (precision
+          ? decimal_separator +
+            Math.abs(amount - i)
+              .toFixed(precision)
+              .slice(2)
+          : '')
+      )
     } catch (e) {
       console.log(e)
     }
@@ -76,13 +70,7 @@ export default {
 
     amount = amount / 100
 
-    let {
-      precision,
-      decimal_separator,
-      thousand_separator,
-      symbol,
-      swap_currency_symbol,
-    } = currency
+    let { precision, decimal_separator, thousand_separator, symbol } = currency
 
     try {
       precision = Math.abs(precision)
@@ -96,22 +84,20 @@ export default {
       let j = i.length > 3 ? i.length % 3 : 0
 
       let moneySymbol = `${symbol}`
-      let thousandText = j ? i.substr(0, j) + thousand_separator : ''
-      let amountText = i
-        .substr(j)
-        .replace(/(\d{3})(?=\d)/g, '$1' + thousand_separator)
-      let precisionText = precision
-        ? decimal_separator +
-          Math.abs(amount - i)
-            .toFixed(precision)
-            .slice(2)
-        : ''
-      let combinedAmountText =
-        negativeSign + thousandText + amountText + precisionText
 
-      return swap_currency_symbol
-        ? combinedAmountText + ' ' + moneySymbol
-        : moneySymbol + ' ' + combinedAmountText
+      return (
+        moneySymbol +
+        ' ' +
+        negativeSign +
+        (j ? i.substr(0, j) + thousand_separator : '') +
+        i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousand_separator) +
+        (precision
+          ? decimal_separator +
+            Math.abs(amount - i)
+              .toFixed(precision)
+              .slice(2)
+          : '')
+      )
     } catch (e) {
       console.log(e)
     }
@@ -261,6 +247,36 @@ export default {
         }
     }
   },
+  getStatusTranslation(status) {
+    switch (status) {
+      case 'DRAFT':
+        return i18n.t('general.draft')
+      case 'PAID':
+        return i18n.t('invoices.paid')
+      case 'UNPAID':
+        return i18n.t('invoices.unpaid')
+      case 'SENT':
+        return i18n.t('general.sent')
+      case 'REJECTED':
+        return i18n.t('estimates.rejected')
+      case 'ACCEPTED':
+        return i18n.t('estimates.accepted')
+      case 'VIEWED':
+        return i18n.t('invoices.viewed')
+      case 'EXPIRED':
+        return i18n.t('estimates.expired')
+      case 'PARTIALLY PAID':
+        return i18n.t('estimates.partially_paid')
+      case 'OVERDUE':
+        return i18n.t('invoices.overdue')
+      case 'COMPLETED':
+        return i18n.t('invoices.completed')
+      case 'DUE':
+        return i18n.t('general.due')
+      default:
+        return status
+    }
+  },
   compareVersion(v1, v2, options) {
     const lexicographical = options && options.lexicographical
     const zeroExtend = options && options.zeroExtend
@@ -296,5 +312,5 @@ export default {
       return -1
     }
     return 0
-  },
+  }
 }

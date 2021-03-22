@@ -15,7 +15,7 @@
             to="/admin/invoices"
           />
           <sw-breadcrumb-item
-            v-if="$route.name === 'invoices.edit'"
+            v-if="$route.name === 'invoice.edit'"
             :title="$t('invoices.edit_invoice')"
             to="#"
             active

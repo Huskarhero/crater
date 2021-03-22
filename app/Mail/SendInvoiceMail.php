@@ -40,17 +40,9 @@ class SendInvoiceMail extends Mailable
             'mailable_type' => Invoice::class,
             'mailable_id' => $this->data['invoice']['id']
         ]);
-        
-        $mailContent = $this->from($this->data['from'], config('mail.from.name'))
-            ->subject($this->data['subject'])
-            ->markdown('emails.send.invoice', ['data', $this->data]);
 
-        if ($this->data['attach']['data'])
-            $mailContent->attachData(
-                $this->data['attach']['data']->output(), 
-                $this->data['invoice']['invoice_number'] . '.pdf'
-            );
-        
-        return $mailContent;
+        return $this->from($this->data['from'], config('mail.from.name'))
+                    ->subject($this->data['subject'])
+                    ->markdown('emails.send.invoice', ['data', $this->data]);
     }
 }

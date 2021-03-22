@@ -37,8 +37,7 @@ class CurrenciesTableSeeder extends Seeder
                 'symbol' => '€',
                 'precision' => '2',
                 'thousand_separator' => '.',
-                'decimal_separator' => ',',
-                'swap_currency_symbol' => true
+                'decimal_separator' => ','
             ],
             [
                 'name' => 'South African Rand',
