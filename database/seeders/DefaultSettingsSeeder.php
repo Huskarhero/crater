@@ -53,19 +53,16 @@ class DefaultSettingsSeeder extends Seeder
             'notify_estimate_viewed' => 'NO',
             'tax_per_item' => 'NO',
             'discount_per_item' => 'NO',
-            'invoice_prefix' => 'INV',
             'invoice_auto_generate' => 'YES',
-            'invoice_number_length' => 6,
-            'invoice_email_attachment' => 'NO',
+            'invoice_prefix' => 'INV',
             'estimate_prefix' => 'EST',
             'estimate_auto_generate' => 'YES',
-            'estimate_number_length' => 6,
-            'estimate_email_attachment' => 'NO',
             'payment_prefix' => 'PAY',
             'payment_auto_generate' => 'YES',
-            'payment_number_length' => 6,
-            'payment_email_attachment' => 'NO',
             'save_pdf_to_disk' => 'NO',
+            'invoice_email_attachment' => 'NO',
+            'estimate_email_attachment' => 'NO',
+            'payment_email_attachment' => 'NO',
         ];
 
         CompanySetting::setSettings($settings, $user->company_id);
