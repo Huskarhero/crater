@@ -33,18 +33,18 @@
             :show-labels="false"
             :placeholder="$t('settings.disk.select_disk')"
             :allow-empty="false"
-            :custom-label="getCustomLabel"
             track-by="id"
             label="name"
+            :custom-label="getCustomLabel"
             @select="refreshTable"
           />
         </sw-input-group>
       </div>
       <sw-table-component
         ref="table"
+        variant="gray"
         :show-filter="false"
         :data="fetchBackupsData"
-        variant="gray"
       >
         <sw-table-column :label="$t('settings.backup.path')" show="path">
           <template slot-scope="row">
@@ -119,8 +119,6 @@ export default {
 
     ...mapActions('modal', ['openModal']),
 
-    ...mapActions('notification', ['showNotification']),
-
     getCustomLabel({ driver, name }) {
       if (!name) {
         return
@@ -129,17 +127,14 @@ export default {
     },
 
     async onRemoveBackup(backup) {
-      this.$swal({
+      swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('settings.backup.backup_confirm_delete'),
-        icon: 'question',
-        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>`,
-        showCancelButton: true,
-        showConfirmButton: true,
-      }).then(async (result) => {
-        if (result.value) {
+        icon: '/assets/icon/trash-solid.svg',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (value) => {
+        if (value) {
           let data = {
             disk: this.filters.selected_disk.driver,
             file_disk_id: this.filters.selected_disk.id,
@@ -147,10 +142,7 @@ export default {
           }
           let response = await this.removeBackup(data)
           if (response.data.success) {
-            this.showNotification({
-              type: 'success',
-              message: this.$t('settings.backup.deleted_message'),
-            })
+            window.toastr['success'](this.$t('settings.backup.deleted_message'))
             this.$refs.table.refresh()
             return true
           }
@@ -178,10 +170,9 @@ export default {
       let response = await this.fetchBackups(data)
 
       if (response.data.error) {
-        this.showNotification({
-          type: 'error',
-          message: this.$t('settings.backup.' + response.data.error),
-        })
+        window.toastr['error'](
+          this.$t('settings.backup.' + response.data.error)
+        )
       }
 
       this.isRequestOngoing = false
@@ -234,10 +225,7 @@ export default {
         })
         .catch((e) => {
           this.isRequestOngoing = false
-          this.showNotification({
-            type: 'error',
-            message: e.response.data.message,
-          })
+          window.toastr['error'](e.response.data.message)
         })
     },
   },

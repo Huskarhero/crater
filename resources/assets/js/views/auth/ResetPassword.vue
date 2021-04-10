@@ -92,7 +92,6 @@ const {
   sameAs,
   minLength,
 } = require('vuelidate/lib/validators')
-import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -121,7 +120,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions('notification', ['showNotification']),
     async validateBeforeSubmit(e) {
       this.$v.formData.$touch()
 
@@ -137,18 +135,18 @@ export default {
           let res = await axios.post('/api/v1/auth/reset/password', data)
           this.isLoading = false
           if (res.data) {
-            this.showNotification({
-              type: 'success',
-              message: this.$t('login.password_reset_successfully'),
-            })
+            toastr['success'](
+              this.$t('login.password_reset_successfully'),
+              'Success'
+            )
             this.$router.push('/login')
           }
         } catch (err) {
           if (err.response && err.response.status === 403) {
-            this.showNotification({
-              type: 'error',
-              message: this.$t('validation.email_incorrect'),
-            })
+            toastr['error'](
+              err.response.data,
+              this.$t('validation.email_incorrect')
+            )
             this.isLoading = false
           }
         }

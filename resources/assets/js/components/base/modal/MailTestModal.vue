@@ -4,8 +4,8 @@
       <div class="p-4 md:p-8">
         <sw-input-group
           :label="$t('general.to')"
-          :error="emailError"
           class="mt-3"
+          :error="emailError"
           variant="horizontal"
           required
         >
@@ -19,8 +19,8 @@
         </sw-input-group>
         <sw-input-group
           :label="$t('general.subject')"
-          :error="subjectError"
           class="mt-3"
+          :error="subjectError"
           variant="horizontal"
           required
         >
@@ -33,8 +33,8 @@
         </sw-input-group>
         <sw-input-group
           :label="$t('general.message')"
-          :error="messageError"
           class="mt-3"
+          :error="messageError"
           variant="horizontal"
           required
         >
@@ -57,7 +57,7 @@
         >
           {{ $t('general.cancel') }}
         </sw-button>
-        <sw-button :loading="isLoading" variant="primary" type="submit">
+        <sw-button variant="primary" type="submit" :loading="isLoading">
           <paper-airplane-icon v-if="!isLoading" class="mr-2" />
           {{ !isEdit ? $t('general.send') : $t('general.update') }}
         </sw-button>
@@ -149,7 +149,6 @@ export default {
   methods: {
     ...mapActions('modal', ['closeModal', 'resetModalData']),
     ...mapActions('company', ['sendTestMail']),
-    ...mapActions('notification', ['showNotification']),
     resetFormData() {
       this.formData = {
         to: null,
@@ -170,26 +169,18 @@ export default {
 
       if (response.data) {
         if (response.data.success) {
-          this.showNotification({
-            type: 'success',
-            message: this.$tc('general.send_mail_successfully'),
-          })
+          window.toastr['success'](this.$tc('general.send_mail_successfully'))
           this.closeTaxModal()
           this.isLoading = false
           return true
         }
-        this.showNotification({
-          type: 'error',
-          message: this.$tc('validation.something_went_wrong'),
-        })
+
+        window.toastr['error'](this.$tc('validation.something_went_wrong'))
         this.closeTaxModal()
         this.isLoading = false
         return true
       }
-      this.showNotification({
-        type: 'error',
-        message: response.data.error,
-      })
+      window.toastr['error'](response.data.error)
     },
     closeTaxModal() {
       this.resetModalData()

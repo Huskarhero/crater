@@ -312,8 +312,6 @@ export default {
 
     ...mapActions('modal', ['openModal']),
 
-    ...mapActions('notification', ['showNotification']),
-
     async setTaxPerItem() {
       let response = await this.fetchCompanySettings(['tax_per_item'])
 
@@ -387,24 +385,15 @@ export default {
         this.isLoading = false
 
         if (!this.isEdit) {
-          this.showNotification({
-            type: 'success',
-            message: this.$tc('items.created_message'),
-          })
+          window.toastr['success'](this.$tc('items.created_message'))
           this.$router.push('/admin/items')
           return true
         } else {
-          this.showNotification({
-            type: 'success',
-            message: this.$tc('items.updated_message'),
-          })
+          window.toastr['success'](this.$tc('items.updated_message'))
           this.$router.push('/admin/items')
           return true
         }
-        this.showNotification({
-          type: 'error',
-          message: response.data.error,
-        })
+        window.toastr['error'](response.data.error)
       }
     },
 

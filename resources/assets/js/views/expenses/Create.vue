@@ -417,8 +417,6 @@ export default {
 
     ...mapActions('customer', ['fetchCustomers']),
 
-    ...mapActions('notification', ['showNotification']),
-
     openCategoryModal() {
       this.openModal({
         title: this.$t('settings.expense_category.add_category'),
@@ -534,34 +532,22 @@ export default {
 
         if (response.data.success) {
           this.isLoading = false
-          this.showNotification({
-            type: 'success',
-            message: this.$t('expenses.updated_message'),
-          })
+          window.toastr['success'](this.$t('expenses.updated_message'))
           this.$router.push('/admin/expenses')
           return true
         }
-        this.showNotification({
-          type: 'error',
-          message: response.data.error,
-        })
+        window.toastr['error'](response.data.error)
       } else {
         this.isLoading = true
         let response = await this.addExpense(data)
         this.isLoading = false
 
         if (response.data.success) {
-          this.showNotification({
-            type: 'success',
-            message: this.$t('expenses.created_message'),
-          })
+          window.toastr['success'](this.$t('expenses.created_message'))
           this.$router.push('/admin/expenses')
           return true
         }
-        this.showNotification({
-          type: 'success',
-          message: response.data.success,
-        })
+        window.toastr['success'](response.data.success)
       }
     },
   },

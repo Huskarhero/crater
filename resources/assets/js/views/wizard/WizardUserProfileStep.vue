@@ -208,17 +208,13 @@ export default {
   },
   methods: {
     ...mapActions('user', ['uploadAvatar']),
-    ...mapActions('notification', ['showNotification']),
     onUploadHandler(cropper) {
       this.previewAvatar = cropper
         .getCroppedCanvas()
         .toDataURL(this.cropperOutputMime)
     },
     onHandleUploadError() {
-      this.showNotification({
-        type: 'error',
-        message: 'Oops! Something went wrong...',
-      })
+      window.toastr['error']('Oops! Something went wrong...')
     },
     onChange(file) {
       this.cropperOutputMime = file.type

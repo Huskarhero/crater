@@ -251,7 +251,6 @@ export default {
     ...mapActions('modal', ['closeModal', 'resetModalData']),
     ...mapActions('item', ['addItem', 'updateItem', 'fetchItemUnits']),
     ...mapActions('invoice', ['setItem']),
-    ...mapActions('notification', ['showNotification']),
 
     resetFormData() {
       this.formData = {
@@ -305,10 +304,7 @@ export default {
         response = await this.addItem(data)
       }
       if (response.data) {
-        this.showNotification({
-          type: 'success',
-          message: this.$tc('items.created_message'),
-        })
+        window.toastr['success'](this.$tc('items.created_message'))
         this.setItem(response.data.item)
 
         window.hub.$emit('newItem', response.data.item)
@@ -318,10 +314,7 @@ export default {
         this.closeModal()
         return true
       }
-      this.showNotification({
-        type: 'error',
-        message: response.data.error,
-      })
+      window.toastr['error'](response.data.error)
     },
 
     closeItemModal() {

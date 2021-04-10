@@ -2,8 +2,8 @@
   <div class="relative customer-modal">
     <base-loader
       v-if="isRequestOngoing"
-      :show-bg-overlay="true"
       class="h-130"
+      :show-bg-overlay="true"
     />
     <form @submit.prevent="createNewBackup">
       <div class="p-6">
@@ -21,7 +21,7 @@
             :show-labels="false"
             :placeholder="$t('settings.backup.select_backup_type')"
             :allow-empty="false"
-            :max-height="100"
+            :maxHeight="100"
           />
         </sw-input-group>
         <sw-input-group
@@ -38,11 +38,11 @@
             :show-labels="false"
             :placeholder="$t('settings.disk.select_disk')"
             :allow-empty="false"
+            track-by="id"
             :preselect-first="true"
             :custom-label="getCustomLabel"
-            :max-height="100"
+            :maxHeight="100"
             :loading="isLoading"
-            track-by="id"
           />
         </sw-input-group>
       </div>
@@ -59,9 +59,9 @@
         </sw-button>
         <sw-button
           :loading="isCreateLoading"
-          :disabled="isCreateLoading"
           variant="primary"
           type="submit"
+          :disabled="isCreateLoading"
         >
           <save-icon v-if="!isCreateLoading" class="mr-2" />
           {{ $t('general.create') }}
@@ -140,8 +140,6 @@ export default {
 
     ...mapActions('modal', ['closeModal']),
 
-    ...mapActions('notification', ['showNotification']),
-
     getCustomLabel({ driver, name }) {
       return `${name} — [${driver}]`
     },
@@ -156,18 +154,12 @@ export default {
         this.isCreateLoading = true
         await this.createBackup(data)
         this.isCreateLoading = false
-        this.showNotification({
-          type: 'success',
-          message: this.$t('settings.backup.created_message'),
-        })
+        window.toastr['success'](this.$t('settings.backup.created_message'))
         this.refreshData ? this.refreshData() : ''
         this.cancelBackup()
       } catch (e) {
         this.isCreateLoading = false
-        this.showNotification({
-          type: 'error',
-          message: e.response.data.message,
-        })
+        window.toastr['error'](e.response.data.message)
       }
     },
 

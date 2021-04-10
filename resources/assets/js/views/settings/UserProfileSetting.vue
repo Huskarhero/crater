@@ -264,8 +264,6 @@ export default {
 
     ...mapActions(['fetchLanguages']),
 
-    ...mapActions('notification', ['showNotification']),
-
     onUploadHandler(cropper) {
       this.previewAvatar = cropper
         .getCroppedCanvas()
@@ -273,10 +271,7 @@ export default {
     },
 
     onHandleUploadError() {
-      this.showNotification({
-        type: 'error',
-        message: 'Oops! Something went wrong...',
-      })
+      window.toastr['error']('Oops! Something went wrong...')
     },
 
     onChange(file) {
@@ -353,10 +348,10 @@ export default {
 
             this.uploadAvatar(avatarData)
           }
-          this.showNotification({
-            type: 'success',
-            message: this.$t('settings.account_settings.updated_message'),
-          })
+
+          window.toastr['success'](
+            this.$t('settings.account_settings.updated_message')
+          )
 
           this.formData.password = ''
           this.formData.confirm_password = ''

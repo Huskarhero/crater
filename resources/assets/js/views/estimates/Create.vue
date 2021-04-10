@@ -720,8 +720,6 @@ export default {
 
     ...mapActions('customFields', ['fetchCustomFields']),
 
-    ...mapActions('notification', ['showNotification']),
-
     selectFixed() {
       if (this.newEstimate.discount_type === 'fixed') {
         return
@@ -923,10 +921,7 @@ export default {
         .then((res) => {
           if (res.data) {
             this.$router.push(`/admin/estimates/${res.data.estimate.id}/view`)
-            this.showNotification({
-              type: 'success',
-              message: this.$t('estimates.created_message'),
-            })
+            window.toastr['success'](this.$t('estimates.created_message'))
           }
 
           this.isLoading = false
@@ -942,10 +937,7 @@ export default {
           this.isLoading = false
           if (res.data) {
             this.$router.push(`/admin/estimates/${res.data.estimate.id}/view`)
-            this.showNotification({
-              type: 'success',
-              message: this.$t('estimates.updated_message'),
-            })
+            window.toastr['success'](this.$t('estimates.updated_message'))
           }
         })
         .catch((err) => {

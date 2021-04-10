@@ -62,7 +62,7 @@
                 :allow-empty="false"
                 :show-labels="false"
                 :placeholder="$t('customers.select_currency')"
-                :max-height="200"
+                :maxHeight="200"
                 label="name"
                 class="mt-1 md:mt-0"
                 track-by="id"
@@ -343,7 +343,7 @@
         >
           {{ $t('general.cancel') }}
         </sw-button>
-        <sw-button :loading="isLoading" variant="primary" type="submit">
+        <sw-button variant="primary" type="submit" :loading="isLoading">
           <save-icon v-if="!isLoading" class="mr-2" />
           {{ $t('general.save') }}
         </sw-button>
@@ -444,8 +444,6 @@ export default {
     ...mapGetters(['currencies', 'countries']),
     ...mapGetters('company', ['defaultCurrency']),
     ...mapGetters('modal', ['modalDataID', 'modalData', 'modalActive']),
-    ...mapActions('notification', ['showNotification']),
-
     nameError() {
       if (!this.$v.formData.name.$error) {
         return ''
@@ -588,7 +586,6 @@ export default {
       'updateCustomer',
     ]),
     ...mapActions('modal', ['closeModal']),
-    ...mapActions('notification', ['showNotification']),
     resetData() {
       this.formData = {
         name: null,
@@ -703,15 +700,9 @@ export default {
         }
         if (response.data) {
           if (this.modalDataID) {
-            this.showNotification({
-              type: 'success',
-              message: this.$tc('customers.updated_message'),
-            })
+            window.toastr['success'](this.$tc('customers.updated_message'))
           } else {
-            this.showNotification({
-              type: 'success',
-              message: this.$tc('customers.created_message'),
-            })
+            window.toastr['success'](this.$tc('customers.created_message'))
           }
 
           this.isLoading = false

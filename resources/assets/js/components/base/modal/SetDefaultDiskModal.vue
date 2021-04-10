@@ -9,9 +9,9 @@
             :searchable="true"
             :allow-empty="false"
             :show-labels="false"
-            :custom-label="getCustomLabel"
             class="mt-2"
             track-by="id"
+            :custom-label="getCustomLabel"
           />
         </sw-input-group>
       </div>
@@ -90,8 +90,6 @@ export default {
 
     ...mapActions('modal', ['closeModal']),
 
-    ...mapActions('notification', ['showNotification']),
-
     async loadData() {
       this.loading = true
 
@@ -109,10 +107,7 @@ export default {
       if (response.data.success) {
         this.refreshData()
         this.closeDisk()
-        this.showNotification({
-          type: 'success',
-          message: this.$t('settings.disk.success'),
-        })
+        window.toastr['success'](this.$t('settings.disk.success'))
       }
       this.isLoading = true
     },

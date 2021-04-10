@@ -55,8 +55,8 @@
             v-model="formData.body"
             :fields="InvoiceMailFields"
             :invalid="$v.formData.body.$error"
-            class="mt-2"
             @input="$v.formData.body.$touch()"
+            class="mt-2"
           />
         </sw-input-group>
       </div>
@@ -194,8 +194,6 @@ export default {
 
     ...mapActions('company', ['fetchCompanySettings', 'fetchMailConfig']),
 
-    ...mapActions('notification', ['showNotification']),
-
     async setInitialData() {
       let admin = await this.fetchMailConfig()
 
@@ -222,31 +220,15 @@ export default {
       if (this.$v.$invalid) {
         return true
       }
-      this.$swal({
+      swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.confirm_send_invoice'),
-        icon: 'question',
-        iconHtml: `<svg
-            aria-hidden="true"
-            class="w-6 h-6"
-            focusable="false"
-            data-prefix="fas"
-            data-icon="check-circle"
-            class="svg-inline--fa fa-check-circle fa-w-16"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="#55547A"
-              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
-            ></path>
-          </svg>`,
-        showCancelButton: true,
-        showConfirmButton: true,
-      }).then(async (result) => {
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true,
+      }).then(async (value) => {
         try {
-          if (result.value) {
+          if (value) {
             let data = {
               ...this.formData,
               id: this.modalDataID,
@@ -257,26 +239,21 @@ export default {
             this.closeModal()
             if (res.data.success) {
               this.isLoading = false
-              this.showNotification({
-                type: 'success',
-                message: this.$tc('invoices.send_invoice_successfully'),
-              })
+              window.toastr['success'](
+                this.$tc('invoices.send_invoice_successfully')
+              )
               return true
             }
             if (res.data.error === 'invoices.user_email_does_not_exist') {
-              this.showNotification({
-                type: 'error',
-                message: this.$tc('invoices.user_email_does_not_exist'),
-              })
+              window.toastr['error'](
+                this.$tc('invoices.user_email_does_not_exist')
+              )
               return false
             }
           }
         } catch (error) {
           this.isLoading = false
-          this.showNotification({
-            type: 'error',
-            message: this.$tc('invoices.something_went_wrong'),
-          })
+          window.toastr['error'](this.$tc('invoices.something_went_wrong'))
         }
       })
     },

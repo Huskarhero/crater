@@ -24,7 +24,7 @@ import Smtp from './mail-driver/SmtpMailDriver'
 import Mailgun from './mail-driver/MailgunMailDriver'
 import Ses from './mail-driver/SesMailDriver'
 import Basic from './mail-driver/BasicMailDriver'
-import { mapActions } from 'vuex'
+
 export default {
   components: {
     Smtp,
@@ -48,7 +48,6 @@ export default {
     this.getMailDrivers()
   },
   methods: {
-    ...mapActions('notification', ['showNotification']),
     async getMailDrivers() {
       this.isLoading = this.isFetching = true
 
@@ -68,24 +67,19 @@ export default {
         )
         if (response.data.success) {
           this.$emit('next', 4)
-          this.showNotification({
-            type: 'success',
-            message: this.$t('wizard.success.' + response.data.success),
-          })
+          window.toastr['success'](
+            this.$t('wizard.success.' + response.data.success)
+          )
         } else {
-          this.showNotification({
-            type: 'error',
-            message: this.$t('wizard.errors.' + response.data.error),
-          })
+          window.toastr['error'](
+            this.$t('wizard.errors.' + response.data.error)
+          )
         }
         this.isLoading = this.isFetching = false
         return true
       } catch (e) {
         this.isLoading = this.isFetching = false
-        this.showNotification({
-          type: 'error',
-          message: 'Something went wrong',
-        })
+        window.toastr['error']('Something went wrong')
       }
     },
   },
