@@ -460,7 +460,7 @@ export default {
       taxPerItem: null,
       discountPerItem: null,
       isLoadingInvoice: false,
-      isLoadingData: true,
+      isLoadingData: false,
       isLoading: false,
       maxDiscount: 0,
       invoicePrefix: null,
@@ -832,9 +832,10 @@ export default {
 
               if (res2.data) {
                 let customFields = res2.data.customFields.data
-                await this.setEditCustomFields(fields, customFields)
+                this.setEditCustomFields(fields, customFields)
               }
             }
+
             this.isLoadingInvoice = false
           })
           .catch((error) => {

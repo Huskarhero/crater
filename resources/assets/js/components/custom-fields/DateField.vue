@@ -72,9 +72,11 @@ export default {
       deep: true,
     },
   },
-  created() {
+  mounted() {
     this.date =
-      this.field && this.field.defaultAnswer && this.field.defaultAnswer
+      this.field && this.field.defaultAnswer
+        ? this.field.defaultAnswer
+        : new Date()
     this.placeholder =
       this.field && this.field.placeholder ? this.field.placeholder : ''
   },
