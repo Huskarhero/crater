@@ -15,6 +15,19 @@
       </sw-input-group>
 
       <sw-input-group
+        :label="$t('settings.customization.invoices.invoice_number_length')"
+        :error="invoicenumberLengthError"
+        class="mt-6 mb-4"
+      >
+        <sw-input
+          v-model="invoices.invoice_number_length"
+          :invalid="$v.invoices.invoice_number_length.$error"
+          type="number"
+          style="max-width: 60px"
+        />
+      </sw-input-group>
+
+      <sw-input-group
         :label="
           $t('settings.customization.invoices.default_invoice_email_body')
         "
@@ -113,9 +126,7 @@
 
       <div class="ml-4">
         <p class="p-0 mb-1 text-base leading-snug text-black">
-          {{
-            $t('settings.customization.invoices.invoice_email_attachment')
-          }}
+          {{ $t('settings.customization.invoices.invoice_email_attachment') }}
         </p>
 
         <p
@@ -123,7 +134,9 @@
           style="max-width: 480px"
         >
           {{
-            $t('settings.customization.invoices.invoice_email_attachment_setting_description')
+            $t(
+              'settings.customization.invoices.invoice_email_attachment_setting_description'
+            )
           }}
         </p>
       </div>
@@ -132,7 +145,7 @@
 </template>
 
 <script>
-const { required, maxLength, alpha } = require('vuelidate/lib/validators')
+const { required, maxLength, minValue, alpha, numeric } = require('vuelidate/lib/validators')
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -151,6 +164,7 @@ export default {
 
       invoices: {
         invoice_prefix: null,
+        invoice_number_length: null,
         invoice_mail_body: null,
         company_address_format: null,
         shipping_address_format: null,
@@ -193,11 +207,29 @@ export default {
         return this.$t('validation.characters_only')
       }
     },
+    invoicenumberLengthError() {
+      if (!this.$v.invoices.invoice_number_length.$error) {
+        return ''
+      }
+
+      if (!this.$v.invoices.invoice_number_length.required) {
+        return this.$t('validation.required')
+      }
+
+      if (!this.$v.invoices.invoice_number_length.minValue) {
+        return this.$t('validation.number_length_minvalue')
+      }
+
+      if (!this.$v.invoices.invoice_number_length.numeric) {
+        return this.$t('validation.numbers_only')
+      }
+    },
   },
 
   watch: {
     settings(val) {
       this.invoices.invoice_prefix = val ? val.invoice_prefix : ''
+      this.invoices.invoice_number_length = val ? val.invoice_number_length : ''
 
       this.invoices.invoice_mail_body = val ? val.invoice_mail_body : null
       this.invoices.company_address_format = val
@@ -235,11 +267,17 @@ export default {
         maxLength: maxLength(5),
         alpha,
       },
+      invoice_number_length: {
+        required,
+        minValue: minValue(1),
+        numeric
+      },
     },
   },
 
   methods: {
     ...mapActions('company', ['updateCompanySettings']),
+    ...mapActions('notification', ['showNotification']),
 
     async setInvoiceSetting() {
       let data = {
@@ -252,7 +290,10 @@ export default {
       let response = await this.updateCompanySettings(data)
 
       if (response.data) {
-        window.toastr['success'](this.$t('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$t('general.setting_updated'),
+        })
       }
     },
 
@@ -274,6 +315,7 @@ export default {
       let data = {
         settings: {
           invoice_prefix: this.invoices.invoice_prefix,
+          invoice_number_length: this.invoices.invoice_number_length,
           invoice_mail_body: this.invoices.invoice_mail_body,
           invoice_company_address_format: this.invoices.company_address_format,
           invoice_billing_address_format: this.invoices.billing_address_format,
@@ -283,9 +325,12 @@ export default {
       }
 
       if (this.updateSetting(data)) {
-        window.toastr['success'](
-          this.$t('settings.customization.invoices.invoice_setting_updated')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$t(
+            'settings.customization.invoices.invoice_setting_updated'
+          ),
+        })
       }
     },
 

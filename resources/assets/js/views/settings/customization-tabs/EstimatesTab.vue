@@ -15,6 +15,19 @@
       </sw-input-group>
 
       <sw-input-group
+        :label="$t('settings.customization.estimates.estimate_number_length')"
+        :error="estimateNumberLengthError"
+        class="mt-6 mb-4"
+      >
+        <sw-input
+          v-model="estimates.estimate_number_length"
+          :invalid="$v.estimates.estimate_number_length.$error"
+          type="number"
+          style="max-width: 60px"
+        />
+      </sw-input-group>
+
+      <sw-input-group
         :label="
           $t('settings.customization.estimates.default_estimate_email_body')
         "
@@ -107,9 +120,7 @@
       </div>
       <div class="ml-4">
         <p class="p-0 mb-1 text-base leading-snug text-black">
-          {{
-            $t('settings.customization.estimates.estimate_email_attachment')
-          }}
+          {{ $t('settings.customization.estimates.estimate_email_attachment') }}
         </p>
 
         <p
@@ -117,7 +128,9 @@
           style="max-width: 480px"
         >
           {{
-            $t('settings.customization.estimates.estimate_email_attachment_setting_description')
+            $t(
+              'settings.customization.estimates.estimate_email_attachment_setting_description'
+            )
           }}
         </p>
       </div>
@@ -126,15 +139,20 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-const { required, maxLength, alpha } = require('vuelidate/lib/validators')
+import { mapActions } from 'vuex'
+const {
+  required,
+  maxLength,
+  minValue,
+  alpha,
+  numeric,
+} = require('vuelidate/lib/validators')
 
 export default {
   props: {
     settings: {
       type: Object,
-      require: true,
-      default: false,
+      required: true,
     },
   },
 
@@ -145,6 +163,7 @@ export default {
 
       estimates: {
         estimate_prefix: null,
+        estimate_number_length: null,
         estimate_mail_body: null,
         estimate_terms_and_conditions: null,
         company_address_format: null,
@@ -193,6 +212,23 @@ export default {
         return this.$t('validation.characters_only')
       }
     },
+    estimateNumberLengthError() {
+      if (!this.$v.estimates.estimate_number_length.$error) {
+        return ''
+      }
+
+      if (!this.$v.estimates.estimate_number_length.required) {
+        return this.$t('validation.required')
+      }
+
+      if (!this.$v.estimates.estimate_number_length.minValue) {
+        return this.$t('validation.number_length_minvalue')
+      }
+
+      if (!this.$v.estimates.estimate_number_length.numeric) {
+        return this.$t('validation.numbers_only')
+      }
+    },
   },
 
   validations: {
@@ -202,12 +238,20 @@ export default {
         maxLength: maxLength(5),
         alpha,
       },
+      estimate_number_length: {
+        required,
+        minValue: minValue(1),
+        numeric,
+      },
     },
   },
 
   watch: {
     settings(val) {
       this.estimates.estimate_prefix = val ? val.estimate_prefix : ''
+      this.estimates.estimate_number_length = val
+        ? val.estimate_number_length
+        : ''
 
       this.estimates.estimate_mail_body = val ? val.estimate_mail_body : ''
       this.estimates.company_address_format = val
@@ -244,7 +288,7 @@ export default {
 
   methods: {
     ...mapActions('company', ['updateCompanySettings']),
-
+    ...mapActions('notification', ['showNotification']),
     async setEstimateSetting() {
       let data = {
         settings: {
@@ -254,7 +298,10 @@ export default {
       }
       let response = await this.updateCompanySettings(data)
       if (response.data) {
-        window.toastr['success'](this.$t('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$t('general.setting_updated'),
+        })
       }
     },
 
@@ -275,6 +322,7 @@ export default {
       let data = {
         settings: {
           estimate_prefix: this.estimates.estimate_prefix,
+          estimate_number_length: this.estimates.estimate_number_length,
           estimate_mail_body: this.estimates.estimate_mail_body,
           estimate_company_address_format: this.estimates
             .company_address_format,
@@ -286,9 +334,12 @@ export default {
       }
 
       if (this.updateSetting(data)) {
-        window.toastr['success'](
-          this.$t('settings.customization.estimates.estimate_setting_updated')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$t(
+            'settings.customization.estimates.estimate_setting_updated'
+          ),
+        })
       }
     },
 

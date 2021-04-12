@@ -16,6 +16,19 @@
       </sw-input-group>
 
       <sw-input-group
+        :label="$t('settings.customization.payments.payment_number_length')"
+        :error="paymentnumberLengthError"
+        class="mt-6 mb-4"
+      >
+        <sw-input
+          v-model="payments.payment_number_length"
+          :invalid="$v.payments.payment_number_length.$error"
+          type="number"
+          style="max-width: 60px"
+        />
+      </sw-input-group>
+
+      <sw-input-group
         :label="
           $t('settings.customization.payments.default_payment_email_body')
         "
@@ -102,9 +115,7 @@
 
       <div class="ml-4">
         <p class="p-0 mb-1 text-base leading-snug text-black">
-          {{
-            $t('settings.customization.payments.payment_email_attachment')
-          }}
+          {{ $t('settings.customization.payments.payment_email_attachment') }}
         </p>
 
         <p
@@ -112,7 +123,9 @@
           style="max-width: 480px"
         >
           {{
-            $t('settings.customization.payments.payment_email_attachment_setting_description')
+            $t(
+              'settings.customization.payments.payment_email_attachment_setting_description'
+            )
           }}
         </p>
       </div>
@@ -121,7 +134,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-const { required, maxLength, alpha } = require('vuelidate/lib/validators')
+const { required, maxLength, minValue, alpha, numeric } = require('vuelidate/lib/validators')
 
 export default {
   props: {
@@ -139,6 +152,7 @@ export default {
 
       payments: {
         payment_prefix: null,
+        payment_number_length: null,
         payment_mail_body: null,
         from_customer_address_format: null,
         company_address_format: null,
@@ -179,6 +193,23 @@ export default {
         return this.$t('validation.characters_only')
       }
     },
+    paymentnumberLengthError() {
+      if (!this.$v.payments.payment_number_length.$error) {
+        return ''
+      }
+
+      if (!this.$v.payments.payment_number_length.required) {
+        return this.$t('validation.required')
+      }
+
+      if (!this.$v.payments.payment_number_length.minValue) {
+        return this.$t('validation.number_length_minvalue')
+      }
+
+      if (!this.$v.payments.payment_number_length.numeric) {
+        return this.$t('validation.numbers_only')
+      }
+    },
   },
 
   validations: {
@@ -188,12 +219,18 @@ export default {
         maxLength: maxLength(5),
         alpha,
       },
+      payment_number_length: {
+        required,
+        minValue: minValue(1),
+        numeric
+      },
     },
   },
 
   watch: {
     settings(val) {
       this.payments.payment_prefix = val ? val.payment_prefix : ''
+      this.payments.payment_number_length = val ? val.payment_number_length : ''
 
       this.payments.payment_mail_body = val ? val.payment_mail_body : ''
 
@@ -228,6 +265,8 @@ export default {
 
     ...mapActions('company', ['updateCompanySettings']),
 
+    ...mapActions('notification', ['showNotification']),
+
     changeToUppercase(currentTab) {
       if (currentTab === 'PAYMENTS') {
         this.payments.payment_prefix = this.payments.payment_prefix.toUpperCase()
@@ -244,7 +283,10 @@ export default {
       }
       let response = await this.updateCompanySettings(data)
       if (response.data) {
-        window.toastr['success'](this.$t('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$t('general.setting_updated'),
+        })
       }
     },
 
@@ -258,6 +300,7 @@ export default {
       let data = {
         settings: {
           payment_prefix: this.payments.payment_prefix,
+          payment_number_length: this.payments.payment_number_length,
           payment_mail_body: this.payments.payment_mail_body,
           payment_company_address_format: this.payments.company_address_format,
           payment_from_customer_address_format: this.payments
@@ -266,9 +309,12 @@ export default {
       }
 
       if (this.updateSetting(data)) {
-        window.toastr['success'](
-          this.$t('settings.customization.payments.payment_setting_updated')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$t(
+            'settings.customization.payments.payment_setting_updated'
+          ),
+        })
       }
     },
 
