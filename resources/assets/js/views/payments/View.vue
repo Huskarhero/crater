@@ -385,13 +385,13 @@ export default {
         if (result.value) {
           let request = await this.deletePayment({ ids: [id] })
           if (request.data.success) {
-            this.showNotification({
+            this.showToaster({
               type: 'success',
               message: this.$tc('payments.deleted_message', 1),
             })
             this.$router.push('/admin/payments')
           } else if (request.data.error) {
-            this.showNotification({
+            this.showToaster({
               type: 'error',
               message: request.data.message,
             })
