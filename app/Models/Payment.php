@@ -446,9 +446,4 @@ class Payment extends Model implements HasMedia
             '{PAYMENT_LINK}' => $this->paymentPdfUrl,
         ];
     }
-
-    public function getValues($slug)
-    {
-        return $this->getCustomFieldValues($slug);
-    }
 }
