@@ -80,7 +80,7 @@ export default {
           if (res.data) {
             this.showNotification({
               type: 'success',
-              message: 'Mail sent successfully!',
+              message: 'Mail sent successfuly!',
             })
           }
 

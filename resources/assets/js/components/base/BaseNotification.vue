@@ -71,7 +71,7 @@
                       ? notificationMessage
                       : success
                       ? 'Successful'
-                      : 'Something went wrong'
+                      : 'Somthing went wrong'
                   }}
                 </p>
               </div>
