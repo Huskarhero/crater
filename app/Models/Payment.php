@@ -399,10 +399,6 @@ class Payment extends Model implements HasMedia
 
     public function getCompanyAddress()
     {
-        if ($this->company && (! $this->company->address()->exists())) {
-            return false;
-        }
-
         $format = CompanySetting::getSetting('payment_company_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
@@ -410,10 +406,6 @@ class Payment extends Model implements HasMedia
 
     public function getCustomerBillingAddress()
     {
-        if ($this->user && (! $this->user->billingAddress()->exists())) {
-            return false;
-        }
-
         $format = CompanySetting::getSetting('payment_from_customer_address_format', $this->company_id);
 
         return $this->getFormattedString($format);

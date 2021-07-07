@@ -541,10 +541,6 @@ class Invoice extends Model implements HasMedia
 
     public function getCompanyAddress()
     {
-        if ($this->company && (! $this->company->address()->exists())) {
-            return false;
-        }
-
         $format = CompanySetting::getSetting('invoice_company_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
@@ -552,10 +548,6 @@ class Invoice extends Model implements HasMedia
 
     public function getCustomerShippingAddress()
     {
-        if ($this->user && (! $this->user->shippingAddress()->exists())) {
-            return false;
-        }
-
         $format = CompanySetting::getSetting('invoice_shipping_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
@@ -563,10 +555,6 @@ class Invoice extends Model implements HasMedia
 
     public function getCustomerBillingAddress()
     {
-        if ($this->user && (! $this->user->billingAddress()->exists())) {
-            return false;
-        }
-
         $format = CompanySetting::getSetting('invoice_billing_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
