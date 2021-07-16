@@ -476,32 +476,21 @@ class Invoice extends Model implements HasMedia
 
     public function getPDFData()
     {
-        $taxTypes = [];
-        $taxes = [];
-        $labels = [];
+        $taxes = collect();
 
         if ($this->tax_per_item === 'YES') {
             foreach ($this->items as $item) {
                 foreach ($item->taxes as $tax) {
-                    if (! in_array($tax->name, $taxTypes)) {
-                        array_push($taxTypes, $tax->name);
-                        array_push($labels, $tax->name.' ('.$tax->percent.'%)');
+                    $found = $taxes->filter(function ($item) use ($tax) {
+                        return $item->tax_type_id == $tax->tax_type_id;
+                    })->first();
+
+                    if ($found) {
+                        $found->amount += $tax->amount;
+                    } else {
+                        $taxes->push($tax);
                     }
                 }
-            }
-
-            foreach ($taxTypes as $taxType) {
-                $total = 0;
-
-                foreach ($this->items as $item) {
-                    foreach ($item->taxes as $tax) {
-                        if ($tax->name == $taxType) {
-                            $total += $tax->amount;
-                        }
-                    }
-                }
-
-                array_push($taxes, $total);
             }
         }
 
@@ -521,7 +510,6 @@ class Invoice extends Model implements HasMedia
             'billing_address' => $this->getCustomerBillingAddress(),
             'notes' => $this->getNotes(),
             'logo' => $logo ?? null,
-            'labels' => $labels,
             'taxes' => $taxes,
         ]);
 
@@ -541,6 +529,10 @@ class Invoice extends Model implements HasMedia
 
     public function getCompanyAddress()
     {
+        if ($this->company && (! $this->company->address()->exists())) {
+            return false;
+        }
+
         $format = CompanySetting::getSetting('invoice_company_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
@@ -548,6 +540,10 @@ class Invoice extends Model implements HasMedia
 
     public function getCustomerShippingAddress()
     {
+        if ($this->user && (! $this->user->shippingAddress()->exists())) {
+            return false;
+        }
+
         $format = CompanySetting::getSetting('invoice_shipping_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
@@ -555,6 +551,10 @@ class Invoice extends Model implements HasMedia
 
     public function getCustomerBillingAddress()
     {
+        if ($this->user && (! $this->user->billingAddress()->exists())) {
+            return false;
+        }
+
         $format = CompanySetting::getSetting('invoice_billing_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
