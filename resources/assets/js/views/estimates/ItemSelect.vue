@@ -104,6 +104,15 @@ export default {
       loading: false,
     }
   },
+  validations() {
+    return {
+      item: {
+        description: {
+          maxLength: maxLength(255),
+        },
+      },
+    }
+  },
   computed: {
     ...mapGetters('item', ['items']),
   },
