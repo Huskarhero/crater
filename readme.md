@@ -60,7 +60,6 @@ Join the Crater discord server to discuss:
 - [ ] Improve Accessibility
 - [ ] Customer Portal
 - [ ] Accept Payments (Stripe Integration)
-- [ ] Debit & Credit Notes
 
 ## Credits
 
