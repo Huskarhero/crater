@@ -39,7 +39,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the default Laravel folders permissions, if your application
-    | requires more permissions just add them to the array list below.
+    | requires more permissions just add them to the array list bellow.
     |
     */
     'permissions' => [
