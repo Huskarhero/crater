@@ -181,7 +181,7 @@
         <template #cell-amount="{ row }">
           <BaseFormatMoney
             :amount="row.data.amount"
-            :currency="row.data.currency"
+            :currency="companyStore.selectedCompanyCurrency"
           />
         </template>
 

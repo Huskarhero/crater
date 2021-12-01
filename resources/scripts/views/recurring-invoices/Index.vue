@@ -124,11 +124,7 @@
         "
       >
         <!-- Tabs -->
-        <BaseTabGroup
-          class="-mb-5"
-          :default-index="currentStatusIndex"
-          @change="setStatusFilter"
-        >
+        <BaseTabGroup class="-mb-5" @change="setStatusFilter">
           <BaseTab :title="$t('recurring_invoices.active')" filter="ACTIVE" />
           <BaseTab :title="$t('recurring_invoices.on_hold')" filter="ON_HOLD" />
           <BaseTab :title="$t('recurring_invoices.all')" filter="ALL" />
@@ -193,7 +189,7 @@
 
         <!-- Starts at  -->
         <template #cell-starts_at="{ row }">
-          {{ row.data.formatted_starts_at }}
+            {{ row.data.formatted_starts_at }}
         </template>
 
         <!-- Customer  -->
@@ -333,10 +329,6 @@ onUnmounted(() => {
   if (recurringInvoiceStore.selectAllField) {
     recurringInvoiceStore.selectAllRecurringInvoices()
   }
-})
-
-const currentStatusIndex = computed(() => {
-  return statusList.value.findIndex((status) => status === filters.status)
 })
 
 function canViewActions() {

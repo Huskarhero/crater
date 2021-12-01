@@ -422,21 +422,14 @@ async function searchCustomer(search) {
 }
 
 async function loadData() {
-  if (!isEdit.value) {
-    expenseStore.currentExpense.currency_id =
-      companyStore.selectedCompanyCurrency.id
-    expenseStore.currentExpense.selectedCurrency =
-      companyStore.selectedCompanyCurrency
-  }
+  expenseStore.currentExpense.currency_id = companyStore.selectedCompanyCurrency.id
+  expenseStore.currentExpense.selectedCurrency = companyStore.selectedCompanyCurrency
 
   isFetchingInitialData.value = true
   await expenseStore.fetchPaymentModes({ limit: 'all' })
 
   if (isEdit.value) {
     await expenseStore.fetchExpense(route.params.id)
-
-    expenseStore.currentExpense.currency_id =
-      expenseStore.currentExpense.selectedCurrency.id
   } else if (route.query.customer) {
     expenseStore.currentExpense.customer_id = route.query.customer
   }
