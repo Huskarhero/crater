@@ -131,9 +131,7 @@
           style="border-top: 1px solid rgba(185, 193, 209, 0.41)"
         >
           <div>
-            <BaseText
-              :text="customer.name"
-              :length="30"
+            <div
               class="
                 pr-2
                 text-sm
@@ -144,12 +142,11 @@
                 capitalize
                 truncate
               "
-            />
-            
-            <BaseText
+            >
+              {{ customer.name }}
+            </div>
+            <div
               v-if="customer.contact_name"
-              :text="customer.contact_name"
-              :length="30"
               class="
                 mt-1
                 text-xs
@@ -158,7 +155,9 @@
                 leading-5
                 text-gray-600
               "
-            />
+            >
+              {{ customer.contact_name }}
+            </div>
           </div>
           <div class="flex-1 font-bold text-right whitespace-nowrap">
             <BaseFormatMoney

@@ -161,11 +161,9 @@
         </template>
 
         <template #cell-name="{ row }">
-          <BaseText
-            :text="row.data.customer.name"
-            :length="30"
-            tag="span"
-          />
+          <span>
+            {{ row.data.customer.name }}
+          </span>
         </template>
 
         <template #cell-payment_mode="{ row }">

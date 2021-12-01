@@ -151,21 +151,12 @@
         <template #cell-name="{ row }">
           <router-link
             :to="{ path: `customers/${row.data.id}/view` }"
-          >
-          <BaseText
-            :text="row.data.name"
-            :length="30"
-            tag="span"
             class="font-medium text-primary-500 flex flex-col"
           >
             {{ row.data.name }}
-          </BaseText>
-          <BaseText
-            :text="row.data.contact_name ? row.data.contact_name : ''"
-            :length="30"
-            tag="span"
-            class="text-xs text-gray-400"
-          />
+            <span class="text-xs text-gray-400">
+              {{ row.data.contact_name ? row.data.contact_name : '' }}</span
+            >
           </router-link>
         </template>
 
