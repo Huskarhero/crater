@@ -207,7 +207,10 @@
         </template>
 
         <template #cell-total="{ row }">
-          <BaseFormatMoney :amount="row.data.total" />
+          <BaseFormatMoney
+            :amount="row.data.total"
+            :currency="row.data.customer.currency"
+          />
         </template>
 
         <!-- Actions -->

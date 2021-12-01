@@ -197,7 +197,7 @@
 
         <!-- Invoice date  -->
         <template #cell-invoice_date="{ row }">
-            {{ row.data.formatted_invoice_date }}
+          {{ row.data.formatted_invoice_date }}
         </template>
 
         <!-- Invoice Total  -->
