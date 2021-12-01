@@ -86,15 +86,13 @@ class EstimatesRequest extends FormRequest
 
         $companyCurrency = CompanySetting::getSetting('currency', $this->header('company'));
 
-        $customer = Customer::find($this->customer_id);
+        $customerCurrency = Customer::find($this->customer_id)->currency_id;
 
-        if ($companyCurrency && $customer) {
-            if ((string)$customer->currency_id !== $companyCurrency) {
-                $rules['exchange_rate'] = [
-                    'required',
-                ];
-            };
-        }
+        if ((string)$customerCurrency !== $companyCurrency) {
+            $rules['exchange_rate'] = [
+                'required',
+            ];
+        };
 
         if ($this->isMethod('PUT')) {
             $rules['estimate_number'] = [
@@ -117,7 +115,7 @@ class EstimatesRequest extends FormRequest
 
         return collect($this->except('items', 'taxes'))
             ->merge([
-                'creator_id' => $this->user()->id ?? null,
+                'creator_id' => $this->user()->id,
                 'status' => $this->has('estimateSend') ? Estimate::STATUS_SENT : Estimate::STATUS_DRAFT,
                 'company_id' => $this->header('company'),
                 'tax_per_item' => CompanySetting::getSetting('tax_per_item', $this->header('company')) ?? 'NO ',

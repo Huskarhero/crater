@@ -23,11 +23,9 @@
       @click.stop
     >
       <div class="flex relative justify-between mb-2">
-        <BaseText
-          :text="selectedCustomer.name"
-          :length="30"
-          class="flex-1 text-base font-medium text-left text-gray-900"
-        />
+        <label class="flex-1 text-base font-medium text-left text-gray-900">
+          {{ selectedCustomer.name }}
+        </label>
         <div class="flex">
           <a
             class="
@@ -304,10 +302,8 @@
                   </span>
 
                   <div class="flex flex-col justify-center text-left">
-                    <BaseText
+                    <label
                       v-if="customer.name"
-                      :text="customer.name"
-                      :length="30"
                       class="
                         m-0
                         text-base
@@ -315,11 +311,12 @@
                         leading-tight
                         cursor-pointer
                       "
-                    />
-                    <BaseText
+                    >
+                      {{ customer.name }}
+                    </label>
+
+                    <label
                       v-if="customer.contact_name"
-                      :text="customer.contact_name"
-                      :length="30"
                       class="
                         m-0
                         text-sm
@@ -327,7 +324,9 @@
                         text-gray-400
                         cursor-pointer
                       "
-                    />
+                    >
+                      {{ customer.contact_name }}
+                    </label>
                   </div>
                 </li>
                 <div

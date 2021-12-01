@@ -6,6 +6,7 @@ use Crater\Models\Company;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
@@ -32,12 +33,7 @@ test('store user using a form request', function () {
 });
 
 test('store company', function () {
-    $company = Company::factory()->raw([
-        'currency' => 12,
-        'address' => [
-            'country_id' => 12
-        ]
-    ]);
+    $company = Company::factory()->raw();
 
     postJson('/api/v1/companies', $company)
         ->assertStatus(201);
@@ -52,8 +48,10 @@ test('store company', function () {
 });
 
 test('delete company', function () {
-    postJson('/api/v1/companies/delete', ["xyz"])
-        ->assertStatus(422);
+    $company = Company::factory()->create();
+
+    deleteJson('/api/v1/companies/delete')
+        ->assertOk();
 });
 
 test('transfer ownership', function () {

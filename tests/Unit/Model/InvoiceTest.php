@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Artisan;
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
     Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'UnitSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'PaymentMethodSeeder', '--force' => true]);
 });
 
 test('invoice has many invoice items', function () {
@@ -112,7 +114,7 @@ test('update invoice', function () {
     array_push($newInvoice['items'], $item);
     array_push($newInvoice['taxes'], $tax);
 
-    $request = new InvoicesRequest();
+    $request = new Request();
 
     $request->replace($newInvoice);
 
@@ -159,7 +161,7 @@ test('create items', function () {
 
     $request->replace(['items' => $items ]);
 
-    Invoice::createItems($invoice, $request->items);
+    Invoice::createItems($invoice, $request, $invoice->exchange_rate);
 
     $this->assertDatabaseHas('invoice_items', [
         'invoice_id' => $invoice->id,
@@ -186,7 +188,7 @@ test('create taxes', function () {
 
     $request->replace(['taxes' => $taxes ]);
 
-    Invoice::createTaxes($invoice, $request->taxes);
+    Invoice::createTaxes($invoice, $request, $invoice->exchange_rate);
 
     $this->assertDatabaseHas('taxes', [
         'invoice_id' => $invoice->id,

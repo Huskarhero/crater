@@ -180,9 +180,7 @@
             style="border-bottom: 1px solid rgba(185, 193, 209, 0.41)"
           >
             <div class="flex-2">
-              <BaseText
-                :text="estimate.customer.name"
-                :length="30"
+              <div
                 class="
                   pr-2
                   mb-2
@@ -194,8 +192,10 @@
                   capitalize
                   truncate
                 "
-              />
-              
+              >
+                {{ estimate.customer.name }}
+              </div>
+
               <div
                 class="
                   mt-1

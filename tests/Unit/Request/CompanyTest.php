@@ -1,7 +1,6 @@
 <?php
 
 use Crater\Http\Requests\CompanyRequest;
-use Illuminate\Validation\Rule;
 
 test('company request validation rules', function () {
     $request = new CompanyRequest();
@@ -10,9 +9,8 @@ test('company request validation rules', function () {
         [
             'name' => [
                 'required',
-                Rule::unique('companies')->ignore($request->header('company'), 'id'),
             ],
-            'address.country_id' => [
+            'country_id' => [
                 'required',
             ],
         ],

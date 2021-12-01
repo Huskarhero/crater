@@ -181,15 +181,12 @@
         <template #cell-amount="{ row }">
           <BaseFormatMoney
             :amount="row.data.amount"
-            :currency="row.data.currency"
+            :currency="companyStore.selectedCompanyCurrency"
           />
         </template>
 
         <template #cell-user_name="{ row }">
-          <BaseText
-            :text="row.data.customer ? row.data.customer.name : '-'"
-            :length="30"
-          />
+          {{ row.data.customer ? row.data.customer.name : '-' }}
         </template>
 
         <template #cell-notes="{ row }">

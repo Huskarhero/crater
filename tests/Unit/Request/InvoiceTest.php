@@ -19,10 +19,7 @@ test('invoice request validation rules', function () {
             ],
             'invoice_number' => [
                 'required',
-                Rule::unique('invoices')->where('company_id', $request->header('company'))
-            ],
-            'exchange_rate' => [
-                'nullable'
+                Rule::unique('invoices')->where('company_id', null)
             ],
             'discount' => [
                 'required',

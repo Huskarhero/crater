@@ -179,10 +179,7 @@
         </template>
 
         <template #cell-name="{ row }">
-         <BaseText
-            :text="row.data.customer.name"
-            :length="30"
-          />
+          {{ row.data.customer.name }}
         </template>
 
         <!-- Invoice Number  -->
@@ -197,7 +194,7 @@
 
         <!-- Invoice date  -->
         <template #cell-invoice_date="{ row }">
-          {{ row.data.formatted_invoice_date }}
+            {{ row.data.formatted_invoice_date }}
         </template>
 
         <!-- Invoice Total  -->
