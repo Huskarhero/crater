@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { watch, computed, ref, onBeforeUnmount } from 'vue'
+import { watch, computed, ref, onMounted } from 'vue'
 import { useGlobalStore } from '@/scripts/stores/global'
 import { useCompanyStore } from '@/scripts/stores/company'
 import { useExchangeRateStore } from '@/scripts/stores/exchange-rate'
@@ -110,8 +110,7 @@ watch(
   () => props.store[props.storeProp].currency_id,
   (v) => {
     onChangeCurrency(v)
-  },
-  { immediate: true }
+  }
 )
 watch(
   () => props.customerCurrency,
@@ -145,7 +144,7 @@ function setCustomerCurrency(v) {
 
 async function onChangeCurrency(v) {
   if (v !== companyCurrency.value.id) {
-    if (!props.isEdit && v) {
+    if (!props.isEdit) {
       await getCurrenctExchangeRate(v)
     }
 
@@ -171,8 +170,4 @@ function getCurrenctExchangeRate(v) {
       isFetching.value = false
     })
 }
-
-onBeforeUnmount(() => {
-  props.store.showExchangeRate = false
-})
 </script>
