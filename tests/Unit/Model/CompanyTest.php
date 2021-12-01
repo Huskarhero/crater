@@ -8,10 +8,10 @@ beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 });
 
-test('company has many customers', function () {
-    $company = Company::factory()->hasCustomers()->create();
+test('company has one customer', function () {
+    $company = Company::factory()->hasCustomer()->create();
 
-    $this->assertTrue($company->customers()->exists());
+    $this->assertTrue($company->customer()->exists());
 });
 
 test('company has many company setings', function () {

@@ -53,13 +53,11 @@ class ExpenseRequest extends FormRequest
             ],
         ];
 
-        if ($companyCurrency && $this->currency_id) {
-            if ($companyCurrency !== $this->currency_id) {
-                $rules['exchange_rate'] = [
-                    'required',
-                ];
-            };
-        }
+        if ($companyCurrency !== $this->currency_id) {
+            $rules['exchange_rate'] = [
+                'required',
+            ];
+        };
 
         return $rules;
     }

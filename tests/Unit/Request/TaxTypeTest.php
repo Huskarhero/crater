@@ -1,7 +1,6 @@
 <?php
 
 use Crater\Http\Requests\TaxTypeRequest;
-use Illuminate\Validation\Rule;
 
 test('tax type request validation rules', function () {
     $request = new TaxTypeRequest();
@@ -10,8 +9,6 @@ test('tax type request validation rules', function () {
         [
             'name' => [
                 'required',
-                Rule::unique('tax_types')
-                ->where('company_id', $request->header('company'))
             ],
             'percent' => [
                 'required',

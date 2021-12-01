@@ -1,10 +1,9 @@
 <?php
 
 use Crater\Models\User;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use function Pest\Laravel\postJson;
+use function Pest\Laravel\getJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -20,15 +19,7 @@ beforeEach(function () {
     );
 });
 
-test('create super admin role', function () {
-    $data = [
-        "email" => "loremipsum@gmail.com",
-        "name" => "lorem",
-        "role" => "super admin",
-        "password" => "lorem@123"
-    ];
-
-    postJson('api/v1/users', $data)->assertStatus(201);
-
-    $this->assertDatabaseHas('users', Arr::except($data, ['password']));
+test('get all retrospective edits', function () {
+    getJson('api/v1/config/retrospective-edit-options')
+        ->assertOk();
 });
