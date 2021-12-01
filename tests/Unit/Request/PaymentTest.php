@@ -14,15 +14,12 @@ test('payment request validation rules', function () {
             'customer_id' => [
                 'required',
             ],
-            'exchange_rate' => [
-                'nullable'
-            ],
             'amount' => [
                 'required',
             ],
             'payment_number' => [
                 'required',
-                Rule::unique('payments')->where('company_id', $request->header('company'))
+                Rule::unique('payments')->where('company_id', null)
             ],
             'invoice_id' => [
                 'nullable',

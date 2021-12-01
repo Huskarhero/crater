@@ -19,10 +19,7 @@ test('estimate request validation rules', function () {
             ],
             'estimate_number' => [
                 'required',
-                Rule::unique('estimates')->where('company_id', $request->header('company'))
-            ],
-            'exchange_rate' => [
-                'nullable'
+                Rule::unique('estimates')->where('company_id', null)
             ],
             'discount' => [
                 'required',

@@ -252,8 +252,10 @@ test('clone invoice', function () {
         'due_date' => '1988-08-18',
     ]);
 
-    postJson("api/v1/invoices/{$invoices->id}/clone")
-        ->assertStatus(201);
+    $response = postJson("api/v1/invoices/{$invoices->id}/clone");
+
+    $response
+        ->assertOk();
 });
 
 test('create invoice with negative tax', function () {
