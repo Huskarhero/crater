@@ -52,12 +52,11 @@ Join the Crater discord server to discuss:
 - [x] Performance Improvements
 - [x] Customer View page
 - [x] Add and Use Custom Fields on Invoices & Estimates.
-- [x] Multiple Companies
-- [x] Recurring Invoices
 - [ ] Modules
+- [ ] Multiple Companies
 - [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
 - [ ] Vendors, Inventory & Bills
-- [ ] Payment Reminders
+- [ ] Recurring Invoices & Payment Reminders
 - [ ] Improve Accessibility
 - [ ] Customer Portal
 - [ ] Accept Payments (Stripe Integration)
