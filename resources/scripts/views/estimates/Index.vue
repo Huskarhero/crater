@@ -54,16 +54,6 @@
         />
       </BaseInputGroup>
 
-      <BaseInputGroup :label="$t('estimates.status')">
-        <BaseMultiselect
-          v-model="filters.status"
-          :options="status"
-          searchable
-          :placeholder="$t('general.select_a_status')"
-          @update:modelValue="setActiveTab"
-          @remove="clearStatusSearch()"
-        />
-      </BaseInputGroup>
       <BaseInputGroup :label="$t('general.from')">
         <BaseDatePicker
           v-model="filters.from_date"
@@ -339,11 +329,6 @@ function hasAtleastOneAbility() {
   ])
 }
 
-async function clearStatusSearch(removedOption, id) {
-  filters.status = ''
-  refreshTable()
-}
-
 function refreshTable() {
   tableComponent.value && tableComponent.value.refresh()
 }
@@ -458,23 +443,6 @@ function setActiveTab(val) {
     case 'SENT':
       activeTab.value = t('general.sent')
       break
-
-    case 'VIEWED':
-      activeTab.value = t('estimates.viewed')
-      break
-
-    case 'EXPIRED':
-      activeTab.value = t('estimates.expired')
-      break
-
-    case 'ACCEPTED':
-      activeTab.value = t('estimates.accepted')
-      break
-
-    case 'REJECTED':
-      activeTab.value = t('estimates.rejected')
-      break
-
     default:
       activeTab.value = t('general.all')
       break
