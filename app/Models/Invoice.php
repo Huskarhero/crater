@@ -389,7 +389,6 @@ class Invoice extends Model implements HasMedia
         }
 
         $data['due_amount'] = ($this->due_amount + $oldTotal);
-        $data['base_due_amount'] = $data['due_amount'] * $data['exchange_rate'];
         $data['customer_sequence_number'] = $serial->nextCustomerSequenceNumber;
 
         $this->changeInvoiceStatus($data['due_amount']);
@@ -661,7 +660,6 @@ class Invoice extends Model implements HasMedia
     public function addInvoicePayment($amount)
     {
         $this->due_amount += $amount;
-        $this->base_due_amount = $this->due_amount * $this->exchange_rate;
 
         $this->changeInvoiceStatus($this->due_amount);
     }
@@ -669,7 +667,6 @@ class Invoice extends Model implements HasMedia
     public function subtractInvoicePayment($amount)
     {
         $this->due_amount -= $amount;
-        $this->base_due_amount = $this->due_amount * $this->exchange_rate;
 
         $this->changeInvoiceStatus($this->due_amount);
     }
