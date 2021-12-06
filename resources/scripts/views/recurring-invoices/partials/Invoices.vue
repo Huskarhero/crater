@@ -1,5 +1,4 @@
 <template>
-  <SendInvoiceModal />
   <div class="relative table-container">
     <BaseTable
       ref="table"
@@ -50,7 +49,6 @@ import { useUserStore } from '@/scripts/stores/user'
 import { useRecurringInvoiceStore } from '@/scripts/stores/recurring-invoice'
 import abilities from '@/scripts/stub/abilities'
 import InvoiceDropdown from '@/scripts/components/dropdowns/InvoiceIndexDropdown.vue'
-import SendInvoiceModal from '@/scripts/components/modal-components/SendInvoiceModal.vue'
 
 const recurringInvoiceStore = useRecurringInvoiceStore()
 

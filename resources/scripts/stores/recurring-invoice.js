@@ -399,14 +399,11 @@ export const useRecurringInvoiceStore = (useWindow = false) => {
       },
 
       setSelectedFrequency() {
-        let data = this.frequencies.find(
+        this.newRecurringInvoice.selectedFrequency = this.frequencies.find(
           (frequency) => {
             return frequency.value === this.newRecurringInvoice.frequency
           }
         )
-        data ? this.newRecurringInvoice.selectedFrequency = data
-          : this.newRecurringInvoice.selectedFrequency = { label: 'Custom', value: 'CUSTOM' }
-
       },
 
       resetSelectedNote() {

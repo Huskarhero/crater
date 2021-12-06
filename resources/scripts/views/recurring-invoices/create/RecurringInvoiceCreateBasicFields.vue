@@ -235,12 +235,10 @@ const getStatusOptions = computed(() => {
 watch(
   () => recurringInvoiceStore.newRecurringInvoice.selectedFrequency,
   (newValue) => {
-    if (!recurringInvoiceStore.isFetchingInitialSettings) {
-      if (newValue && newValue.value !== 'CUSTOM') {
-        recurringInvoiceStore.newRecurringInvoice.frequency = newValue.value
-      } else {
-        recurringInvoiceStore.newRecurringInvoice.frequency = null
-      }
+    if (newValue && newValue.value !== 'CUSTOM') {
+      recurringInvoiceStore.newRecurringInvoice.frequency = newValue.value
+    } else {
+      recurringInvoiceStore.newRecurringInvoice.frequency = null
     }
   }
 )
