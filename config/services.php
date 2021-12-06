@@ -62,7 +62,4 @@ return [
         'redirect' => env('GITHUB_REDIRECT_URL'),
     ],
 
-    'cron_job' => [
-        'auth_token' => env('CRON_JOB_AUTH_TOKEN', 0)
-    ],
 ];
