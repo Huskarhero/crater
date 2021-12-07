@@ -52,7 +52,13 @@ test('store recurring invoice', function () {
 
     $recurringInvoice = collect($recurringInvoice)
         ->only([
+            'starts_at',
+            'send_automatically',
+            'next_invoice_at',
             'frequency',
+            'limit_by',
+            'limit_count',
+            'limit_date'
         ])
         ->toArray();
 
@@ -90,7 +96,13 @@ test('update recurring invoice', function () {
 
     $new_recurringInvoice = collect($new_recurringInvoice)
         ->only([
+            'starts_at',
+            'send_automatically',
+            'next_invoice_at',
             'frequency',
+            'limit_by',
+            'limit_count',
+            'limit_date'
         ])
         ->toArray();
 

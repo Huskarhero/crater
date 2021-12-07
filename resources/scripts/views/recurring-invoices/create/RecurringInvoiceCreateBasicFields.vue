@@ -3,7 +3,7 @@
     <BaseCustomerSelectPopup
       v-model="recurringInvoiceStore.newRecurringInvoice.customer"
       :valid="v.customer_id"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       type="recurring-invoice"
     />
 
@@ -40,13 +40,13 @@
   >
     <BaseInputGroup
       :label="$t('recurring_invoices.starts_at')"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       required
       :error="v.starts_at.$error && v.starts_at.$errors[0].$message"
     >
       <BaseDatePicker
         v-model="recurringInvoiceStore.newRecurringInvoice.starts_at"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :calendar-button="true"
         calendar-button-icon="calendar"
         :invalid="v.starts_at.$error"
@@ -56,12 +56,12 @@
 
     <BaseInputGroup
       :label="$t('recurring_invoices.next_invoice_date')"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       required
     >
       <BaseDatePicker
         v-model="recurringInvoiceStore.newRecurringInvoice.next_invoice_at"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :calendar-button="true"
         :disabled="true"
         :loading="isLoadingNextDate"
@@ -71,14 +71,14 @@
 
     <BaseInputGroup
       :label="$t('recurring_invoices.limit_by')"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       class="lg:mt-0"
       required
       :error="v.limit_by.$error && v.limit_by.$errors[0].$message"
     >
       <BaseMultiselect
         v-model="recurringInvoiceStore.newRecurringInvoice.limit_by"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :options="limits"
         label="label"
         :invalid="v.limit_by.$error"
@@ -89,13 +89,13 @@
     <BaseInputGroup
       v-if="hasLimitBy('DATE')"
       :label="$t('recurring_invoices.limit_date')"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       :required="hasLimitBy('DATE')"
       :error="v.limit_date.$error && v.limit_date.$errors[0].$message"
     >
       <BaseDatePicker
         v-model="recurringInvoiceStore.newRecurringInvoice.limit_date"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :invalid="v.limit_date.$error"
         calendar-button-icon="calendar"
       />
@@ -104,13 +104,13 @@
     <BaseInputGroup
       v-if="hasLimitBy('COUNT')"
       :label="$t('recurring_invoices.count')"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       :required="hasLimitBy('COUNT')"
       :error="v.limit_count.$error && v.limit_count.$errors[0].$message"
     >
       <BaseInput
         v-model="recurringInvoiceStore.newRecurringInvoice.limit_count"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :invalid="v.limit_count.$error"
         type="number"
       />
@@ -119,13 +119,13 @@
     <BaseInputGroup
       :label="$t('recurring_invoices.status')"
       required
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       :error="v.status.$error && v.status.$errors[0].$message"
     >
       <BaseMultiselect
         v-model="recurringInvoiceStore.newRecurringInvoice.status"
         :options="getStatusOptions"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :invalid="v.status.$error"
         :placeholder="$t('recurring_invoices.select_a_status')"
         value-prop="value"
@@ -136,14 +136,14 @@
     <BaseInputGroup
       :label="$t('recurring_invoices.frequency.select_frequency')"
       required
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       :error="
         v.selectedFrequency.$error && v.selectedFrequency.$errors[0].$message
       "
     >
       <BaseMultiselect
         v-model="recurringInvoiceStore.newRecurringInvoice.selectedFrequency"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :options="recurringInvoiceStore.frequencies"
         label="label"
         :invalid="v.selectedFrequency.$error"
@@ -155,13 +155,13 @@
     <BaseInputGroup
       v-if="isCustomFrequency"
       :label="$t('recurring_invoices.frequency.title')"
-      :content-loading="isLoading"
+      :content-loading="isFetchingInitialData"
       required
       :error="v.frequency.$error && v.frequency.$errors[0].$message"
     >
       <BaseInput
         v-model="recurringInvoiceStore.newRecurringInvoice.frequency"
-        :content-loading="isLoading"
+        :content-loading="isFetchingInitialData"
         :disabled="!isCustomFrequency"
         :invalid="v.frequency.$error"
         :loading="isLoadingNextDate"
@@ -208,6 +208,7 @@ const route = useRoute()
 const recurringInvoiceStore = useRecurringInvoiceStore()
 const globalStore = useGlobalStore()
 
+const isFetchingInitialData = ref(false)
 const isLoadingNextDate = ref(false)
 
 const limits = reactive([
