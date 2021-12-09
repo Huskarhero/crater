@@ -1,10 +1,11 @@
 <?php
 
+use Crater\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropUniqueEmailOnCustomersTable extends Migration
+class UpdateCraterVersion505 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +14,7 @@ class DropUniqueEmailOnCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dropUnique(['email']);
-        });
+        Setting::setSetting('version', '5.0.5');
     }
 
     /**
