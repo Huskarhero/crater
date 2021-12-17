@@ -101,7 +101,6 @@ async function onMarkAsSent() {
         invoiceData.value.status = 'SENT'
         isMarkAsSent.value = true
       }
-      isMarkAsSent.value = false
     })
 }
 

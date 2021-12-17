@@ -26,6 +26,8 @@
       <BaseInputGroup
         :label="$t('invoices.due_date')"
         :content-loading="isLoading"
+        required
+        :error="v.due_date.$error && v.due_date.$errors[0].$message"
       >
         <BaseDatePicker
           v-model="invoiceStore.newInvoice.due_date"
