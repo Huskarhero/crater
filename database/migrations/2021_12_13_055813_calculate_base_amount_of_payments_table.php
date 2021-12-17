@@ -12,7 +12,7 @@ class CalculateBaseAmountOfPaymentsTable extends Migration
      */
     public function up()
     {
-        $payments = Payment::where('exchange_rate', '<>', null)->get();
+        $payments = Payment::all();
 
         if ($payments) {
             foreach ($payments as $payment) {
