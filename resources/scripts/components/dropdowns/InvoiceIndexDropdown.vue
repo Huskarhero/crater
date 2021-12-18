@@ -153,6 +153,7 @@ const utils = inject('utils')
 function canReSendInvoice(row) {
   return (
     (row.status == 'SENT' || row.status == 'VIEWED') &&
+    route.name !== 'invoices.view' &&
     userStore.hasAbilities(abilities.SEND_INVOICE)
   )
 }
