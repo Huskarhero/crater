@@ -35,8 +35,6 @@ class Estimate extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
-        'estimate_date',
-        'expiry_date'
     ];
 
     protected $appends = [
@@ -55,6 +53,20 @@ class Estimate extends Model implements HasMedia
         'discount_val' => 'integer',
         'exchange_rate' => 'float'
     ];
+
+    public function setEstimateDateAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['estimate_date'] = Carbon::createFromFormat('Y-m-d', $value);
+        }
+    }
+
+    public function setExpiryDateAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['expiry_date'] = Carbon::createFromFormat('Y-m-d', $value);
+        }
+    }
 
     public function getEstimatePdfUrlAttribute()
     {

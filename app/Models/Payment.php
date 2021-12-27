@@ -28,7 +28,7 @@ class Payment extends Model implements HasMedia
     public const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
     public const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
-    protected $dates = ['created_at', 'updated_at', 'payment_date'];
+    protected $dates = ['created_at', 'updated_at'];
 
     protected $guarded = ['id'];
 
@@ -52,6 +52,13 @@ class Payment extends Model implements HasMedia
         static::updated(function ($payment) {
             GeneratePaymentPdfJob::dispatch($payment, true);
         });
+    }
+
+    public function setPaymentDateAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['payment_date'] = Carbon::createFromFormat('Y-m-d', $value);
+        }
     }
 
     public function getFormattedCreatedAtAttribute($value)
@@ -176,7 +183,7 @@ class Payment extends Model implements HasMedia
 
     public function updatePayment($request)
     {
-        $data = $request->getPaymentPayload();
+        $data = $request->all();
 
         if ($request->invoice_id && (! $this->invoice_id || $this->invoice_id !== $request->invoice_id)) {
             $invoice = Invoice::find($request->invoice_id);

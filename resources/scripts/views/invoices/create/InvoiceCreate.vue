@@ -186,6 +186,9 @@ const rules = {
   invoice_date: {
     required: helpers.withMessage(t('validation.required'), required),
   },
+  due_date: {
+    required: helpers.withMessage(t('validation.required'), required),
+  },
   reference_number: {
     maxLength: helpers.withMessage(
       t('validation.price_maxlength'),
