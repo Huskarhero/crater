@@ -22,13 +22,6 @@ class CustomFieldValue extends Model
         'defaultAnswer',
     ];
 
-    public function setDateAnswerAttribute($value)
-    {
-        if ($value && $value != null) {
-            $this->attributes['date_answer'] = $value;
-        }
-    }
-
     public function setTimeAnswerAttribute($value)
     {
         if ($value && $value != null) {
@@ -36,14 +29,6 @@ class CustomFieldValue extends Model
         } else {
             $this->attributes['time_answer'] = null;
         }
-    }
-
-    public function setDateTimeAnswerAttribute($value)
-    {
-        if ($value && $value != null) {
-            $this->attributes['date_time_answer'] = $value;
-        }
-        $this->attributes['time_answer'] = null;
     }
 
     public function getDefaultAnswerAttribute()

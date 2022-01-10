@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Nwidart\Modules\Facades\Module;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
@@ -63,6 +64,11 @@ class Invoice extends Model implements HasMedia
         'invoicePdfUrl',
     ];
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function emailLogs()
     {
         return $this->morphMany('App\Models\EmailLog', 'mailable');
@@ -111,6 +117,15 @@ class Invoice extends Model implements HasMedia
     public function getInvoicePdfUrlAttribute()
     {
         return url('/invoices/pdf/'.$this->unique_hash);
+    }
+
+    public function getPaymentModuleEnabledAttribute()
+    {
+        if (Module::has('Payments')) {
+            return Module::isEnabled('Payments');
+        }
+
+        return false;
     }
 
     public function getAllowEditAttribute()

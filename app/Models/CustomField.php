@@ -26,24 +26,10 @@ class CustomField extends Model
         'options' => 'array',
     ];
 
-    public function setDateAnswerAttribute($value)
-    {
-        if ($value && $value != null) {
-            $this->attributes['date_answer'] = $value;
-        }
-    }
-
     public function setTimeAnswerAttribute($value)
     {
         if ($value && $value != null) {
             $this->attributes['time_answer'] = date("H:i:s", strtotime($value));
-        }
-    }
-
-    public function setDateTimeAnswerAttribute($value)
-    {
-        if ($value && $value != null) {
-            $this->attributes['date_time_answer'] = $value;
         }
     }
 
