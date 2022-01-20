@@ -54,24 +54,20 @@ Join the Crater discord server to discuss:
 - [x] Add and Use Custom Fields on Invoices & Estimates.
 - [x] Multiple Companies
 - [x] Recurring Invoices
-- [x] Customer Portal
-- [x] Accept Payments (Stripe Integration)
-- [x] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
-- [ ] Modules API
+- [ ] Modules
 - [ ] Blockchain Integration
 - [ ] Web 3.0 Accounting
-- [ ] Vendors & Bills
-- [ ] Inventory Management 
+- [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
+- [ ] Vendors, Inventory & Bills
 - [ ] Payment Reminders
 - [ ] Improve Accessibility
+- [ ] Customer Portal
+- [ ] Accept Payments (Stripe Integration)
 - [ ] Debit & Credit Notes
-- [ ] Time Tracking
-- [ ] Full service Payroll
-
 
 ## Copyright
 
-© 2022 Crater Invoice, Inc.
+© 2021 Crater Invoice, Inc.
 
 **Special thanks to:**
 
