@@ -28,16 +28,7 @@
       "
     >
       <div class="w-full">
-        <MainLogo
-          v-if="!loginPageLogo"
-          class="block w-48 h-auto max-w-full mb-32 text-primary-500"
-        />
-
-        <img
-          v-else
-          :src="loginPageLogo"
-          class="block w-48 h-auto max-w-full mb-32 text-primary-500"
-        />
+        <MainLogo class="block w-48 h-auto max-w-full mb-32 text-primary-500" />
 
         <router-view />
 
@@ -85,7 +76,7 @@
 
       <LoginBackgroundOverlay class="absolute h-full w-full right-[7.5%]" />
 
-      <div class="md:pl-10 xl:pl-0 relative z-50 w-7/12 xl:w-5/12 xl:w-5/12">
+      <div class="pl-20 xl:pl-0 relative z-50">
         <h1
           class="
             hidden
@@ -98,7 +89,9 @@
             lg:block
           "
         >
-          {{ pageHeading }}
+          <b class="font-bold">Simple Invoicing</b> <br />
+          for Individuals & <br />
+          Small Businesses <br />
         </h1>
         <p
           class="
@@ -113,7 +106,9 @@
             lg:block
           "
         >
-          {{ pageDescription }}
+          Crater helps you track expenses, record payments & generate beautiful
+          <br />
+          invoices & estimates. <br />
         </p>
       </div>
 
@@ -141,31 +136,6 @@ import LoginBackground from '@/scripts/components/svg/LoginBackground.vue'
 import LoginPlanetCrater from '@/scripts/components/svg/LoginPlanetCrater.vue'
 import LoginBottomVector from '@/scripts/components/svg/LoginBottomVector.vue'
 import LoginBackgroundOverlay from '@/scripts/components/svg/LoginBackgroundOverlay.vue'
-import { computed, ref } from 'vue'
-
-const pageHeading = computed(() => {
-  if (window.login_page_heading) {
-    return window.login_page_heading
-  }
-
-  return 'Simple Invoicing for Individuals Small Businesses'
-})
-
-const pageDescription = computed(() => {
-  if (window.login_page_description) {
-    return window.login_page_description
-  }
-
-  return 'Crater helps you track expenses, record payments & generate beautiful invoices & estimates.'
-})
-
-const loginPageLogo = computed(() => {
-  if (window.login_page_logo) {
-    return window.login_page_logo
-  }
-
-  return false
-})
 </script>
 
 <style lang="scss" scoped>
