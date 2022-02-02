@@ -92,12 +92,6 @@ class CustomerProfileRequest extends FormRequest
             ],
             'shipping.fax' => [
                 'nullable',
-            ],
-            'customer_avatar' => [
-                'nullable',
-                'file',
-                'mimes:gif,jpg,png',
-                'max:20000'
             ]
         ];
     }
