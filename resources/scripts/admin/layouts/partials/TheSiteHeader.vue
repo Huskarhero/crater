@@ -33,8 +33,7 @@
         md:block
       "
     >
-      <img v-if="adminLogo" :src="adminLogo" class="h-6" />
-      <MainLogo v-else class="h-6" light-color="white" dark-color="white" />
+      <MainLogo class="h-6" light-color="white" dark-color="white" />
     </router-link>
 
     <!-- toggle button-->
@@ -194,14 +193,6 @@ const previewAvatar = computed(() => {
   return userStore.currentUser && userStore.currentUser.avatar !== 0
     ? userStore.currentUser.avatar
     : getDefaultAvatar()
-})
-
-const adminLogo = computed(() => {
-  if (globalStore.globalSettings.admin_portal_logo) {
-    return '/storage/' + globalStore.globalSettings.admin_portal_logo
-  }
-
-  return false
 })
 
 function getDefaultAvatar() {
