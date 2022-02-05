@@ -1,45 +1,35 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { computed, reactive, ref, watch, inject } from 'vue'
-import InvoiceDropdown from '@/scripts/admin/components/dropdowns/InvoiceIndexDropdown.vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { debounce } from 'lodash'
+
 import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
 import { useModalStore } from '@/scripts/stores/modal'
-import { useNotificationStore } from '@/scripts/stores/notification'
 import { useUserStore } from '@/scripts/admin/stores/user'
 import { useDialogStore } from '@/scripts/stores/dialog'
+
 import SendInvoiceModal from '@/scripts/admin/components/modal-components/SendInvoiceModal.vue'
+import InvoiceDropdown from '@/scripts/admin/components/dropdowns/InvoiceIndexDropdown.vue'
 import LoadingIcon from '@/scripts/components/icons/LoadingIcon.vue'
+
 import abilities from '@/scripts/admin/stub/abilities'
 
 const modalStore = useModalStore()
 const invoiceStore = useInvoiceStore()
-const notificationStore = useNotificationStore()
 const userStore = useUserStore()
 const dialogStore = useDialogStore()
 
 const { t } = useI18n()
-const utils = inject('$utils')
-const id = ref(null)
-const count = ref(null)
 const invoiceData = ref(null)
-const currency = ref(null)
 const route = useRoute()
-const router = useRouter()
-const status = ref([
-  'DRAFT',
-  'SENT',
-  'VIEWED',
-  'EXPIRED',
-  'ACCEPTED',
-  'REJECTED',
-])
+
 const isMarkAsSent = ref(false)
-const isSendingEmail = ref(false)
-const isRequestOnGoing = ref(false)
 const isSearching = ref(false)
 const isLoading = ref(false)
+const invoiceList = ref(null)
+const currentPageNumber = ref(1)
+const lastPageNumber = ref(1)
 
 const searchData = reactive({
   orderBy: null,
@@ -118,14 +108,40 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadInvoices() {
+async function loadInvoices(params, isScroll = false) {
+  if (isLoading.value) {
+    return
+  }
+
   isLoading.value = true
-  await invoiceStore.fetchInvoices()
+  let response = await invoiceStore.fetchInvoices(params)
   isLoading.value = false
 
-  setTimeout(() => {
-    scrollToInvoice()
-  }, 500)
+  invoiceList.value = invoiceList.value ? invoiceList.value : []
+
+  invoiceList.value = [...invoiceList.value, ...response.data.data]
+
+  currentPageNumber.value = params ? params.page : 1
+  lastPageNumber.value = response.data.meta.last_page
+  let isInvoiceExist = invoiceList.value.find(
+    (inv) => inv.id == route.params.id
+  )
+
+  if (
+    isScroll == false &&
+    !isInvoiceExist &&
+    currentPageNumber.value < lastPageNumber.value
+  ) {
+    loadInvoices({ page: ++currentPageNumber.value })
+  }
+
+  if (isInvoiceExist) {
+    setTimeout(() => {
+      if (isScroll == false) {
+        scrollToInvoice()
+      }
+    }, 500)
+  }
 }
 
 function scrollToInvoice() {
@@ -133,7 +149,22 @@ function scrollToInvoice() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
+    addScrollListner()
   }
+}
+
+function addScrollListner() {
+  let el = document.getElementById('scroll_load')
+  el.addEventListener('scroll', (ev) => {
+    if (
+      ev.target.scrollTop > 0 &&
+      ev.target.scrollTop == ev.target.scrollHeight - ev.target.clientHeight
+    ) {
+      if (currentPageNumber.value < lastPageNumber.value) {
+        loadInvoices({ page: ++currentPageNumber.value }, true)
+      }
+    }
+  })
 }
 
 async function loadInvoice() {
@@ -211,7 +242,6 @@ onSearched = debounce(onSearched, 500)
             invoiceData.status === 'DRAFT' &&
             userStore.hasAbilities(abilities.SEND_INVOICE)
           "
-          :disabled="isSendingEmail"
           variant="primary"
           class="text-sm"
           @click="onSendInvoice"
@@ -359,7 +389,7 @@ onSearched = debounce(onSearched, 500)
       </div>
 
       <div
-        v-if="invoiceStore && invoiceStore.invoices"
+        id="scroll_load"
         class="
           h-full
           pb-32
@@ -368,9 +398,9 @@ onSearched = debounce(onSearched, 500)
           base-scroll
         "
       >
-        <div v-for="(invoice, index) in invoiceStore.invoices" :key="index">
+        <div v-for="(invoice, index) in invoiceList" :key="index">
           <router-link
-            v-if="invoice && !isLoading"
+            v-if="invoice"
             :id="'invoice-' + invoice.id"
             :to="`/admin/invoices/${invoice.id}/view`"
             :class="[
