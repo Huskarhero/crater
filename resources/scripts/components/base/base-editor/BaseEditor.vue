@@ -504,72 +504,6 @@
           >
             <redo-icon class="h-3 cursor-pointer fill-current" />
           </span>
-          <span
-            class="
-              flex
-              items-center
-              justify-center
-              w-6
-              h-6
-              rounded-sm
-              cursor-pointer
-              hover:bg-gray-100
-            "
-            :class="{ 'bg-gray-200': editor.isActive({ textAlign: 'left' }) }"
-            @click="editor.chain().focus().setTextAlign('left').run()"
-          >
-            <menu-alt2-icon class="h-5 cursor-pointer fill-current" />
-          </span>
-          <span
-            class="
-              flex
-              items-center
-              justify-center
-              w-6
-              h-6
-              rounded-sm
-              cursor-pointer
-              hover:bg-gray-100
-            "
-            :class="{ 'bg-gray-200': editor.isActive({ textAlign: 'right' }) }"
-            @click="editor.chain().focus().setTextAlign('right').run()"
-          >
-            <menu-alt3-icon class="h-5 cursor-pointer fill-current" />
-          </span>
-          <span
-            class="
-              flex
-              items-center
-              justify-center
-              w-6
-              h-6
-              rounded-sm
-              cursor-pointer
-              hover:bg-gray-100
-            "
-            :class="{
-              'bg-gray-200': editor.isActive({ textAlign: 'justify' }),
-            }"
-            @click="editor.chain().focus().setTextAlign('justify').run()"
-          >
-            <menu-icon class="h-5 cursor-pointer fill-current" />
-          </span>
-          <span
-            class="
-              flex
-              items-center
-              justify-center
-              w-6
-              h-6
-              rounded-sm
-              cursor-pointer
-              hover:bg-gray-100
-            "
-            :class="{ 'bg-gray-200': editor.isActive({ textAlign: 'center' }) }"
-            @click="editor.chain().focus().setTextAlign('center').run()"
-          >
-            <menu-center-icon class="h-5 cursor-pointer fill-current" />
-          </span>
         </div>
       </div>
       <editor-content
@@ -592,13 +526,7 @@
 import { onUnmounted, watch } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
-import {
-  DotsVerticalIcon,
-  MenuAlt2Icon,
-  MenuAlt3Icon,
-  MenuIcon,
-} from '@heroicons/vue/outline'
-import TextAlign from '@tiptap/extension-text-align'
+import { DotsVerticalIcon } from '@heroicons/vue/outline'
 
 import {
   BoldIcon,
@@ -612,7 +540,6 @@ import {
   UndoIcon,
   RedoIcon,
   CodeBlockIcon,
-  MenuCenterIcon,
 } from './icons/index.js'
 
 export default {
@@ -630,10 +557,6 @@ export default {
     RedoIcon,
     CodeBlockIcon,
     DotsVerticalIcon,
-    MenuCenterIcon,
-    MenuAlt2Icon,
-    MenuAlt3Icon,
-    MenuIcon,
   },
 
   props: {
@@ -650,13 +573,7 @@ export default {
   setup(props, { emit }) {
     const editor = useEditor({
       content: props.modelValue,
-      extensions: [
-        StarterKit,
-        TextAlign.configure({
-          types: ['heading', 'paragraph'],
-          alignments: ['left', 'right', 'center', 'justify'],
-        }),
-      ],
+      extensions: [StarterKit],
 
       onUpdate: () => {
         emit('update:modelValue', editor.value.getHTML())
