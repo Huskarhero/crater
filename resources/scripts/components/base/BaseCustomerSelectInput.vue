@@ -82,13 +82,6 @@ async function searchCustomers(search) {
   }
 
   let res = await customerStore.fetchCustomers(data)
-  if(res.data.data.length>0 && customerStore.editCustomer) {
-    let checkCustomerExist = res.data.data.find((c) => c.id==customerStore.editCustomer.id)
-    if(!checkCustomerExist) {
-      let edit_customer = Object.assign({}, customerStore.editCustomer)
-      res.data.data.unshift(edit_customer)
-    }
-  }
 
   return res.data.data
 }
