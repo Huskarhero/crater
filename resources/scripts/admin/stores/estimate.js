@@ -13,7 +13,6 @@ import { handleError } from '@/scripts/helpers/error-handling'
 import estimateStub from '../stub/estimate'
 import estimateItemStub from '../stub/estimate-item'
 import taxStub from '../stub/tax'
-import { useUserStore } from './user'
 
 export const useEstimateStore = (useWindow = false) => {
   const defineStoreFunc = useWindow ? window.pinia.defineStore : defineStore
@@ -498,7 +497,6 @@ export const useEstimateStore = (useWindow = false) => {
         const itemStore = useItemStore()
         const taxTypeStore = useTaxTypeStore()
         const route = useRoute()
-        const userStore = useUserStore()
 
         this.isFetchingInitialSettings = true
         this.newEstimate.selectedCurrency = companyStore.selectedCompanyCurrency
@@ -548,9 +546,6 @@ export const useEstimateStore = (useWindow = false) => {
               }
 
               this.setTemplate(this.templates[0].name)
-              this.newEstimate.template_name =
-                userStore.currentUserSettings.default_estimate_template ?
-                userStore.currentUserSettings.default_estimate_template : this.newEstimate.template_name
             }
 
             if (isEdit) {
