@@ -46,7 +46,6 @@ class InvoiceResource extends JsonResource
             'base_due_amount' => $this->base_due_amount,
             'currency_id' => $this->currency_id,
             'formatted_created_at' => $this->formattedCreatedAt,
-            'formatted_notes' => $this->formattedNotes,
             'invoice_pdf_url' => $this->invoicePdfUrl,
             'formatted_invoice_date' => $this->formattedInvoiceDate,
             'formatted_due_date' => $this->formattedDueDate,
