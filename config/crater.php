@@ -68,7 +68,6 @@ return [
         ["code" => "sv", "name" => "Svenska"],
         ["code" => "sk", "name" => "Slovak"],
         ["code" => "vi", "name" => "Tiếng Việt"],
-        ["code" => "cs", "name" => "Czech"],
         ["code" => "el", "name" => "Greek"],
         ["code" => "hr", "name" => "Crotian"],
     ],

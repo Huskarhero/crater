@@ -146,11 +146,7 @@ Route::get('/', function () {
 
 Route::get('/reset-password/{token}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('reset-password')->middleware(['install', 'guest']);
-
-Route::get('/forgot-password', function () {
-    return view('app');
-})->where('vue', '[\/\w\.-]*')->name('forgot-password')->middleware(['install', 'guest']);
+})->where('vue', '[\/\w\.-]*')->name('home')->middleware(['install', 'guest']);
 
 Route::get('/login', function () {
     return view('app');
