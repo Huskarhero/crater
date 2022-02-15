@@ -25,7 +25,6 @@ export const useCustomerStore = (useWindow = false) => {
       currentCustomer: {
         ...customerStub(),
       },
-      editCustomer: null
     }),
 
     getters: {
