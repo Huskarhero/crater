@@ -1,37 +1,24 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { computed, reactive, ref, watch, inject } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { debounce } from 'lodash'
+
 import { useRecurringInvoiceStore } from '@/scripts/admin/stores/recurring-invoice'
-import { useModalStore } from '@/scripts/stores/modal'
-import { useNotificationStore } from '@/scripts/stores/notification'
-import { useUserStore } from '@/scripts/admin/stores/user'
-import { useDialogStore } from '@/scripts/stores/dialog'
+
 import LoadingIcon from '@/scripts/components/icons/LoadingIcon.vue'
 
-const modalStore = useModalStore()
 const recurringInvoiceStore = useRecurringInvoiceStore()
-const notificationStore = useNotificationStore()
-const userStore = useUserStore()
-const dialogStore = useDialogStore()
 
 const { t } = useI18n()
-const id = ref(null)
-const count = ref(null)
-const currency = ref(null)
 const route = useRoute()
-const router = useRouter()
-const status = ref([
-  'DRAFT',
-  'SENT',
-  'VIEWED',
-  'EXPIRED',
-  'ACCEPTED',
-  'REJECTED',
-])
 const isSearching = ref(false)
 const isLoading = ref(false)
+
+const invoiceList = ref(null)
+const currentPageNumber = ref(1)
+const lastPageNumber = ref(1)
+const invoiceListSection = ref(null)
 
 const searchData = reactive({
   orderBy: null,
@@ -50,14 +37,38 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadRecurringInvoices() {
+async function loadRecurringInvoices(params, fromScrollListener = false) {
+  if (isLoading.value) {
+    return
+  }
+
   isLoading.value = true
-  await recurringInvoiceStore.fetchRecurringInvoices()
+  let response = await recurringInvoiceStore.fetchRecurringInvoices(params)
   isLoading.value = false
 
-  setTimeout(() => {
-    scrollToRecurringInvoice()
-  }, 500)
+  invoiceList.value = invoiceList.value ? invoiceList.value : []
+
+  invoiceList.value = [...invoiceList.value, ...response.data.data]
+
+  currentPageNumber.value = params ? params.page : 1
+  lastPageNumber.value = response.data.meta.last_page
+  let invoiceFound = invoiceList.value.find((inv) => inv.id == route.params.id)
+
+  if (
+    fromScrollListener == false &&
+    !invoiceFound &&
+    currentPageNumber.value < lastPageNumber.value
+  ) {
+    loadRecurringInvoices({ page: ++currentPageNumber.value })
+  }
+
+  if (invoiceFound) {
+    setTimeout(() => {
+      if (fromScrollListener == false) {
+        scrollToRecurringInvoice()
+      }
+    }, 500)
+  }
 }
 
 function scrollToRecurringInvoice() {
@@ -65,7 +76,22 @@ function scrollToRecurringInvoice() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
+    addScrollListener()
   }
+}
+
+function addScrollListener() {
+  invoiceListSection.value.addEventListener('scroll', (ev) => {
+    if (
+      ev.target.scrollTop > 0 &&
+      ev.target.scrollTop + ev.target.clientHeight >
+        ev.target.scrollHeight - 200
+    ) {
+      if (currentPageNumber.value < lastPageNumber.value) {
+        loadRecurringInvoices({ page: ++currentPageNumber.value }, true)
+      }
+    }
+  })
 }
 
 async function onSearched() {
@@ -91,7 +117,7 @@ async function onSearched() {
   let response = await recurringInvoiceStore.searchRecurringInvoice(data)
   isSearching.value = false
   if (response.data) {
-    recurringInvoiceStore.recurringInvoices = response.data.data
+    invoiceList.value = response.data.data
   }
 }
 
@@ -120,7 +146,7 @@ onSearched = debounce(onSearched, 500)
       hidden
       h-full
       pt-16
-      pb-4
+      pb-[6.4rem]
       ml-56
       bg-white
       xl:ml-64
@@ -211,21 +237,17 @@ onSearched = debounce(onSearched, 500)
     </div>
 
     <div
-      v-if="recurringInvoiceStore && recurringInvoiceStore.recurringInvoices"
+      ref="invoiceListSection"
       class="
         h-full
-        pb-32
         overflow-y-scroll
         border-l border-gray-200 border-solid
         base-scroll
       "
     >
-      <div
-        v-for="(invoice, index) in recurringInvoiceStore.recurringInvoices"
-        :key="index"
-      >
+      <div v-for="(invoice, index) in invoiceList" :key="index">
         <router-link
-          v-if="invoice && !isLoading"
+          v-if="invoice"
           :id="'recurring-invoice-' + invoice.id"
           :to="`/admin/recurring-invoices/${invoice.id}/view`"
           :class="[
@@ -253,7 +275,7 @@ onSearched = debounce(onSearched, 500)
                 truncate
               "
             />
-            
+
             <div
               class="
                 mt-1
@@ -305,14 +327,14 @@ onSearched = debounce(onSearched, 500)
           </div>
         </router-link>
       </div>
-      <div class="flex justify-center p-4 items-center">
-        <LoadingIcon
-          v-if="isLoading"
-          class="h-6 m-1 animate-spin text-primary-400"
-        />
+      <div
+        v-if="isLoading || isSearching"
+        class="flex justify-center p-4 items-center"
+      >
+        <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
       </div>
       <p
-        v-if="!recurringInvoiceStore.recurringInvoices.length && !isLoading"
+        v-if="!invoiceList?.length && !isLoading && !isSearching"
         class="flex justify-center px-4 mt-5 text-sm text-gray-600"
       >
         {{ $t('invoices.no_matching_invoices') }}
