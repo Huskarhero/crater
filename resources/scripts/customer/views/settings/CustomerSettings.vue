@@ -153,7 +153,6 @@ let isSaving = ref(false)
 let avatarFileBlob = ref(null)
 let isShowPassword = ref(false)
 let isShowConfirmPassword = ref(false)
-const isCustomerAvatarRemoved = ref(false)
 
 if (userStore.userForm.avatar) {
   imgFiles.value.push({
@@ -207,7 +206,6 @@ function onFileInputChange(fileName, file) {
 
 function onFileInputRemove() {
   avatarFileBlob.value = null
-  isCustomerAvatarRemoved.value = true
 }
 
 function updateCustomerData() {
@@ -232,7 +230,6 @@ function updateCustomerData() {
   if (avatarFileBlob.value) {
     data.append('customer_avatar', avatarFileBlob.value)
   }
-  data.append('is_customer_avatar_removed', isCustomerAvatarRemoved.value)
 
   userStore
     .updateCurrentUser({
@@ -246,8 +243,6 @@ function updateCustomerData() {
           state.userForm.password = ''
           state.userForm.confirm_password = ''
         })
-        avatarFileBlob.value = null
-        isCustomerAvatarRemoved.value = false
       }
     })
     .catch((error) => {

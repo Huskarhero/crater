@@ -118,7 +118,6 @@
               :store="invoiceStore"
               store-prop="newInvoice"
               component-name="InvoiceTemplate"
-              :is-mark-as-default="isMarkAsDefault"
             />
           </div>
 
@@ -174,7 +173,6 @@ let router = useRouter()
 
 const invoiceValidationScope = 'newInvoice'
 let isSaving = ref(false)
-const isMarkAsDefault = ref(false)
 
 const invoiceNoteFieldList = ref([
   'customer',

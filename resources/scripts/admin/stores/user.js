@@ -108,14 +108,6 @@ export const useUserStore = (useWindow = false) => {
                 this.currentUserSettings.language = data.settings.language
                 global.locale = data.settings.language
               }
-              if (data.settings.default_estimate_template) {
-                this.currentUserSettings.default_estimate_template =
-                  data.settings.default_estimate_template
-              }
-              if (data.settings.default_invoice_template) {
-                this.currentUserSettings.default_invoice_template =
-                  data.settings.default_invoice_template
-              }
               resolve(response)
             })
             .catch((err) => {
