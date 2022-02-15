@@ -1,36 +1,45 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { computed, reactive, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, reactive, ref, watch, inject } from 'vue'
+import InvoiceDropdown from '@/scripts/admin/components/dropdowns/InvoiceIndexDropdown.vue'
+import { useRoute, useRouter } from 'vue-router'
 import { debounce } from 'lodash'
-
 import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
 import { useModalStore } from '@/scripts/stores/modal'
+import { useNotificationStore } from '@/scripts/stores/notification'
 import { useUserStore } from '@/scripts/admin/stores/user'
 import { useDialogStore } from '@/scripts/stores/dialog'
-
 import SendInvoiceModal from '@/scripts/admin/components/modal-components/SendInvoiceModal.vue'
-import InvoiceDropdown from '@/scripts/admin/components/dropdowns/InvoiceIndexDropdown.vue'
 import LoadingIcon from '@/scripts/components/icons/LoadingIcon.vue'
-
 import abilities from '@/scripts/admin/stub/abilities'
 
 const modalStore = useModalStore()
 const invoiceStore = useInvoiceStore()
+const notificationStore = useNotificationStore()
 const userStore = useUserStore()
 const dialogStore = useDialogStore()
 
 const { t } = useI18n()
+const utils = inject('$utils')
+const id = ref(null)
+const count = ref(null)
 const invoiceData = ref(null)
+const currency = ref(null)
 const route = useRoute()
-
+const router = useRouter()
+const status = ref([
+  'DRAFT',
+  'SENT',
+  'VIEWED',
+  'EXPIRED',
+  'ACCEPTED',
+  'REJECTED',
+])
 const isMarkAsSent = ref(false)
+const isSendingEmail = ref(false)
+const isRequestOnGoing = ref(false)
+const isSearching = ref(false)
 const isLoading = ref(false)
-
-const invoiceList = ref(null)
-const currentPageNumber = ref(1)
-const lastPageNumber = ref(1)
-const invoiceListSection = ref(null)
 
 const searchData = reactive({
   orderBy: null,
@@ -109,38 +118,14 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadInvoices(params, fromScrollListener = false) {
-  if (isLoading.value) {
-    return
-  }
-
+async function loadInvoices() {
   isLoading.value = true
-  let response = await invoiceStore.fetchInvoices(params)
+  await invoiceStore.fetchInvoices()
   isLoading.value = false
 
-  invoiceList.value = invoiceList.value ? invoiceList.value : []
-
-  invoiceList.value = [...invoiceList.value, ...response.data.data]
-
-  currentPageNumber.value = params && params.page ? params.page : 1
-  lastPageNumber.value = response.data.meta.last_page
-  let invoiceFound = invoiceList.value.find((inv) => inv.id == route.params.id)
-
-  if (
-    fromScrollListener == false &&
-    !invoiceFound &&
-    currentPageNumber.value < lastPageNumber.value
-  ) {
-    loadInvoices({ page: ++currentPageNumber.value })
-  }
-
-  if (invoiceFound) {
-    setTimeout(() => {
-      if (fromScrollListener == false) {
-        scrollToInvoice()
-      }
-    }, 500)
-  }
+  setTimeout(() => {
+    scrollToInvoice()
+  }, 500)
 }
 
 function scrollToInvoice() {
@@ -148,22 +133,7 @@ function scrollToInvoice() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
-    addScrollListener()
   }
-}
-
-function addScrollListener() {
-  invoiceListSection.value.addEventListener('scroll', (ev) => {
-    if (
-      ev.target.scrollTop > 0 &&
-      ev.target.scrollTop + ev.target.clientHeight >
-        ev.target.scrollHeight - 200
-    ) {
-      if (currentPageNumber.value < lastPageNumber.value) {
-        loadInvoices({ page: ++currentPageNumber.value }, true)
-      }
-    }
-  })
 }
 
 async function loadInvoice() {
@@ -174,29 +144,30 @@ async function loadInvoice() {
 }
 
 async function onSearched() {
-  let params = {}
+  let data = ''
   if (
     searchData.searchText !== '' &&
     searchData.searchText !== null &&
     searchData.searchText !== undefined
   ) {
-    params.search = searchData.searchText
+    data += `search=${searchData.searchText}&`
   }
 
   if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    params.orderBy = searchData.orderBy
+    data += `orderBy=${searchData.orderBy}&`
   }
-
   if (
     searchData.orderByField !== null &&
     searchData.orderByField !== undefined
   ) {
-    params.orderByField = searchData.orderByField
+    data += `orderByField=${searchData.orderByField}`
   }
-
-  invoiceList.value = []
-
-  loadInvoices(params)
+  isSearching.value = true
+  let response = await invoiceStore.searchInvoice(data)
+  isSearching.value = false
+  if (response.data) {
+    invoiceStore.invoices = response.data.data
+  }
 }
 
 function sortData() {
@@ -240,6 +211,7 @@ onSearched = debounce(onSearched, 500)
             invoiceData.status === 'DRAFT' &&
             userStore.hasAbilities(abilities.SEND_INVOICE)
           "
+          :disabled="isSendingEmail"
           variant="primary"
           class="text-sm"
           @click="onSendInvoice"
@@ -282,7 +254,7 @@ onSearched = debounce(onSearched, 500)
         hidden
         h-full
         pt-16
-        pb-[6.4rem]
+        pb-4
         ml-56
         bg-white
         xl:ml-64
@@ -387,17 +359,18 @@ onSearched = debounce(onSearched, 500)
       </div>
 
       <div
-        ref="invoiceListSection"
+        v-if="invoiceStore && invoiceStore.invoices"
         class="
           h-full
+          pb-32
           overflow-y-scroll
           border-l border-gray-200 border-solid
           base-scroll
         "
       >
-        <div v-for="(invoice, index) in invoiceList" :key="index">
+        <div v-for="(invoice, index) in invoiceStore.invoices" :key="index">
           <router-link
-            v-if="invoice"
+            v-if="invoice && !isLoading"
             :id="'invoice-' + invoice.id"
             :to="`/admin/invoices/${invoice.id}/view`"
             :class="[
@@ -476,11 +449,14 @@ onSearched = debounce(onSearched, 500)
             </div>
           </router-link>
         </div>
-        <div v-if="isLoading" class="flex justify-center p-4 items-center">
-          <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
+        <div class="flex justify-center p-4 items-center">
+          <LoadingIcon
+            v-if="isLoading"
+            class="h-6 m-1 animate-spin text-primary-400"
+          />
         </div>
         <p
-          v-if="!invoiceList?.length && !isLoading"
+          v-if="!invoiceStore.invoices.length && !isLoading"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('invoices.no_matching_invoices') }}
