@@ -5,6 +5,7 @@
       <template #actions>
         <BaseButton
           v-if="userStore.hasAbilities(abilities.SEND_PAYMENT)"
+          :disabled="isSendingEmail"
           :content-loading="isFetching"
           variant="primary"
           @click="onPaymentSend"
@@ -29,7 +30,7 @@
         hidden
         h-full
         pt-16
-        pb-[6rem]
+        pb-4
         ml-56
         bg-white
         xl:ml-64
@@ -138,12 +139,17 @@
       </div>
 
       <div
-        ref="paymentListSection"
-        class="h-full overflow-y-scroll border-l border-gray-200 border-solid"
+        v-if="paymentStore && paymentStore.payments"
+        class="
+          h-full
+          pb-32
+          overflow-y-scroll
+          border-l border-gray-200 border-solid
+        "
       >
-        <div v-for="(payment, index) in paymentList" :key="index">
+        <div v-for="(payment, index) in paymentStore.payments" :key="index">
           <router-link
-            v-if="payment"
+            v-if="payment && !isLoading"
             :id="'payment-' + payment.id"
             :to="`/admin/payments/${payment.id}/view`"
             :class="[
@@ -222,8 +228,11 @@
             </div>
           </router-link>
         </div>
-        <div v-if="isLoading" class="flex justify-center p-4 items-center">
-          <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
+        <div class="flex justify-center p-4 items-center">
+          <LoadingIcon
+            v-if="isLoading"
+            class="h-6 m-1 animate-spin text-primary-400"
+          />
         </div>
         <p
           v-if="!paymentStore?.payments?.length && !isLoading"
@@ -251,25 +260,26 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { debounce } from 'lodash'
-import { ref, reactive, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import moment from 'moment'
-
+import { ref, reactive, computed, inject, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useDialogStore } from '@/scripts/stores/dialog'
 import { usePaymentStore } from '@/scripts/admin/stores/payment'
 import { useModalStore } from '@/scripts/stores/modal'
-import { useUserStore } from '@/scripts/admin/stores/user'
-
 import PaymentDropdown from '@/scripts/admin/components/dropdowns/PaymentIndexDropdown.vue'
+import moment from 'moment'
+import { useUserStore } from '@/scripts/admin/stores/user'
 import SendPaymentModal from '@/scripts/admin/components/modal-components/SendPaymentModal.vue'
+import abilities from '@/scripts/admin/stub/abilities'
 import LoadingIcon from '@/scripts/components/icons/LoadingIcon.vue'
 
-import abilities from '@/scripts/admin/stub/abilities'
-
 const route = useRoute()
+const router = useRouter()
 
 const { t } = useI18n()
+let id = ref(null)
+let count = ref(null)
 let payment = reactive({})
+let currency = ref(null)
 let searchData = reactive({
   orderBy: null,
   orderByField: null,
@@ -277,17 +287,16 @@ let searchData = reactive({
 })
 
 let isSearching = ref(false)
+let isSendingEmail = ref(false)
+let isMarkingAsSent = ref(false)
 let isLoading = ref(false)
 let isFetching = ref(false)
+
+const $utils = inject('utils')
 
 const paymentStore = usePaymentStore()
 const modalStore = useModalStore()
 const userStore = useUserStore()
-
-const paymentList = ref(null)
-const currentPageNumber = ref(1)
-const lastPageNumber = ref(1)
-const paymentListSection = ref(null)
 
 const pageTitle = computed(() => {
   return payment.payment_number || ''
@@ -337,40 +346,14 @@ function hasAbilities() {
 
 const dialogStore = useDialogStore()
 
-async function loadPayments(params, fromScrollListener = false) {
-  if (isLoading.value) {
-    return
-  }
-
+async function loadPayments() {
   isLoading.value = true
-  let response = await paymentStore.fetchPayments(params)
+  await paymentStore.fetchPayments({ limit: 'all' })
   isLoading.value = false
 
-  paymentList.value = paymentList.value ? paymentList.value : []
-
-  paymentList.value = [...paymentList.value, ...response.data.data]
-
-  currentPageNumber.value = params ? params.page : 1
-  lastPageNumber.value = response.data.meta.last_page
-  let paymentFound = paymentList.value.find(
-    (paym) => paym.id == route.params.id
-  )
-
-  if (
-    fromScrollListener == false &&
-    !paymentFound &&
-    currentPageNumber.value < lastPageNumber.value
-  ) {
-    loadPayments({ page: ++currentPageNumber.value })
-  }
-
-  if (paymentFound) {
-    setTimeout(() => {
-      if (fromScrollListener == false) {
-        scrollToPayment()
-      }
-    }, 500)
-  }
+  setTimeout(() => {
+    scrollToPayment()
+  }, 500)
 }
 
 async function loadPayment() {
@@ -392,22 +375,7 @@ function scrollToPayment() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
-    addScrollListener()
   }
-}
-
-function addScrollListener() {
-  paymentListSection.value.addEventListener('scroll', (ev) => {
-    if (
-      ev.target.scrollTop > 0 &&
-      ev.target.scrollTop + ev.target.clientHeight >
-        ev.target.scrollHeight - 200
-    ) {
-      if (currentPageNumber.value < lastPageNumber.value) {
-        loadPayments({ page: ++currentPageNumber.value }, true)
-      }
-    }
-  })
 }
 
 async function onSearch() {

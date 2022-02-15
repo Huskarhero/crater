@@ -17,7 +17,6 @@ export const useCategoryStore = (useWindow = false) => {
         name: '',
         description: '',
       },
-      editCategory: null
     }),
 
     getters: {
