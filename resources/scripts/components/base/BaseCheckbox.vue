@@ -20,7 +20,6 @@
       >
         {{ label }}
       </label>
-      <p v-if="description" class="text-gray-500">{{ description }}</p>
     </div>
   </div>
 </template>
@@ -30,10 +29,6 @@ import { computed } from 'vue'
 
 const props = defineProps({
   label: {
-    type: String,
-    default: '',
-  },
-  description: {
     type: String,
     default: '',
   },

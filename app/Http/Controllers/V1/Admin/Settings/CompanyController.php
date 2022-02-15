@@ -71,9 +71,6 @@ class CompanyController extends Controller
 
         $data = json_decode($request->company_logo);
 
-        if (isset($request->is_company_logo_removed) && (bool) $request->is_company_logo_removed) {
-            $company->clearMediaCollection('logo');
-        }
         if ($data) {
             $company = Company::find($request->header('company'));
 
@@ -101,9 +98,6 @@ class CompanyController extends Controller
     {
         $user = auth()->user();
 
-        if (isset($request->is_admin_avatar_removed) && (bool) $request->is_admin_avatar_removed) {
-            $user->clearMediaCollection('admin_avatar');
-        }
         if ($user && $request->hasFile('admin_avatar')) {
             $user->clearMediaCollection('admin_avatar');
 
