@@ -260,8 +260,6 @@ async function submitForm() {
 
     const response = await invoiceStore.sendInvoice(invoiceMailForm)
 
-    isLoading.value = false
-
     if (response.data.success) {
       closeSendInvoiceModal()
       return true

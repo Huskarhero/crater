@@ -93,6 +93,7 @@ export const usePaymentStore = (useWindow = false) => {
           })
       },
 
+
       fetchPayments(params) {
         return new Promise((resolve, reject) => {
           axios
@@ -288,11 +289,6 @@ export const usePaymentStore = (useWindow = false) => {
           axios
             .post(`/api/v1/payments/${data.id}/send`, data)
             .then((response) => {
-              const notificationStore = useNotificationStore()
-              notificationStore.showNotification({
-                type: 'success',
-                message: global.t('payments.send_payment_successfully'),
-              })
               resolve(response)
             })
             .catch((err) => {

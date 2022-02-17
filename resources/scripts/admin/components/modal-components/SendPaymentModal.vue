@@ -257,8 +257,6 @@ async function sendPaymentData() {
 
     const response = await paymentStore.sendEmail(paymentMailForm)
 
-    isLoading.value = false
-
     if (response.data.success) {
       closeSendPaymentModal()
       return true
