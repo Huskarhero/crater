@@ -54,8 +54,7 @@
           "
         >
           <p class="mb-3">
-            Copyright @ {{ documentTitle }}, Inc.
-            {{ new Date().getFullYear() }}
+            Copyright @ Crater Invoice, Inc. {{ new Date().getFullYear() }}
           </p>
         </div>
       </div>
@@ -158,14 +157,6 @@ const pageDescription = computed(() => {
   }
 
   return 'Crater helps you track expenses, record payments & generate beautiful invoices & estimates.'
-})
-
-const documentTitle = computed(() => {
-  if (window.admin_document_title) {
-    return window.admin_document_title
-  }
-
-  return 'Crater Invoice'
 })
 
 const loginPageLogo = computed(() => {
