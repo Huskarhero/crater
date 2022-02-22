@@ -33,18 +33,6 @@ function get_customer_logo($company_id)
     }
 }
 
-/**
- * Get current customer page title
- *
- * @param $company_id
- * @return string
- */
-function get_customer_page_title($company_id)
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting('customer_portal_page_title', $company_id);
-    }
-}
 
 /**
  * Get current admin portal logo
@@ -105,31 +93,6 @@ function get_login_page_description()
     }
 }
 
-/**
- * Get admin page title
- *
- * @param $company_id
- * @return string
- */
-function get_admin_page_title()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('admin_page_title');
-    }
-}
-
-/**
- * Get admin page title
- *
- * @param $company_id
- * @return string
- */
-function get_copyright_text()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('copyright_text');
-    }
-}
 
 /**
  * Set Active Path

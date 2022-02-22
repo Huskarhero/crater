@@ -29,8 +29,6 @@ class ViewServiceProvider extends ServiceProvider
             View::share('login_page_logo', get_login_page_logo());
             View::share('login_page_heading', get_login_page_heading());
             View::share('login_page_description', get_login_page_description());
-            View::share('admin_page_title', get_admin_page_title());
-            View::share('copyright_text', get_copyright_text());
         }
     }
 }
