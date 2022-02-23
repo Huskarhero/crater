@@ -63,7 +63,7 @@
         class="
           hidden
           w-full
-          h-screen
+          h-screen h-screen-ios
           border-gray-100 border-solid
           rounded
           md:flex

@@ -13,7 +13,7 @@
             flex
             items-end
             justify-center
-            min-h-screen
+            min-h-screen min-h-screen-ios
             px-4
             text-center
             sm:block sm:px-2
@@ -35,7 +35,10 @@
 
           <!-- This element is to trick the browser into centering the modal contents. -->
           <span
-            class="hidden sm:inline-block sm:align-middle sm:h-screen"
+            class="
+              hidden
+              sm:inline-block sm:align-middle sm:h-screen sm:h-screen-ios
+            "
             aria-hidden="true"
             >&#8203;</span
           >
