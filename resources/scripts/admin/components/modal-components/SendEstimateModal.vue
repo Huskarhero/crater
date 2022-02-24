@@ -170,8 +170,6 @@ let estimateMailForm = reactive({
   body: null,
 })
 
-const emit = defineEmits(['update'])
-
 const modalActive = computed(() => {
   return modalStore.active && modalStore.componentName === 'SendEstimateModal'
 })
@@ -251,7 +249,6 @@ async function submitForm() {
     isLoading.value = false
 
     if (response.data.success) {
-      emit('update')
       closeSendEstimateModal()
       return true
     }

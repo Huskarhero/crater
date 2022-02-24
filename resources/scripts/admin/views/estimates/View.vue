@@ -1,5 +1,5 @@
 <template>
-  <SendEstimateModal @update="updateSentEstimate" />
+  <SendEstimateModal />
   <BasePage v-if="estimateData" class="xl:pl-96 xl:ml-8">
     <BasePageHeader :title="pageTitle">
       <template #actions>
@@ -525,16 +525,5 @@ async function removeEstimate(id) {
           })
       }
     })
-}
-
-function updateSentEstimate() {
-  let pos = estimateList.value.findIndex(
-    (estimate) => estimate.id === estimateData.value.id
-  )
-
-  if (estimateList.value[pos]) {
-    estimateList.value[pos].status = 'SENT'
-    estimateData.value.status = 'SENT'
-  }
 }
 </script>

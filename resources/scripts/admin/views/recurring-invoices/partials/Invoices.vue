@@ -1,5 +1,5 @@
 <template>
-  <SendInvoiceModal @update="updateSentInvoiceStatus" />
+  <SendInvoiceModal />
   <div class="relative table-container">
     <BaseTable
       ref="table"
@@ -96,15 +96,5 @@ function hasAtleastOneAbility() {
 
 function refreshTable() {
   table.value && table.value.refresh()
-}
-
-function updateSentInvoiceStatus(id) {
-  let pos = recurringInvoiceStore.newRecurringInvoice.invoices.findIndex(
-    (invoice) => invoice.id === id
-  )
-
-  if (recurringInvoiceStore.newRecurringInvoice.invoices[pos]) {
-    recurringInvoiceStore.newRecurringInvoice.invoices[pos].status = 'SENT'
-  }
 }
 </script>
