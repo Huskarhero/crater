@@ -1,13 +1,5 @@
 <template>
-  <div
-    class="
-      grid
-      h-screen h-screen-ios
-      grid-cols-12
-      overflow-y-hidden
-      bg-gray-100
-    "
-  >
+  <div class="grid h-screen grid-cols-12 overflow-y-hidden bg-gray-100">
     <NotificationRoot />
 
     <div
@@ -54,8 +46,7 @@
           "
         >
           <p class="mb-3">
-            {{ documentTitle }}, Inc.
-            {{ new Date().getFullYear() }}
+            Copyright @ Crater Invoice, Inc. {{ new Date().getFullYear() }}
           </p>
         </div>
       </div>
@@ -158,13 +149,6 @@ const pageDescription = computed(() => {
   }
 
   return 'Crater helps you track expenses, record payments & generate beautiful invoices & estimates.'
-})
-
-const documentTitle = computed(() => {
-  if (window.copyright_text) {
-    return window.copyright_text
-  }
-  return 'Copyright @ Crater Invoice'
 })
 
 const loginPageLogo = computed(() => {
