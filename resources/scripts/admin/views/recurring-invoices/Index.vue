@@ -283,7 +283,7 @@ const router = useRouter()
 
 let filters = reactive({
   customer_id: '',
-  status: '',
+  status: 'ACTIVE',
   from_date: '',
   to_date: '',
 })

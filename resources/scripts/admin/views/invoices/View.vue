@@ -212,24 +212,13 @@ function sortData() {
   return true
 }
 
-function updateSentInvoice() {
-  let pos = invoiceList.value.findIndex(
-    (invoice) => invoice.id === invoiceData.value.id
-  )
-
-  if (invoiceList.value[pos]) {
-    invoiceList.value[pos].status = 'SENT'
-    invoiceData.value.status = 'SENT'
-  }
-}
-
 loadInvoices()
 loadInvoice()
 onSearched = debounce(onSearched, 500)
 </script>
 
 <template>
-  <SendInvoiceModal @update="updateSentInvoice" />
+  <SendInvoiceModal />
 
   <BasePage v-if="invoiceData" class="xl:pl-96 xl:ml-8">
     <BasePageHeader :title="pageTitle">
@@ -267,7 +256,9 @@ onSearched = debounce(onSearched, 500)
         >
           <BaseButton
             v-if="
-              invoiceData.status === 'SENT' || invoiceData.status === 'VIEWED'
+              invoiceData.status === 'SENT' ||
+              invoiceData.status === 'OVERDUE' ||
+              invoiceData.status === 'VIEWED'
             "
             variant="primary"
           >

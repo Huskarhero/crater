@@ -40,13 +40,10 @@ class CheckInvoiceStatus extends Command
     public function handle()
     {
         $date = Carbon::now();
-        $invoices = Invoice::whereNotIn('status', [Invoice::STATUS_COMPLETED, Invoice::STATUS_DRAFT])
-            ->where('overdue', false)
-            ->whereDate('due_date', '<', $date)
-            ->get();
+        $invoices = Invoice::where('status', '<>', Invoice::STATUS_COMPLETED)->whereDate('due_date', '<', $date)->get();
 
         foreach ($invoices as $invoice) {
-            $invoice->overdue = true;
+            $invoice->status = Invoice::STATUS_OVERDUE;
             printf("Invoice %s is OVERDUE \n", $invoice->invoice_number);
             $invoice->save();
         }

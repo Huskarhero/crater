@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{ get_page_title(!Request::header('company')) }}</title>
+    <title>Crater - Self Hosted Invoicing Platform</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -26,7 +26,7 @@
 
 <body
     class="h-full overflow-hidden bg-gray-100 font-base
-    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'crater'}} @endif ">
+    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_admin_portal_theme()}} @endif ">
 
     <!-- Module Scripts -->
     @foreach (\Crater\Services\Module\ModuleFacade::allScripts() as $name => $path)
@@ -57,13 +57,7 @@
 
         window.login_page_description = "{{$login_page_description}}"
 
-        @endif     
-        @if(isset($copyright_text))
-
-        window.copyright_text = "{{$copyright_text}}"
-
-        @endif    
-
+        @endif
         window.Crater.start()
     </script>
 </body>

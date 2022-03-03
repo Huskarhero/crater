@@ -209,6 +209,11 @@ export default {
           bgColor: '#C9E3EC',
           color: '#2c5282',
         }
+      case 'OVERDUE':
+        return {
+          bgColor: '#FED7D7',
+          color: '#c53030',
+        }
       case 'COMPLETED':
         return {
           bgColor: '#D5EED0',
@@ -251,6 +256,8 @@ export default {
         return global.t('estimates.expired')
       case 'PARTIALLY PAID':
         return global.t('estimates.partially_paid')
+      case 'OVERDUE':
+        return global.t('invoices.overdue')
       case 'COMPLETED':
         return global.t('invoices.completed')
       case 'DUE':
