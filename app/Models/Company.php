@@ -380,21 +380,4 @@ class Company extends Model implements HasMedia
             $model->taxes()->delete();
         }
     }
-
-    public function hasTransactions()
-    {
-        if (
-            $this->customers()->exists() ||
-            $this->items()->exists() ||
-            $this->invoices()->exists() ||
-            $this->estimates()->exists() ||
-            $this->expenses()->exists() ||
-            $this->payments()->exists() ||
-            $this->recurringInvoices()->exists()
-        ) {
-            return true;
-        }
-
-        return false;
-    }
 }

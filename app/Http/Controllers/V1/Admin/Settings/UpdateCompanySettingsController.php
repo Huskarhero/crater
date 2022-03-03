@@ -17,20 +17,9 @@ class UpdateCompanySettingsController extends Controller
      */
     public function __invoke(UpdateSettingsRequest $request)
     {
-        $company = Company::find($request->header('company'));
-        $this->authorize('manage company', $company);
+        $this->authorize('manage company', Company::find($request->header('company')));
 
-        $companyCurrency = CompanySetting::getSetting('currency', $request->header('company'));
-        $data = $request->settings;
-
-        if ($companyCurrency !== $data['currency'] && $company->hasTransactions()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'You cannot change currency once transaction is created.'
-            ]);
-        }
-
-        CompanySetting::setSettings($data, $request->header('company'));
+        CompanySetting::setSettings($request->settings, $request->header('company'));
 
         return response()->json([
             'success' => true,

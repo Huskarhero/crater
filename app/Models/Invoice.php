@@ -575,10 +575,6 @@ class Invoice extends Model implements HasMedia
             'taxes' => $taxes,
         ]);
 
-        if (request()->has('preview')) {
-            return view('app.pdf.invoice.'.$invoiceTemplate);
-        }
-
         return PDF::loadView('app.pdf.invoice.'.$invoiceTemplate);
     }
 
