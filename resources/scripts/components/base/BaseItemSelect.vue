@@ -30,7 +30,7 @@
       v-model="itemSelect"
       :content-loading="contentLoading"
       value-prop="id"
-      track-by="name"
+      track-by="id"
       :invalid="invalid"
       preserve-search
       :initial-search="itemData.name"

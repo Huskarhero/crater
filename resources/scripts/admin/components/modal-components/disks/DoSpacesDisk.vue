@@ -35,7 +35,6 @@
             searchable
             label="name"
             :can-deselect="false"
-            track-by="name"
             @update:modelValue="onChangeDriver(data)"
           />
         </BaseInputGroup>

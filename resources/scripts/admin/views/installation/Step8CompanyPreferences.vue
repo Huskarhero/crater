@@ -48,7 +48,7 @@
               value-prop="code"
               :placeholder="$tc('settings.preferences.select_language')"
               class="w-full"
-              track-by="name"
+              track-by="code"
               :searchable="true"
               :invalid="v$.currentPreferences.language.$error"
             />
@@ -95,7 +95,7 @@
               label="key"
               value-prop="value"
               :placeholder="$tc('settings.preferences.select_time_zone')"
-              track-by="key"
+              track-by="value"
               :searchable="true"
               :invalid="v$.currentPreferences.time_zone.$error"
             />

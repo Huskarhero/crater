@@ -38,7 +38,6 @@
               label="key"
               :searchable="true"
               :invalid="v$.currentExchangeRate.driver.$error"
-              track-by="key"
               @update:modelValue="resetCurrency"
               @input="v$.currentExchangeRate.driver.$touch()"
             />
@@ -61,7 +60,6 @@
               :options="serverOptions"
               :invalid="v$.currencyConverter.type.$error"
               label="value"
-              track-by="value"
               @update:modelValue="resetCurrency"
             />
           </BaseInputGroup>
@@ -106,8 +104,8 @@
               :invalid="v$.currentExchangeRate.currencies.$error"
               label="code"
               track-by="code"
-              open-direction="top"
               @input="v$.currentExchangeRate.currencies.$touch()"
+              openDirection="top"
             />
           </BaseInputGroup>
           <!--  For Currency Converter  -->

@@ -75,7 +75,7 @@
             :options="globalStore.config.languages"
             label="name"
             value-prop="code"
-            track-by="name"
+            track-by="code"
             open-direction="top"
           />
         </BaseInputGroup>
