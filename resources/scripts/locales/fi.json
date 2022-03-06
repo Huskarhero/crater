@@ -526,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Ole hyvä ja lisää sähköpostiosoite tälle asiakkaalle voidaksesi lähettää laskut automaattisesti.",
     "item": {
       "title": "Item Title",
       "description": "Description",

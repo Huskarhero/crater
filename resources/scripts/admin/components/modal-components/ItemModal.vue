@@ -61,14 +61,13 @@
               <BaseMultiselect
                 v-model="taxes"
                 :options="getTaxTypes"
-                mode="tags"
-                label="tax_name"
+                label="name"
                 value-prop="id"
                 class="w-full"
                 :can-deselect="false"
                 :can-clear="false"
                 searchable
-                track-by="tax_name"
+                track-by="id"
                 object
               />
             </BaseInputGroup>
